@@ -18,23 +18,16 @@
         }
 
         h1, h2, p {
-            font-family: Roboto, Monospace;
+            font-family: Roboto, Monospace,serif;
         }
 
         p {
             font-size: 16px;
         }
 
-        .thin-rounded-border {
-            border-color: transparent;
-            border-width: 10px;
-            border-style: solid;
-            border-radius: 50%;
-        }
-
         .column-double-center {
             background: white;
-            padding:1em 3em 1em 2em;
+            padding: 1em 3em 1em 2em;
         }
 
         .column-left-center {
@@ -51,14 +44,16 @@
 
 
     <script>
-        $(".row-header").addClass("text-center");
-        $(".column-left").addClass("col-md-1");
-        $(".column-right").addClass("col-md-1");
-        $(".column-double-center").addClass("col-md-8");
-        $(".column-left-center").addClass("col-md-6");
-        $(".column-right-center").addClass("col-md-2");
+        $(document).ready(function () {
+            $(".row-header").addClass("text-center");
+            $(".column-left").addClass("col-md-1");
+            $(".column-right").addClass("col-md-1");
+            $(".column-double-center").addClass("col-md-8");
+            $(".column-left-center").addClass("col-md-6");
+            $(".column-right-center").addClass("col-md-2");
 
-        //$(".column-double-center").addClass("bg-overlay");
+            //$(".column-double-center").addClass("bg-overlay");
+        });
     </script>
 
 </head>
@@ -104,11 +99,10 @@
             </div>
             <div class="column-double-center">
                 <div class="column-left-center">
-                    <p>
 
-                    <h2>Степанов Валерий</h2>
-                    </p>
-                    <p>
+                        <h2>Степанов Валерий</h2>
+
+
 
                     <p>
                         <a href="https://www.facebook.com/bskydive" target="_blank" class="btn btn-default">
@@ -129,7 +123,8 @@
                         <a href="http://www.freecodecamp.com/bskydive" target="_blank" class="btn btn-default"><i
                                 class="fa fa-fire fa-fw"></i> freeCodeCamp</a>
                     </p>
-                    </p>
+
+
                 </div>
                 <div class="column-right-center">
 

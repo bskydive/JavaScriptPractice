@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head lang="ru">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Генератор цитат</title>
+
+    <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Roboto:400italic,300,700,300italic,400&subset=latin,cyrillic-ext">
+
+    <link rel="script" href="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"/>
+
+    <style>
+        .background-main {
+            background: url("https://zima216h.storage.yandex.net/rdisk/617b6d6231b5eba8483b8026b26eb4e901731c3524b88eafb1eed0869ff78d7e/inf/Ad6F7gAEK4SAcFsqaqA0TY_Uax24iR1CkqeBf_BP8bSUNTvhcggG85mBP_uP0PsZ4doekKE86fvag2aS2WjHuw==?uid=0&filename=background-wood-backgroundlab.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&tknv=v2&rtoken=876553fcd08c3e4d9acc94b407c85688&force_default=no&ycrid=na-010e83bdbfd34e01b5a5455facdaf073-downloader15h") repeat fixed;
+        }
+
+        h1, h2, p {
+            font-family: Roboto, Monospace, serif;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .column-center {
+            background: url("https://leto21d.storage.yandex.net/rdisk/53d5b53ede5bebd92ceaa6667c81675f4e8524a5f19ec638bddbbed9c61b6468/inf/QjsWuarbb8i7n-hIwPeET9rDF94k7WWLCiQ7TmgXMorYeXRN8Ehan0Aj6wZiflPlw7G-Kl1gu9eEwf7akPQE1w==?uid=0&filename=pattern-lines-ava7-1527-bright.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&rtoken=876553fcd08c3e4d9acc94b407c85688&force_default=no&ycrid=na-dbebfe7846b7cb8b9a1bb632f1bb3a6d-downloader15h") repeat fixed;
+            padding: 1em 3em 1em 2em;
+            align-content: center;
+
+        }
+
+
+    </style>
+
 
     <script>
-            var quotes = [
-                ["Олег Янковский","http://www.adme.ru/tvorchestvo-kino/15-genialnyh-citat-olega-yankovskogo-797860/",
+
+        var quotes = [
+            ["Олег Янковский", "http://www.adme.ru/tvorchestvo-kino/15-genialnyh-citat-olega-yankovskogo-797860/",
                 "В культуру надо вкладывать огромные деньги. Без этого ничего не будет. Бриллиантов у нас много, но никто не хочет браться за их огранку: черпаем ковшом и отдаем за две копейки. Глупо.",
                 "Россия резко перешла от рабства к мнимым свободам. Мы гадим там же, где живем. В подъездах — грязь, в лифтах — моча. Наверное, такое отношение формирует наше крепостное мышление.",
                 "Радует уже то, что в зале не видно хамов в малиновых пиджаках. Сегодня в театр ходят люди хорошо одетые, как правило, с хорошими манерами.",
@@ -24,7 +59,7 @@
                 "Я просто понял, что судьба меня ведет. Если что-то не складывалось — значит, и не надо было изначально. Никогда не мечтал ни о какой роли.",
                 "Моя профессия — любить! Я не представляю себя без любви. Без любви в самом высоком значении этого слова в нашем деле невозможно."],
 
-                ["Царь Соломон","http://www.adme.ru/svoboda-kultura/20-mudryh-myslej-carya-solomona-o-zhizni-886910/",
+            ["Царь Соломон", "http://www.adme.ru/svoboda-kultura/20-mudryh-myslej-carya-solomona-o-zhizni-886910/",
                 "Всему свой час и время всякому делу под небесами: время родиться и время умирать. Время разрушать и время строить. Время разбрасывать камни и время складывать камни. Время молчать и время говорить.",
                 "И глупец, когда молчит, может показаться мудрым.",
                 "Обещал — исполни! Лучше не обещать, чем обещать и не исполнять.",
@@ -46,7 +81,7 @@
                 "И при смехе иногда болит сердце, и концом радости бывает печаль.",
                 "Придет гордость, придет и посрамление; но со смиренными мудрость."],
 
-                ["Конфуций","http://www.adme.ru/svoboda-kultura/10-mudrejshih-citat-konfuciya-858410/",
+            ["Конфуций", "http://www.adme.ru/svoboda-kultura/10-mudrejshih-citat-konfuciya-858410/",
                 "Неважно, как медленно вы идете, до тех пор, пока вы не остановитесь.",
                 "Никогда не заводите дружбу с человеком, который не лучше вас самих.",
                 "Когда ты разгневан, думай о последствиях.",
@@ -58,7 +93,7 @@
                 "Несдержанность в мелочах погубит великое дело.",
                 "Если тебе плюют в спину, значит, ты впереди.."],
 
-                ["Далай Лама","http://www.adme.ru/svoboda-kultura/15-urokov-zhizni-ot-dalaj-lamy-858760/",
+            ["Далай Лама", "http://www.adme.ru/svoboda-kultura/15-urokov-zhizni-ot-dalaj-lamy-858760/",
                 "Будьте добрее, когда это возможно. А это возможно всегда.",
                 "Процветание приходит благодаря действиям, а не благодаря молитвам.",
                 "Высокомерие никогда не оправданно. Оно происходит из низкой самооценки или временных, поверхностных достижений.",
@@ -75,7 +110,7 @@
                 "Великие перемены начинаются с отдельных людей; в основе мира во всем мире лежат внутреннее спокойствие и мир в сердце каждого отдельного человека. Каждый из нас может внести свой вклад.",
                 "Каждый из нас несет ответственность за все человечество. В этом заключается моя простая религия. Нет нужды в храмах, нет нужды в сложной философии. Наш собственный мозг, наше сердце — вот наш храм; наша философия — доброта."],
 
-                ["Фридрих Ницше","http://www.adme.ru/tvorchestvo-pisateli/30-genialnyh-citat-mihaila-zhvaneckogo-867060/ © AdMe.ru",
+            ["Фридрих Ницше", "http://www.adme.ru/tvorchestvo-pisateli/30-genialnyh-citat-mihaila-zhvaneckogo-867060/ © AdMe.ru",
                 "Бог умер: теперь мы хотим, чтобы жил сверхчеловек.",
                 "Кто сражается с чудовищами, тому следует остерегаться, чтобы самому при этом не стать чудовищем. И если ты долго смотришь в бездну, то бездна тоже смотрит в тебя.",
                 "Если вы решили действовать — закройте двери для сомнений.",
@@ -101,7 +136,7 @@
                 "Человек — это канат, натянутый между животным и сверхчеловеком, — канат над пропастью. В человеке ценно то, что он мост, а не цель.",
                 "Стыдиться своей безнравственности — это первая ступень лестницы, на вершине которой будешь стыдиться своей нравственности."],
 
-                ["Михаил Жванецкий","http://adme.ru",
+            ["Михаил Жванецкий", "http://www.adme.ru/tvorchestvo-pisateli/30-genialnyh-citat-mihaila-zhvaneckogo-867060/",
                 "Никогда не преувеличивайте глупость врагов и верность друзей.",
                 "Если вам говорят, что вы многогранная личность, — не обольщайтесь. Может быть, имеется в виду, что вы гад, сволочь и паразит одновременно.",
                 "Если ты споришь с идиотом, то, вероятно, то же самое делает и он.",
@@ -133,7 +168,7 @@
                 "Счастлив ли? В разное время на этот вопрос отвечал по-разному, но всегда — отрицательно.",
                 "Ребята, уж если мы по горло в дерьме, возьмемся за руки."],
 
-                ["Габриель Гарсиа Маркес","http://www.adme.ru/vdohnovenie-919705/ego-sto-let-odinochestva-zakonchilis-670955/ © AdMe.ru",
+            ["Габриель Гарсиа Маркес", "http://www.adme.ru/vdohnovenie-919705/ego-sto-let-odinochestva-zakonchilis-670955/ © AdMe.ru",
                 "Не дай себе умереть, не испытав этого чуда — спать с тем, кого любишь.",
                 "Людям, которых любят, следовало бы умирать вместе со всеми их вещами.",
                 "Всякая вещь — живая. Надо только суметь разбудить ее душу.",
@@ -158,12 +193,71 @@
                 "Вдохновение приходит только во время работы.",
                 "Знание и мудрость приходят к нам тогда, когда они уже не нужны.",
                 "Нет, я не богач. Я бедняк с деньгами, а это не одно и то же.",
-                "Будь спокоен. Умереть труднее, чем кажется."]]
+                "Будь спокоен. Умереть труднее, чем кажется."]];
 
+        function getQuote() {
+
+            var authorInd = getRandomNum(0, quotes.length);
+            var quoteInd = getRandomNum(2, quotes[authorInd].length);//0 - author, 1 - link
+
+            return quotes[authorInd][quoteInd] + "<br /><a href='" + quotes[authorInd][1] + "'>" + quotes[authorInd][0] + "</a><br />";
+        }
+
+        function getRandomNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        $(document).ready(function () {
+            $("#id_main_text").html("<p>" + getQuote() + "</p>");
+            $(".row-header").addClass("text-center");
+
+        });
+
+        var myButton = document.getElementById("clickButton");
+        var myText = document.getElementById("helloText");
+
+        myButton.addEventListener('click', doSomething, false);
+
+        function doSomething() {
+            myText.textContent = "hello, world!";
+        }
     </script>
+
+
 
 </head>
 <body>
+
+<div class="container-fluid bg-overlay background-main">
+    <div class="row row-header">
+        <div class="column-left col-md-1"></div>
+        <div class="column-center col-md-6">
+            <br/>
+
+            <h1>Генератор цитат</h1><br/>
+        </div>
+        <div class="column-right col-md-1"></div>
+    </div>
+    <div class="row row-data">
+        <div class="column-left col-md-1"></div>
+        <div id="id_main_text" class="column-center col-md-6">
+            <br/>
+
+            <p>123</p>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+        <div class="column-right col-md-1"></div>
+    </div>
+    <div class="row row-footer">
+        <div class="column-left col-md-1"></div>
+        <div class="column-center col-md-6">
+            <br/><a href="#" target="_blank" class="btn btn-default"><i class="fa fa-twitter fa-fw"></i> Twit</a><br/>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
 
 </body>
 </html>
