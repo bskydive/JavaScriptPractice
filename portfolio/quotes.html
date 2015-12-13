@@ -195,6 +195,10 @@
         "Нет, я не богач. Я бедняк с деньгами, а это не одно и то же.",
         "Будь спокоен. Умереть труднее, чем кажется."]];
 
+    function getRandomNum(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     function getQuote() {
 
       var authorInd = getRandomNum(0, quotes.length);
@@ -203,24 +207,27 @@
       return quotes[authorInd][quoteInd] + "<br /><a href='" + quotes[authorInd][1] + "'>" + quotes[authorInd][0] + "</a><br />";
     }
 
-    function getRandomNum(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+    var getQuoteButton = document.getElementById("id_getQuoteButton");
+    var divText = document.getElementById("id_divText");
+
+    var twitOutButton = document.getElementById("id_twitOutBtn");
+
+    getQuoteButton.addEventListener('click', showQuote, false);
+
+    function showQuote() {
+      //divText.textContent = "hello, world!";
+      var quote = getQuote();
+      divText.html("<p>" + quote + "</p>");
+      twitOutButton.href("http://twitter.com/home/?status="+quote);
     }
 
     $(document).ready(function () {
-      $("#id_main_text").html("<p>" + getQuote() + "</p>");
+      //$("#id_divText").html("<p>" + getQuote() + "</p>");
+      showQuote;
       $(".row-header").addClass("text-center");
 
     });
 
-    var myButton = document.getElementById("clickButton");
-    var myText = document.getElementById("helloText");
-
-    myButton.addEventListener('click', doSomething, false);
-
-    function doSomething() {
-      myText.textContent = "hello, world!";
-    }
   </script>
 
 
@@ -232,8 +239,7 @@
     <div class="column-left col-md-1"></div>
     <div class="column-center col-md-6">
       <br/>
-
-      <h1>Генератор цитат</h1><br/>
+      <h1>Генератор цитат</h1>
     </div>
     <div class="column-right col-md-1"></div>
   </div>
@@ -241,10 +247,7 @@
     <div class="column-left col-md-1"></div>
     <div id="id_main_text" class="column-center col-md-6">
       <br/>
-
-      <p>123</p>
-      <br/>
-      <br/>
+      <p id="textP">Генератор устал. Отдохните и вы.</p>
       <br/>
     </div>
     <div class="column-right col-md-1"></div>
@@ -252,7 +255,19 @@
   <div class="row row-footer">
     <div class="column-left col-md-1"></div>
     <div class="column-center col-md-6">
-      <br/><a href="#" target="_blank" class="btn btn-default"><i class="fa fa-twitter fa-fw"></i> Twit</a><br/>
+      <br/>
+
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <a href="#" target="_blank" class="btn btn-default"><i class="fa fa-graduation-cap fa-fw"></i> Хочу стать ещё мудрее</a>
+        </div>
+        <div class="btn-group" role="group">
+          <a href="http://twitter.com/home/?status=" id="id_twitOutBtn" target="_blank" class="btn btn-default"><i class="fa fa-twitter fa-fw"></i> Поделиться мудростью</a>
+        </div>
+      </div>
+
+      <br/>
+
     </div>
     <div class="col-md-1"></div>
   </div>
