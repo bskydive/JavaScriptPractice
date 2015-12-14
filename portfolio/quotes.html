@@ -201,21 +201,20 @@
             }
 
             var authorInd = getRandomNum(0, quotes.length);
-            var quoteInd = getRandomNum(2, quotes[authorInd].length);//0 - author, 1 - link
+            var quoteInd = getRandomNum(2, quotes[authorInd].length-2);//0 - author, 1 - link
             var quote = quotes[authorInd][quoteInd] + "<br /><a href='" + quotes[authorInd][1] + "'>" + quotes[authorInd][0] + "</a><br />";
 
-            $("#id_divText").html("<p>" + quote + "</p>");
-            $("#id_twitOutBtn").href("http://twitter.com/home/?status=" + quote);
+            $("#id_divText").html("<p>" + quote +"</p>");
+            $("#id_twitOutBtn").attr("href","https://twitter.com/intent/tweet?text=" + quotes[authorInd][quoteInd].substring(0,140-(quotes[authorInd][0].length)) + "&hashtags=" + quotes[authorInd][0].replace(/\s+/g, ''));
         }
 
 
         $(document).ready(function () {
             $(".row-header").addClass("text-center");
-            $("#id_getQuoteBtn").on("click", function () {
-                showQuote();
-            });
+            $("#id_getQuoteBtn").on("click", function () {showQuote();});
             showQuote();
         });
+
 
         //    var getQuoteButton = document.getElementById("id_getQuoteButton");
         //    var divText = document.getElementById("id_divText");
@@ -235,25 +234,14 @@
         <div class="column-left col-md-1"></div>
         <div class="column-center col-md-6">
             <br/>
-
             <h1>Генератор цитат</h1>
         </div>
         <div class="column-right col-md-1"></div>
     </div>
     <div class="row row-data">
         <div class="column-left col-md-1"></div>
-        <div id="id_divText" class="column-center col-md-6">
-            <br/>
 
-            <p>Генератор устал. Отдохните и вы.</p>
-            <br/>
-        </div>
-        <div class="column-right col-md-1"></div>
-    </div>
-    <div class="row row-footer">
-        <div class="column-left col-md-1"></div>
         <div class="column-center col-md-6">
-            <br/>
 
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
@@ -268,10 +256,19 @@
                 </div>
             </div>
 
-            <br/>
 
         </div>
-        <div class="col-md-1"></div>
+
+
+        <div class="column-right col-md-1"></div>
+    </div>
+    <div class="row row-footer">
+        <div class="column-left col-md-1"></div>
+        <div id="id_divText" class="column-center col-md-6">
+            <p>Генератор устал. Отдохните и вы.</p>
+        </div>
+
+        <div class="column-right col-md-1"></div>
     </div>
 </div>
 
