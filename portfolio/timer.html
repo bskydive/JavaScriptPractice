@@ -78,6 +78,7 @@
         }
 
         function startTimer() {
+            //todo: add captoon with time showing
             timerStart = performance.now();
         }
 
@@ -91,7 +92,7 @@
         }
 
         function startPause() {
-
+//todo: add captoon with time showing
             smallPauseStart = performance.now();
         }
 
@@ -131,10 +132,11 @@
         }
 
         function showTime() {
+// todo           add parameters to func. valueTime
             var timeSpend = minSecSpend();
             $("#id_timeText").html("<p>" + timeSpend[0] + ":" + timeSpend[1] + "</p>");
         }
-
+        //todo add background timer function
         $(document).ready(function () {
             $(".row-header").addClass("text-center");
             $("#id_btnTimer").on("click", function () {
