@@ -71,7 +71,7 @@
 
     <script>
         var timerStart = 0, smallPauseStart = 0, largePauseStart = 0, nowMsecs = 0;
-        var timerMaxValue = 25, smallPauseValue = 5;
+        var timerMaxValue = 25, smallPauseMaxValue = 5;
 
         function parseValue(valueText) {
 //      return [valueText.split("@")[0].replace(/\s+/g, '').toNumber()][valueText.split("@")[1].replace(/\s+/g, '').toNumber()];
@@ -83,26 +83,47 @@
 
 
         function incTimer() {
-            timerMaxValue += 5;
-            $("#id_btnTimer").html(" " + timerMaxValue.toString());
+            timerMaxValue = btnControlTextChange(true, timerMaxValue, $("#id_btnTimer"), "briefcase");
         }
 
         function decTimer() {
-
+            timerMaxValue = btnControlTextChange(false, timerMaxValue, $("#id_btnTimer"), "briefcase");
         }
 
         function startPause() {
-            $("").chi
-            timerStart = performance.now();
+
+            smallPauseStart = performance.now();
         }
 
 
-        function incPause() {
-
+        function incSmallPause() {
+            smallPauseMaxValue = btnControlTextChange(true, smallPauseMaxValue, $("#id_btnSmallPause"), "bell");
         }
 
-        function decPause() {
+        function decSmallPause() {
+            smallPauseMaxValue = btnControlTextChange(false, smallPauseMaxValue, $("#id_btnSmallPause"), "bell");
+        }
 
+        function btnControlTextChange(direction, value, objectId, icon) {
+            if (direction) {
+                if (value <= 55) {
+                    value += 5;
+                }
+            } else {
+                if (value >= 10) {
+                    value -= 5;
+                }
+            }
+
+            var valueText = "05";
+
+            if (value > 5) {
+                valueText = value.toString();
+            }
+
+            objectId.html("<i class = \"glyphicon glyphicon-" + icon + "\"></i> " + valueText);
+
+            return value;
         }
 
         function minSecSpend(time1, time2) {
@@ -116,10 +137,25 @@
 
         $(document).ready(function () {
             $(".row-header").addClass("text-center");
-            $("#id_getQuoteBtn").on("click", function () {
-                showTime();
+            $("#id_btnTimer").on("click", function () {
+                startTimer();
+            });
+            $("#id_btnTimerDec").on("click", function () {
+                decTimer()
+            });
+            $("#id_btnTimerInc").on("click", function () {
+                incTimer()
             });
 
+            $("#id_btnSmallPause").on("click", function () {
+                startPause();
+            });
+            $("#id_btnSmallPauseDec").on("click", function () {
+                decSmallPause()
+            });
+            $("#id_btnSmallPauseInc").on("click", function () {
+                incSmallPause()
+            });
         });
     </script>
 
@@ -149,26 +185,26 @@
 
     <div class = "btn-group " role = "group" aria-label = "...">
 
-        <button type = "button" class = "btn btn-default  controlBtn">
+        <button type = "button" class = "btn btn-default  controlBtn" id = "id_btnTimerDec">
             <strong>-</strong>
         </button>
         <button type = "button" class = "btn btn-default  controlBtn" id = "id_btnTimer">
             <i class = "glyphicon glyphicon-briefcase"></i> 25
         </button>
-        <button type = "button" class = "btn btn-default  controlBtn">
+        <button type = "button" class = "btn btn-default  controlBtn" id = "id_btnTimerInc">
             <strong>+</strong>
         </button>
     </div>
 
     <div class = "btn-group " role = "group" aria-label = "...">
 
-        <button type = "button" class = "btn btn-default  controlBtn">
+        <button type = "button" class = "btn btn-default  controlBtn" id = "id_btnSmallPauseDec">
             <strong>-</strong>
         </button>
-        <button type = "button" class = "btn btn-default  controlBtn" id = "id_btnPause">
+        <button type = "button" class = "btn btn-default  controlBtn" id = "id_btnSmallPause">
             <i class = "glyphicon glyphicon-bell"></i> 05
         </button>
-        <button type = "button" class = "btn btn-default  controlBtn">
+        <button type = "button" class = "btn btn-default  controlBtn" id = "id_btnSmallPauseInc">
             <strong>+</strong>
         </button>
     </div>
