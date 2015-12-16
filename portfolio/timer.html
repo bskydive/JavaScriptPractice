@@ -70,18 +70,36 @@
           href = "//fonts.googleapis.com/css?family=Roboto:400italic,300,700,300italic,400&subset=latin,cyrillic-ext">
 
     <script>
-        var timerStart = 0, smallPauseStart = 0, largePauseStart = 0, nowMsecs = 0;
-        var timerMaxValue = 25, smallPauseMaxValue = 5;
 
-        function parseValue(valueText) {
-//      return [valueText.split("@")[0].replace(/\s+/g, '').toNumber()][valueText.split("@")[1].replace(/\s+/g, '').toNumber()];
+        var timerStart = performance.now(); //initial value to avoid errors showing in browser
+        var smallPauseStart = timerStart, largePauseStart = timerStart, nowMsecs = timerStart;
+
+        var timerMaxValue = 25, smallPauseMaxValue = 5;
+        var globalTimerIntervalId = 0;
+
+        function parseTimeToSec(valueText) {
+            //splits 00:00 to seconds
+            return (valueText.split(":")[0].replace(/\s+/g, '').toNumber() * 60) + valueText.split(":")[1].replace(/\s+/g, '').toNumber();
         }
 
         function startTimer() {
             //todo: add captoon with time showing
-            timerStart = performance.now();
-        }
 
+            //it is compromise between stability and accuracy. setInterval can hangs browser or cut timing.
+            //I'm using timer for function exec(best stability), and performance for time calculate(best accuracy).
+            var firstTimeoutId = 0, secondTimeoutId = 0;
+            timerStart = performance.now();
+
+
+            firstTimeoutId = window.setTimeout(function run() {
+                if (showTime(timerMaxValue)) {
+                    secondTimeoutId = window.setTimeout(run, 1000);
+                } else {
+                    window.clearTimeout(secondTimeoutId);
+                    window.clearTimeout(firstTimeoutId);
+                }
+            }, 1000);
+        }
 
         function incTimer() {
             timerMaxValue = btnControlTextChange(true, timerMaxValue, $("#id_btnTimer"), "briefcase");
@@ -95,7 +113,6 @@
 //todo: add captoon with time showing
             smallPauseStart = performance.now();
         }
-
 
         function incSmallPause() {
             smallPauseMaxValue = btnControlTextChange(true, smallPauseMaxValue, $("#id_btnSmallPause"), "bell");
@@ -128,16 +145,26 @@
         }
 
         function minSecSpend(time1, time2) {
-            return ((time2 - time1).toFixed() / 1000).toFixed();
+            //todo deside where calc min:sec from msec
+
         }
 
-        function showTime() {
-// todo           add parameters to func. valueTime
-            var timeSpend = minSecSpend();
+        function showTime(valueMaxTime) {
+//todo arrange all numeric time values to minutes or seconds
+            var timeNow = performance.now();
+            var timeSpend = ((timeNow - timerStart).toFixed() / 1000).toFixed();
+
+            var continueCond = (valueMaxTime >= timeSpend);
+
             $("#id_timeText").html("<p>" + timeSpend[0] + ":" + timeSpend[1] + "</p>");
+            timerStart = performance.now();
+
+            return continueCond;
         }
-        //todo add background timer function
+
+
         $(document).ready(function () {
+
             $(".row-header").addClass("text-center");
             $("#id_btnTimer").on("click", function () {
                 startTimer();
