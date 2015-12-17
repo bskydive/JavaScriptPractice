@@ -71,11 +71,10 @@
 
     <script>
 
-        var timerStart = performance.now(); //initial value to avoid errors showing in browser
-        var smallPauseStart = timerStart, largePauseStart = timerStart, nowMsecs = timerStart;
+        //all variables should be global for code minimization(legacy :] ) purposes. The clock is one.
+        var timeStart = 0, timeMaxValue = 0, timeNow = 0;
 
         var timerMaxValue = 25, smallPauseMaxValue = 5;
-        var globalTimerIntervalId = 0;
 
         function parseTimeToSec(valueText) {
             //splits 00:00 to seconds
@@ -83,23 +82,55 @@
         }
 
         function startTimer() {
-            //todo: add captoon with time showing
 
-            //it is compromise between stability and accuracy. setInterval can hangs browser or cut timing.
-            //I'm using timer for function exec(best stability), and performance for time calculate(best accuracy).
-            var firstTimeoutId = 0, secondTimeoutId = 0;
-            timerStart = performance.now();
-
-
-            firstTimeoutId = window.setTimeout(function run() {
-                if (showTime(timerMaxValue)) {
-                    secondTimeoutId = window.setTimeout(run, 1000);
-                } else {
-                    window.clearTimeout(secondTimeoutId);
-                    window.clearTimeout(firstTimeoutId);
-                }
-            }, 1000);
+            timeStart = performance.now();
+            recursiveTimeout();
         }
+
+        function recursiveTimeout() {
+            //it is compromise between stability and accuracy. setInterval can hangs browser or cut timing.
+            //I'm using timeout for function exec(best stability), and performance for time calculate(best accuracy).
+
+            var timeoutId = 0;
+
+            timeoutId = setTimeout(function tickTack() {
+
+                if (showTime("id_timeText")) {
+                    timeoutId = setTimeout(tickTack, 1000);
+                } else {
+                    clearTimeout(timeoutId);
+                }
+
+            }, 1000);
+
+
+        }
+
+        function showTime(objectId) {
+            //todo arrange all numeric time values to minutes or seconds
+            //todo check object redirection is correct
+
+            //dedicated allocation for easy refactoring. "From single line"
+            var timeNow = 0, secondsSpend = 0, minutesSpend = 0;
+            var continueCondition = false;
+
+            timeNow = performance.now();
+
+            secondsSpend = ((timeNow - timeStart).toFixed() / 1000).toFixed();
+
+            if (timeMaxValue <= secondsSpend) {
+                continueCondition = true;
+            }//timer stop condition
+
+            secondsSpend = ((timeNow - timeStart).toFixed() / 1000).toFixed();
+            minutesSpend = (secondsSpend / 60).toFixed();
+            secondsSpend = secondsSpend - minutesSpend * 60;
+
+            document.getElementById('id_timeText').innerHTML = "<p>" + minutesSpend.toString() + ":" + secondsSpend.toString() + ":" + timeNow.toString() + "</p>";
+
+            return continueCondition;
+        }
+
 
         function incTimer() {
             timerMaxValue = btnControlTextChange(true, timerMaxValue, $("#id_btnTimer"), "briefcase");
@@ -110,8 +141,8 @@
         }
 
         function startPause() {
-//todo: add captoon with time showing
-            smallPauseStart = performance.now();
+            //todo: add captoon with time showing
+            timeStart = performance.now();
         }
 
         function incSmallPause() {
@@ -147,19 +178,6 @@
         function minSecSpend(time1, time2) {
             //todo deside where calc min:sec from msec
 
-        }
-
-        function showTime(valueMaxTime) {
-//todo arrange all numeric time values to minutes or seconds
-            var timeNow = performance.now();
-            var timeSpend = ((timeNow - timerStart).toFixed() / 1000).toFixed();
-
-            var continueCond = (valueMaxTime >= timeSpend);
-
-            $("#id_timeText").html("<p>" + timeSpend[0] + ":" + timeSpend[1] + "</p>");
-            timerStart = performance.now();
-
-            return continueCond;
         }
 
 
