@@ -72,7 +72,7 @@
     <script>
 
         //all variables should be global for code minimization(legacy :] ) purposes. The clock is one.
-        var timeStart = 0, timeMaxValue = 0, timeNow = 0;
+        var msecStart = 0, secondsMaxValue = 0, msecNow = 0;
 
         var timerMaxValue = 25, smallPauseMaxValue = 5;
 
@@ -83,7 +83,8 @@
 
         function startTimer() {
 
-            timeStart = performance.now();
+            msecStart = performance.now();
+            secondsMaxValue = timerMaxValue * 60;
             recursiveTimeout();
         }
 
@@ -95,7 +96,7 @@
 
             timeoutId = setTimeout(function tickTack() {
 
-                if (showTime("id_timeText")) {
+                if (showTime()) {
                     timeoutId = setTimeout(tickTack, 1000);
                 } else {
                     clearTimeout(timeoutId);
@@ -106,27 +107,30 @@
 
         }
 
-        function showTime(objectId) {
-            //todo arrange all numeric time values to minutes or seconds
-            //todo check object redirection is correct
+        function showTime() {
+            //todo add showTime to Pause button
+            //todo add zeroes to begin of one digit
 
             //dedicated allocation for easy refactoring. "From single line"
-            var timeNow = 0, secondsSpend = 0, minutesSpend = 0;
+            var msecNow = 0, secondsSpend = 0, secondsSpendCutted = 0, minutesSpend = 0;
             var continueCondition = false;
 
-            timeNow = performance.now();
+            msecNow = performance.now();
 
-            secondsSpend = ((timeNow - timeStart).toFixed() / 1000).toFixed();
+            secondsSpend = ((msecNow - msecStart).toFixed() / 1000).toFixed();
 
-            if (timeMaxValue <= secondsSpend) {
+            if (secondsMaxValue >= secondsSpend) {
                 continueCondition = true;
-            }//timer stop condition
+            } else {
+                continueCondition = false;
+            }
 
-            secondsSpend = ((timeNow - timeStart).toFixed() / 1000).toFixed();
-            minutesSpend = (secondsSpend / 60).toFixed();
-            secondsSpend = secondsSpend - minutesSpend * 60;
+            //.toString().split(".")[0] added for cross-browser compatibility
+            secondsSpend = ((msecNow - msecStart) / 1000).toString().split(".")[0];
+            minutesSpend = (secondsSpend / 60).toString().split(".")[0];
+            secondsSpendCutted = secondsSpend - (minutesSpend * 60);
 
-            document.getElementById('id_timeText').innerHTML = "<p>" + minutesSpend.toString() + ":" + secondsSpend.toString() + ":" + timeNow.toString() + "</p>";
+            document.getElementById('id_timeText').innerHTML = "<p>" + minutesSpend.toString() + ":" + secondsSpendCutted.toString() + "</p>";
 
             return continueCondition;
         }
@@ -142,7 +146,7 @@
 
         function startPause() {
             //todo: add captoon with time showing
-            timeStart = performance.now();
+            msecStart = performance.now();
         }
 
         function incSmallPause() {
