@@ -7,7 +7,7 @@
     <meta charset = "utf-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1">
 
-    <title id = "id_titleText">00 : 00</title>
+    <title id = "id_titleText">Таймер Pomodoro</title>
 
     <link rel = "stylesheet" type = "text/css"
           href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -47,16 +47,14 @@
             border-top: 1px solid gray;
         }
 
-        #id_historyText {
+        #id_historyHeader {
             border-top: 1px solid gray;
-        }
-
-        #id_historyText h2 {
             text-transform: uppercase;
             letter-spacing: 0.25em;
             font-weight: bold;
             font-size: 1em;
             margin-bottom: 1.25em;
+            padding-top: 1.25em;
         }
 
         #id_historyText ul {
@@ -90,6 +88,7 @@
         var msecStart = 0, secondsMaxValue = 0, msecNow = 0;
 
         var timerMaxValue = 25, smallPauseMaxValue = 5;
+
 
         function parseTimeToSec(valueText) {
             //splits 00:00 to seconds
@@ -141,9 +140,9 @@
             secondsSpendCutted = secondsSpend - (minutesSpend * 60);
 
             if (minutesSpend < 10) {
-                timeSpendString = "<p>0";
+                timeSpendString = "0";
             } else {
-                timeSpendString = "<p>";
+                timeSpendString = "";
             }
 
             timeSpendString += minutesSpend.toString() + ":";
@@ -152,14 +151,19 @@
                 timeSpendString += "0";
             }
 
-            timeSpendString += secondsSpendCutted.toString() + "</p>";
+            timeSpendString += secondsSpendCutted.toString();
 
-            document.getElementById('id_timeText').innerHTML = timeSpendString;
+            document.getElementById('id_timeText').innerHTML = "<p>" + timeSpendString + "</p>";
             document.getElementById('id_titleText').innerHTML = timeSpendString;
 
             return continueCondition;
         }
 
+        function showHistory(nameVal, timeVal) {
+
+            document.getElementById('id_historyText').innerHTML = "<li>" + nameVal + "<span class = \"time\">" + timeVal + "min ago </span></li>";
+
+        }
 
         function incTimer() {
             timerMaxValue = btnControlTextChange(true, timerMaxValue, $("#id_btnTimer"), "briefcase");
@@ -296,11 +300,15 @@
 
 </div>
 
-<div class = "container-fluid text-center" id = "id_historyText">
-    <h2>История действий</h2>
-    <ul class = "list-unstyled">
-        <li>started<span class = "time">00 min ago</span></li>
-        <li>break<span class = "time">00 min ago</span></li>
+<div class = "container-fluid text-center" id = "id_historyHeader">
+
+    История действий за 00ч 00м
+
+</div>
+
+<div>
+
+    <ul class = "list-unstyled" id = "id_historyText">
     </ul>
 
 
