@@ -4,10 +4,9 @@
 <head lang = "ru">
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1">
+
     <title>Генератор цитат</title>
 
-    <script type = "text/javascript" src = "https://platform.twitter.com/widgets.js"></script>
-    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <link rel = "stylesheet" type = "text/css"
           href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel = "stylesheet" type = "text/css" href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -16,6 +15,8 @@
           href = "//fonts.googleapis.com/css?family=Roboto:400italic,300,700,300italic,400&subset=latin,cyrillic-ext">
 
     <style>
+
+
         .background-main {
             background: url("https://zima216h.storage.yandex.net/rdisk/617b6d6231b5eba8483b8026b26eb4e901731c3524b88eafb1eed0869ff78d7e/inf/Ad6F7gAEK4SAcFsqaqA0TY_Uax24iR1CkqeBf_BP8bSUNTvhcggG85mBP_uP0PsZ4doekKE86fvag2aS2WjHuw==?uid=0&filename=background-wood-backgroundlab.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&tknv=v2&rtoken=876553fcd08c3e4d9acc94b407c85688&force_default=no&ycrid=na-010e83bdbfd34e01b5a5455facdaf073-downloader15h") repeat repeat;
         }
@@ -30,14 +31,14 @@
         .column-center {
             background: url("https://leto21d.storage.yandex.net/rdisk/53d5b53ede5bebd92ceaa6667c81675f4e8524a5f19ec638bddbbed9c61b6468/inf/QjsWuarbb8i7n-hIwPeET9rDF94k7WWLCiQ7TmgXMorYeXRN8Ehan0Aj6wZiflPlw7G-Kl1gu9eEwf7akPQE1w==?uid=0&filename=pattern-lines-ava7-1527-bright.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&rtoken=876553fcd08c3e4d9acc94b407c85688&force_default=no&ycrid=na-dbebfe7846b7cb8b9a1bb632f1bb3a6d-downloader15h") repeat fixed;
             padding: 1em 3em 1em 2em;
-            align-content: center;
+
         }
 
-        /*.bigText{*/
-        /*font-size: 3em;*/
-        /*}*/
+
     </style>
 
+    <script type = "text/javascript" src = "https://platform.twitter.com/widgets.js"></script>
+    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
     <script type = "text/javascript" language = "javascript">
         function showQuote() {
@@ -234,10 +235,13 @@
             }
 
             $("#id_divQuoteText").html("<p>" + quote + "</p>");
-            //document.getElementById('id_divQuoteText').html("<p>" + quote + "</p>");
 
-            $("#id_twitOutBtn").attr("href", "https://twitter.com/intent/tweet?text=" + quotes[authorInd][quoteInd].substring(0, 140 - (quotes[authorInd][0].length)) + "&hashtags=" + quotes[authorInd][0].replace(/\s+/g, ''));
-            $("#id_divHeaderText").html("<br/><h1>Генератор цитат <small>" + quotes.length.toString() + " авторов " + quotesall.toString() + " цитат" + "</small></h1>");
+            $("#id_twitOutBtn").attr("href", "https://twitter.com/intent/tweet?text="
+            + quotes[authorInd][quoteInd].substring(0, 140 - (quotes[authorInd][0].length))
+            + "&hashtags=" + quotes[authorInd][0].replace(/\s+/g, ''));
+            $("#id_divHeaderText").html("<br/><h1>Генератор цитат. <small>"
+            + " авторов: " + quotes.length.toString()
+            + " цитат: " + quotesall.toString() + "</small></h1>");
         }
 
 
@@ -266,42 +270,34 @@
 <!--todo add bootstrap big text-->
 
 <div class = "bg-overlay">
-    <div class = "row row-header">
+    <div class = "row row-header text-center">
         <div class = "column-left col-md-1"></div>
         <div class = "column-center col-md-6" id = "id_divHeaderText">
-            <br/>
-
             <h1>Генератор цитат</h1>
         </div>
         <div class = "column-right col-md-1"></div>
 
     </div>
 
-    <div class = "row row-data">
+    <div class = "row row-data text-center">
         <div class = "column-left col-md-1"></div>
 
-        <div class = "column-center col-md-6">
+        <div class = "column-center col-md-6 ">
 
-            <div class = "btn-group btn-group-justified" role = "group" aria-label = "...">
-                <div class = "btn-group" role = "group">
-                    <a id = "id_getQuoteBtn" class = "btn btn-default"><i
-                            class = "fa fa-graduation-cap fa-fw"></i> Хочу стать ещё
-                                                                      мудрее</a>
-                </div>
-                <div class = "btn-group" role = "group">
-                    <a id = "id_twitOutBtn" href = "http://twitter.com/home/?status=" target = "_blank"
-                       class = "btn btn-default"><i
-                            class = "fa fa-twitter fa-fw"></i> Поделиться мудростью</a>
-                </div>
-            </div>
 
+            <a id = "id_getQuoteBtn" class = "btn btn-default" role = "button">
+                <i class = "fa fa-graduation-cap fa-fw"></i> Ещё цитату</a>
+
+            <a id = "id_twitOutBtn" class = "btn btn-default" role = "button"
+               href = "http://twitter.com/home/?status=">
+                <i class = "fa fa-twitter fa-fw"></i> Поделиться</a>
 
         </div>
 
 
         <div class = "column-right col-md-1"></div>
     </div>
-    <div class = "row row-footer">
+    <div class = "row row-footer text-center">
         <div class = "column-left col-md-1"></div>
         <div id = "id_divQuoteText" class = "column-center col-md-6">
             <p>Генератор устал. Отдохните и вы.</p>
