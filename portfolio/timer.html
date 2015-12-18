@@ -56,20 +56,20 @@
             padding-top: 1.25em;
         }
 
-        #id_historyText ul {
+        #id_historyText {
             text-align: left;
             width: 25em;
             margin: 0 auto;
         }
 
-        #id_historyText ul li {
+        #id_historyText li {
             padding: 0.5em 5em 0.5em 0.5em;
             background: #ddd;
             margin-bottom: 1px;
             position: relative;
         }
 
-        #id_historyText ul li span.time {
+        #id_historyText li span {
             position: absolute;
             right: 1em;
             top: 1em;
@@ -97,11 +97,56 @@
         function startTimer() {
 
             msecStart = performance.now();
-            msecHistoryStart = msecStart;
             secondsMaxValue = timerMaxValue * 60;
-            //todo add real time hh:mm
-            showHistory("Таймер на " + timerMaxValue + "М ", "00:00");
+
+            showHistory("Работа на " + timerMaxValue + " мин");
             recursiveTimeout();
+        }
+
+        function incTimer() {
+            timerMaxValue = btnControlTextChange(true, timerMaxValue, $("#id_btnTimer"), "briefcase");
+        }
+
+        function decTimer() {
+            timerMaxValue = btnControlTextChange(false, timerMaxValue, $("#id_btnTimer"), "briefcase");
+        }
+
+        function startPause() {
+            msecStart = performance.now();
+            secondsMaxValue = smallPauseMaxValue * 60;
+
+            showHistory("Перерыв на " + smallPauseMaxValue + " мин");
+            recursiveTimeout();
+        }
+
+        function incSmallPause() {
+            smallPauseMaxValue = btnControlTextChange(true, smallPauseMaxValue, $("#id_btnSmallPause"), "bell");
+        }
+
+        function decSmallPause() {
+            smallPauseMaxValue = btnControlTextChange(false, smallPauseMaxValue, $("#id_btnSmallPause"), "bell");
+        }
+
+        function btnControlTextChange(direction, value, objectId, icon) {
+            if (direction) {
+                if (value <= 55) {
+                    value += 5;
+                }
+            } else {
+                if (value >= 10) {
+                    value -= 5;
+                }
+            }
+
+            var valueText = "05";
+
+            if (value > 5) {
+                valueText = value.toString();
+            }
+
+            objectId.html("<i class = \"glyphicon glyphicon-" + icon + "\"></i> " + valueText);
+
+            return value;
         }
 
         function recursiveTimeout() {
@@ -158,7 +203,10 @@
                 }
                 timeSpendString += secondsSpendCutted.toString();
             } else {
+                //for better user experience timer stops always with :00 sec
                 timeSpendString += "00";
+
+                showHistory("Отсчёт закончен");
             }
 
             document.getElementById('id_timeText').innerHTML = "<p>" + timeSpendString + "</p>";
@@ -167,54 +215,20 @@
             return continueCondition;
         }
 
-        function showHistory(nameVal, timeVal) {
+        function showHistory(nameVal) {
 
-            document.getElementById('id_historyText').innerHTML = "<li>" + nameVal + "<span class = \"time\">" + timeVal + "min ago </span></li>";
+            var nowDate = new Date();
 
-        }
+            var newLi = document.createElement("li");
 
-        function incTimer() {
-            timerMaxValue = btnControlTextChange(true, timerMaxValue, $("#id_btnTimer"), "briefcase");
-        }
+            newLi.innerHTML = nameVal + "<span class = \"time\">"
+            + nowDate.getHours() + "ч:" + nowDate.getMinutes() + "м</span>";
 
-        function decTimer() {
-            timerMaxValue = btnControlTextChange(false, timerMaxValue, $("#id_btnTimer"), "briefcase");
-        }
+            document.getElementById('id_historyText').appendChild(newLi);
 
-        function startPause() {
-            msecStart = performance.now();
-            secondsMaxValue = smallPauseMaxValue * 60;
-            recursiveTimeout();
-        }
 
-        function incSmallPause() {
-            smallPauseMaxValue = btnControlTextChange(true, smallPauseMaxValue, $("#id_btnSmallPause"), "bell");
-        }
+            //document.getElementById('id_timeText').innerHTML = "<p>" + timeSpendString + "</p>";
 
-        function decSmallPause() {
-            smallPauseMaxValue = btnControlTextChange(false, smallPauseMaxValue, $("#id_btnSmallPause"), "bell");
-        }
-
-        function btnControlTextChange(direction, value, objectId, icon) {
-            if (direction) {
-                if (value <= 55) {
-                    value += 5;
-                }
-            } else {
-                if (value >= 10) {
-                    value -= 5;
-                }
-            }
-
-            var valueText = "05";
-
-            if (value > 5) {
-                valueText = value.toString();
-            }
-
-            objectId.html("<i class = \"glyphicon glyphicon-" + icon + "\"></i> " + valueText);
-
-            return value;
         }
 
 
@@ -240,6 +254,10 @@
             $("#id_btnSmallPauseInc").on("click", function () {
                 incSmallPause()
             });
+
+            msecHistoryStart = performance.now();
+            showHistory("Готов к учёту");
+
         });
     </script>
 
@@ -298,23 +316,17 @@
 
 
 <div class = "container-fluid text-center" id = "id_timeText">
-
     <p>00:00</p>
-
 </div>
 
 <div class = "container-fluid text-center" id = "id_historyHeader">
-
-    История действий за 00ч 00м
-
+    История действий за <span>00ч:00м</span>
 </div>
 
 <div>
-
     <ul class = "list-unstyled" id = "id_historyText">
+
     </ul>
-
-
 </div>
 
 </body>
