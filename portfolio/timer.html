@@ -17,8 +17,7 @@
           rel = 'stylesheet' type = 'text/css'>
     <link href = 'https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext' rel = 'stylesheet'
           type = 'text/css'>
-    <link href = 'https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700&subset=latin,cyrillic-ext'
-          rel = 'stylesheet' type = 'text/css'>
+
 
     <style type = "text/css">
 
@@ -101,7 +100,7 @@
             msecHistoryStart = msecStart;
             secondsMaxValue = timerMaxValue * 60;
             //todo add real time hh:mm
-            showHistory("Таймер на " + secondsMaxValue + "М", "00:00");
+            showHistory("Таймер на " + timerMaxValue + "М ", "00:00");
             recursiveTimeout();
         }
 
@@ -135,7 +134,7 @@
 
             secondsSpend = ((msecNow - msecStart).toFixed() / 1000).toFixed();
 
-            continueCondition = (secondsMaxValue > secondsSpend);
+            continueCondition = (secondsMaxValue >= secondsSpend);
 
             //todo revert timer showing
             //todo add +1 second for final timer value
@@ -152,11 +151,15 @@
 
             timeSpendString += minutesSpend.toString() + ":";
 
-            if (secondsSpendCutted < 10) {
-                timeSpendString += "0";
-            }
 
-            timeSpendString += secondsSpendCutted.toString();
+            if (secondsMaxValue >= secondsSpend) {
+                if (secondsSpendCutted < 10) {
+                    timeSpendString += "0";
+                }
+                timeSpendString += secondsSpendCutted.toString();
+            } else {
+                timeSpendString += "00";
+            }
 
             document.getElementById('id_timeText').innerHTML = "<p>" + timeSpendString + "</p>";
             document.getElementById('id_titleText').innerHTML = timeSpendString;
@@ -249,7 +252,7 @@
 <div class = "container-fluid text-center">
 
     <a class = "btn btn-link" id = "id_headerCaption" href = "http://pomodorotechnique.com/"
-       role = "button">Таймер Pomodoro</a>
+       role = "button">Таймер Pomodoro<sup>&beta;</sup></a>
 
     <!--<div class="btn-group " role="group" aria-label="...">-->
 
