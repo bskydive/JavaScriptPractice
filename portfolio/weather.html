@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang = "en">
+
+    <meta charset = "UTF-8">
+
+    <title>Weather<sup>&alpha;;</sup></title>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1">
+
+    <link rel = "stylesheet" type = "text/css"
+          href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel = "stylesheet" type = "text/css" href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <link href = 'https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&subset=latin,cyrillic-ext'
+          rel = 'stylesheet' type = 'text/css'>
+    <link href = 'https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext' rel = 'stylesheet'
+          type = 'text/css'>
+
+    <style type = "text/css">
+
+
+    </style>
+
+    <script type = "text/javascript" src = "https://platform.twitter.com/widgets.js"></script>
+    <script type = "text/javascript" src = "https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+            function success(pos) {
+                var crd = pos.coords;
+
+                console.log('Your current position is:');
+                console.log('Latitude : ' + crd.latitude);
+                console.log('Longitude: ' + crd.longitude);
+                console.log('More or less ' + crd.accuracy + ' meters.');
+            };
+
+            function error(err) {
+                console.warn('ERROR(' + err.code + '): ' + err.message);
+            };
+
+            navigator.geolocation.getCurrentPosition(success, error, options);
+        });
+    </script>
+</head>
+
+<body>
+
+<div class = "container-fluid text-center">
+
+    <a class = "btn btn-link" id = "id_headerCaption" href = "http://pomodorotechnique.com/"
+       role = "button">Weather<sup>&alpha;</sup></a>
+    // button group to choise weather api
+</div>
+
+
+//list - because on mobile small screens much easier swipe above non-interactive elements to scroll
+<ul class = "list-unstyled" id = "id_listMain">
+    <li><i class = "glyphicon glyphicon-map-marker"></i>location name</li>
+    <li><i class = "glyphicon glyphicon-briefcase"></i>icon</li>
+    <li>temperature</li>
+    <li><i class = "glyphicon glyphicon-tint"></i>humidity</li>
+    <li>pressure</li>
+    <li>wind direction&velocity</li>
+    <li>*current position</li>
+    <li>Latitude</li>
+    <li>Longitude</li>
+    <li>accuracy</li>
+</ul>
+
+<div class = "container-fluid text-center" id = "id_historyHeader">
+
+</div>
+
+<div>
+    //button list to choise nearest gps weather point
+    <ul class = "list-unstyled" id = "id_listBottom">
+        <button type = "button" class = "btn btn-default btnControls" id = "id_btnTimer">
+            <i class = "glyphicon glyphicon-briefcase"></i> 25
+        </button>
+    </ul>
+</div>
+
+
+</body>
+</html>
