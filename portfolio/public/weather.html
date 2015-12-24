@@ -10,10 +10,11 @@
   <link rel="shortcut icon" type="image/png" href="img/favicon_stepanovv.png">
 
 
-  <link rel="stylesheet" type="text/css" href="//public/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="//public/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="//public/css/font-roboto.css">
-  <link rel="stylesheet" type="text/css" href="//public/css/font-droid-sans-mono.css">
+  <link rel="stylesheet" type="text/css" href="css/font-roboto-mono.css">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+  <!--<link rel="stylesheet" type="text/css" href="//public/css/font-droid-sans-mono.css">-->
   <!--<link rel = "stylesheet" type = "text/css"-->
   <!--href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
   <!--<link rel = "stylesheet" type = "text/css" href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
@@ -28,29 +29,32 @@
       font-family: 'Roboto Mono', Monospace, serif;
     }
 
-    #id_timeText {
 
-      padding: 0px;
-      margin: 0px;
-      font-size: 6em;
-    }
 
-    #id_headerCaption {
-      padding: 1em;
-      font-family: Roboto, Monospace, serif;
-    }
+    /*#id_timeText {*/
 
-    .btnControls {
-      font-family: 'Roboto Mono', Monospace, serif;
-      font-weight: 700 !important;
-    }
+      /*padding: 0px;*/
+      /*margin: 0px;*/
+      /*font-size: 6em;*/
+    /*}*/
+
+    /*#id_headerCaption {*/
+      /*padding: 1em;*/
+      /*font-family: Roboto, Monospace, serif;*/
+    /*}*/
+
+    /*.btnControls {*/
+      /*font-family: 'Roboto Mono', Monospace, serif;*/
+      /*font-weight: 700 !important;*/
+    /*}*/
 
     #id_divMain, #id_divBottom {
       border-top: 1px solid gray;
+      padding: 1em;
     }
 
-    #id_divHistory {
-    border-top: 1px solid gray;
+    #id_divlistMainHeader {
+    /*border-top: 1px solid gray;*/
     text-transform: uppercase;
     letter-spacing: 0.25em;
     font-weight: bold;
@@ -59,20 +63,20 @@
     padding-top: 1.25em;
     }
 
-    #id_listHistory {
+    #id_listMain {
       text-align: left;
       width: 25em;
       margin: 0 auto;
     }
 
-    #id_listHistory li {
+    #id_listMain li {
       padding: 0.5em 5em 0.5em 0.5em;
       background: #ddd;
       margin-bottom: 1px;
       position: relative;
     }
 
-    #id_listHistory li span {
+    #id_listMain li span {
       position: absolute;
       right: 1em;
       top: 1em;
@@ -81,8 +85,8 @@
 
   </style>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+  <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 
   <script>
 
@@ -162,18 +166,21 @@
 //                55°32′37″N (55.543512)
 //                Долгота
 //                37°3′54″E (37.064897)
-          showWeather(json.coord.lon, jsonOWMDesc.coord.lon);
-          showWeather(json.coord.lat, jsonOWMDesc.coord.lat);
+
+          document.getElementById("id_spanLocation").innerHTML=json.name;
+
+          showWeather(json.coord.lon+" lon", jsonOWMDesc.coord.lon);
+          showWeather(json.coord.lat+" lat", jsonOWMDesc.coord.lat);
 
           //todo show icon
           //getWeatherIcon(json.weather.icon);
 
-          showWeather(json.main.temp, jsonOWMDesc.main.temp);
-          showWeather(json.main.pressure, jsonOWMDesc.main.pressure);
-          showWeather(json.main.humidity, jsonOWMDesc.main.humidity);
+          showWeather(json.main.temp+"&deg; C", jsonOWMDesc.main.temp);
+          showWeather(json.main.pressure+" hPa", jsonOWMDesc.main.pressure);
+          showWeather(json.main.humidity+" %", jsonOWMDesc.main.humidity);
 
           showWeather(json.sys.country, jsonOWMDesc.sys.country);
-          showWeather(json.name, jsonOWMDesc.name);
+//          showWeather(json.name, jsonOWMDesc.name);
 
         });
     }
@@ -228,9 +235,9 @@
 
       var newLi = document.createElement("li");
 
-      newLi.innerHTML = itemKey + ": <span>" + itemValue + "</span>";
+      newLi.innerHTML = itemKey + "<span>" + itemValue + "</span>";
 
-      document.getElementById('id_listHistory').appendChild(newLi);
+      document.getElementById('id_listMain').appendChild(newLi);
 
     }
 
@@ -281,7 +288,11 @@
 
 <div class="container-fluid text-center" id="id_divMain">
   <!--list - because on mobile small screens much easier swipe above non-interactive elements to scroll-->
-  <ul class="list-unstyled" id="id_listHistory">
+
+  <div class="container-fluid text-center" id="id_divlistMainHeader">
+    Nearest location: <span id="id_spanLocation">UNKNOWN</span>
+  </div>
+  <ul class="list-unstyled" id="id_listMain">
     <!--<li><i class = "glyphicon glyphicon-map-marker"></i>location name</li>-->
     <!--<li><i class = "glyphicon glyphicon-briefcase"></i>icon</li>-->
     <!--<li>temperature</li>-->
@@ -301,7 +312,7 @@
   <!--button list to choise nearest gps weather point-->
   <ul class="list-unstyled" id="id_listBottom">
     <button type="button" class="btn btn-default btnControls" id="id_btnTimer">
-      <i class="glyphicon glyphicon-map-marker"></i> 25
+      <i class="glyphicon glyphicon-map-marker"></i><span id="id_spanLocations"> Nearest location list</span>
     </button>
   </ul>
 </div>
