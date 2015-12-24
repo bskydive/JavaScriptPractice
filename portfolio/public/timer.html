@@ -50,7 +50,7 @@
       border-top: 1px solid gray;
     }
 
-    #id_divHeader {
+    #id_divHistory {
       border-top: 1px solid gray;
       text-transform: uppercase;
       letter-spacing: 0.25em;
@@ -60,20 +60,20 @@
       padding-top: 1.25em;
     }
 
-    #id_listMain {
+    #id_listHistory {
       text-align: left;
       width: 25em;
       margin: 0 auto;
     }
 
-    #id_listMain li {
+    #id_listHistory li {
       padding: 0.5em 5em 0.5em 0.5em;
       background: #ddd;
       margin-bottom: 1px;
       position: relative;
     }
 
-    #id_listMain li span {
+    #id_listHistory li span {
       position: absolute;
       right: 1em;
       top: 1em;
@@ -228,7 +228,7 @@
       newLi.innerHTML = nameVal + "<span class = \"time\">"
       + nowDate.getHours() + "ч:" + nowDate.getMinutes() + "м</span>";
 
-      document.getElementById('id_listMain').appendChild(newLi);
+      document.getElementById('id_listHistory').appendChild(newLi);
 
 
       //document.getElementById('id_timeText').innerHTML = "<p>" + timeSpendString + "</p>";
@@ -323,12 +323,12 @@
   <p>00:00</p>
 </div>
 
-<div class="container-fluid text-center" id="id_divHeader">
+<div class="container-fluid text-center" id="id_divHistory">
   История действий за <span>00ч:00м</span>
 </div>
 
 <div>
-  <ul class="list-unstyled" id="id_listMain">
+  <ul class="list-unstyled" id="id_listHistory">
 
   </ul>
 </div>

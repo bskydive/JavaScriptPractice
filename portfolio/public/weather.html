@@ -49,30 +49,30 @@
       border-top: 1px solid gray;
     }
 
-    /*#id_divHeader {*/
-    /*border-top: 1px solid gray;*/
-    /*text-transform: uppercase;*/
-    /*letter-spacing: 0.25em;*/
-    /*font-weight: bold;*/
-    /*font-size: 1em;*/
-    /*margin-bottom: 1.25em;*/
-    /*padding-top: 1.25em;*/
-    /*}*/
+    #id_divHistory {
+    border-top: 1px solid gray;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 1.25em;
+    padding-top: 1.25em;
+    }
 
-    #id_listMain {
+    #id_listHistory {
       text-align: left;
       width: 25em;
       margin: 0 auto;
     }
 
-    #id_listMain li {
+    #id_listHistory li {
       padding: 0.5em 5em 0.5em 0.5em;
       background: #ddd;
       margin-bottom: 1px;
       position: relative;
     }
 
-    #id_listMain li span {
+    #id_listHistory li span {
       position: absolute;
       right: 1em;
       top: 1em;
@@ -230,7 +230,7 @@
 
       newLi.innerHTML = itemKey + ": <span>" + itemValue + "</span>";
 
-      document.getElementById('id_listMain').appendChild(newLi);
+      document.getElementById('id_listHistory').appendChild(newLi);
 
     }
 
@@ -281,7 +281,7 @@
 
 <div class="container-fluid text-center" id="id_divMain">
   <!--list - because on mobile small screens much easier swipe above non-interactive elements to scroll-->
-  <ul class="list-unstyled" id="id_listMain">
+  <ul class="list-unstyled" id="id_listHistory">
     <!--<li><i class = "glyphicon glyphicon-map-marker"></i>location name</li>-->
     <!--<li><i class = "glyphicon glyphicon-briefcase"></i>icon</li>-->
     <!--<li>temperature</li>-->
