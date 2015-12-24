@@ -7,14 +7,18 @@
     <title>Weather<sup>&alpha;;</sup></title>
     <meta name = "viewport" content = "width=device-width, initial-scale=1">
 
-    <link rel = "stylesheet" type = "text/css"
-          href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel = "stylesheet" type = "text/css" href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="//public/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="//public/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="//public/css/font-roboto.css">
+  <link rel="stylesheet" type="text/css" href="//public/css/font-droid-sans-mono.css">
+  <!--<link rel = "stylesheet" type = "text/css"-->
+  <!--href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+  <!--<link rel = "stylesheet" type = "text/css" href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
 
-    <link href = 'https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&subset=latin,cyrillic-ext'
-          rel = 'stylesheet' type = 'text/css'>
-    <link href = 'https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext' rel = 'stylesheet'
-          type = 'text/css'>
+  <!--<link href = 'https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&subset=latin,cyrillic-ext'-->
+  <!--rel = 'stylesheet' type = 'text/css'>-->
+  <!--<link href = 'https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext' rel = 'stylesheet'-->
+  <!--type = 'text/css'>-->
 
     <style type = "text/css">
         body {
@@ -215,7 +219,7 @@
 
 
         }
-        ;
+
 
         function showWeather(itemKey, itemValue) {
 
@@ -241,11 +245,11 @@
                 console.log('Latitude : ' + crd.latitude);
                 console.log('Longitude: ' + crd.longitude);
                 console.log('More or less ' + crd.accuracy + ' meters.');
-            };
+            }
 
             function error(err) {
                 console.warn('ERROR(' + err.code + '): ' + err.message);
-            };
+            }
 
             navigator.geolocation.getCurrentPosition(success, error, options);
         }
