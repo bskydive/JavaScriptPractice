@@ -110,10 +110,16 @@ var jsonOWMDesc = {
     locationId = 0,
     unitId = 0,
     localization = {
-        locationHeader: ["Nearest location: ", "Ближайшая точка: "],
+        locationHeader: ["Weather geo location: ", "Точка определения погоды: "],
+        locationLonDesc: ["Geo longitude", "Географическая долгота"],
+        locationLatDesc: ["Geo latitude", "Географическая широта"],
+        pressureDesc:["Atmospheric pressure","Атмосфероное давление"],
+        temperatureDesc:["Air temperature","Температура воздуха"],
+        humidityDesc:["Air humidity","Влажность воздуха"],
+        pressUnitCap: [" hPa", " гПа"],
+        tempUnitCap: [" C", " K"],
         langJson: ["en", "ru"],
         unitsJson: ["metric", "imperial"]
-
     };
 
 function getWeatherIcon(weatherIcon) {
@@ -130,8 +136,8 @@ function getWeather(pos) {
 //                        console.log('Longitude: ' + crd.longitude);
 //                        console.log('More or less ' + crd.accuracy + ' meters.');
 
-    var httpText = "http://api.openweathermap.org/data/2.5/find?units="
-        + localization.unitsJson[unitId]
+    var httpText = "http://api.openweathermap.org/data/2.5/find?"
+        + "units=" + localization.unitsJson[unitId]
         + "&lang=" + localization.langJson[langId]
         + "&lat=" + (Math.round(crd.latitude * 100) / 100).toString()
         + "&lon=" + (Math.round(crd.longitude * 100) / 100).toString()
@@ -147,14 +153,14 @@ function getWeather(pos) {
 
         showWeatherTitle(localization.locationHeader[langId], json.list[locationId].name);
 
-        showWeatherList(json.list[locationId].coord.lon, jsonOWMDesc.coord.lon);
-        showWeatherList(json.list[locationId].coord.lat, jsonOWMDesc.coord.lat);
+        showWeatherList(json.list[locationId].coord.lon, localization.locationLonDesc[langId]);
+        showWeatherList(json.list[locationId].coord.lat, localization.locationLatDesc[langId]);
 
         showWeatherList("<img src=\"" + getWeatherIcon(json.list[locationId].weather[0].icon) + "\">", json.list[locationId].weather[0].description);
 
-        showWeatherList(json.list[locationId].main.temp + "&deg; C", jsonOWMDesc.main.temp);
-        showWeatherList(json.list[locationId].main.pressure + " hPa", jsonOWMDesc.main.pressure);
-        showWeatherList(json.list[locationId].main.humidity + " %", jsonOWMDesc.main.humidity);
+        showWeatherList(json.list[locationId].main.temp + "&deg;" + localization.tempUnitCap[unitId], localization.temperatureDesc[langId]);
+        showWeatherList(json.list[locationId].main.pressure + localization.pressUnitCap[langId], localization.pressureDesc[langId]);
+        showWeatherList(json.list[locationId].main.humidity + " %", localization.humidityDesc[langId]);
 
         //showWeatherList(json.list[locationId].sys.country, jsonOWMDesc.sys.country);
         //showWeather(json.list[locationId].name, jsonOWMDesc.name);
@@ -164,7 +170,6 @@ function getWeather(pos) {
         document.getElementById("id_spanLocation2").innerHTML = json.list[2].name;
     });
 }
-
 
 
 function showWeatherTitle(header, name) {
@@ -210,40 +215,40 @@ $(document).ready(function () {
 
     //showWeatherList("value", "desc");
 
-getCoordinates();
+    getCoordinates();
 
     $("#id_btnMetric").on("click", function () {
-        unitId=0;
+        unitId = 0;
         getCoordinates();
     });
 
     $("#id_btnImperial").on("click", function () {
-        unitId=1;
+        unitId = 1;
         getCoordinates();
     });
 
 
     $("#id_btnEn").on("click", function () {
-        langId=0;
+        langId = 0;
         getCoordinates();
     });
 
     $("#id_btnRu").on("click", function () {
-        langId=1;
+        langId = 1;
         getCoordinates();
     });
 
 
     $("#id_btnLocation0").on("click", function () {
-        locationId=0;
+        locationId = 0;
         getCoordinates();
     });
     $("#id_btnLocation1").on("click", function () {
-        locationId=1;
+        locationId = 1;
         getCoordinates();
     });
     $("#id_btnLocation2").on("click", function () {
-        locationId=2;
+        locationId = 2;
         getCoordinates();
     });
 });
