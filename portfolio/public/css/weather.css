@@ -1,0 +1,55 @@
+body {
+    font-family: 'Roboto Mono', Monospace, serif;
+}
+
+/*#id_timeText {*/
+
+/*padding: 0px;*/
+/*margin: 0px;*/
+/*font-size: 6em;*/
+/*}*/
+
+/*#id_headerCaption {*/
+/*padding: 1em;*/
+/*font-family: Roboto, Monospace, serif;*/
+/*}*/
+
+/*.btnControls {*/
+/*font-family: 'Roboto Mono', Monospace, serif;*/
+/*font-weight: 700 !important;*/
+/*}*/
+
+#id_divMain, #id_divBottom {
+    border-top: 1px solid gray;
+    padding: 1em;
+}
+
+#id_divlistMainHeader {
+    /*border-top: 1px solid gray;*/
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 1.25em;
+    padding-top: 1.25em;
+}
+
+#id_listMain {
+    text-align: left;
+    width: 22em;
+    margin: 0 auto;
+}
+
+#id_listMain li {
+    padding: 0.5em 5em 0.5em 0.5em;
+    background: #ddd;
+    margin-bottom: 1px;
+    position: relative;
+}
+
+#id_listMain li span {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    font-size: 0.75em;
+}
