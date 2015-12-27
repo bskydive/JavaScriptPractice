@@ -1,3 +1,47 @@
+//function getTheJSON(urlText) {
+//    var data;
+//
+//    var request = new XMLHttpRequest();
+//
+//    request.timeout = 5000;
+//
+//    request.ontimeout = function () {
+//        console.log("Timeout of " + (request.timeout / 1000).toString() + "sec exceeded");
+//    };
+//
+//    request.onload = function () {
+//        if (request.status >= 200 && request.status < 400) {
+//
+//            try {
+//                data = json.list[locationId].parse(request.responseText);
+//            } catch (e) {
+//                console.log("Incorrect JSON data received. Parse error: " + e.message);
+//            }
+//        } else {
+//            console.log("Server returned an onload error:" + request.status + " : " + request.statusText);
+//        }
+//    };
+//
+//    request.onerror = function () {
+//        console.log("Server returned an error:" + request.status + " : " + request.statusText);
+//    };
+//
+//    request.open('GET', urlText.toString(), true);
+//
+//    request.setRequestHeader('Content-Type', 'application/json');
+//    //request.setRequestHeader('Accept-Encoding', 'gzip, deflate');//for narodmon
+//    request.setRequestHeader('Cache-Control', 'no-cache');
+//
+//    request.send();
+//
+//
+//    return data;
+//
+////            console.log(data.error);
+//
+//
+//}
+
 
 var jsonOWMDesc = {
 
@@ -85,34 +129,6 @@ function getWeather(pos) {
 //                        console.log('Latitude : ' + crd.latitude);
 //                        console.log('Longitude: ' + crd.longitude);
 //                        console.log('More or less ' + crd.accuracy + ' meters.');
-//    var tmp = {
-//        "coord": {
-//            "lon": 37.06, "lat": 55.55
-//        }
-//        ,
-//        "weather": [{"id": 600, "main": "Snow", "description": "небольшой снегопад", "icon": "13n"}],
-//        "base": "cmc stations",
-//        "main": {
-//            "temp": -3.61, "pressure": 1013, "humidity": 58, "temp_min": -4, "temp_max": -2.78
-//        }
-//        ,
-//        "wind": {
-//            "speed": 9, "deg": 290, "gust": 14
-//        }
-//        ,
-//        "clouds": {
-//            "all": 20
-//        }
-//        ,
-//        "dt": 1451233136,
-//        "sys": {
-//            "type": 1, "id": 7329, "message": 0.0032, "country": "RU", "sunrise": 1451196021, "sunset": 1451221539
-//        }
-//        ,
-//        "id": 529621,
-//        "name": "Mamyri",
-//        "cod": 200
-//    }
 
     var httpText = "http://api.openweathermap.org/data/2.5/find?units="
         + localization.unitsJson[unitId]
@@ -127,10 +143,12 @@ function getWeather(pos) {
 
         console.log(json);
 
+        document.getElementById('id_listMain').innerHTML = "";
+
         showWeatherTitle(localization.locationHeader[langId], json.list[locationId].name);
 
-        //showWeatherList(json.list[locationId].coord.lon, jsonOWMDesc.coord.lon);
-        //showWeatherList(json.list[locationId].coord.lat, jsonOWMDesc.coord.lat);
+        showWeatherList(json.list[locationId].coord.lon, jsonOWMDesc.coord.lon);
+        showWeatherList(json.list[locationId].coord.lat, jsonOWMDesc.coord.lat);
 
         showWeatherList("<img src=\"" + getWeatherIcon(json.list[locationId].weather[0].icon) + "\">", json.list[locationId].weather[0].description);
 
@@ -141,53 +159,13 @@ function getWeather(pos) {
         //showWeatherList(json.list[locationId].sys.country, jsonOWMDesc.sys.country);
         //showWeather(json.list[locationId].name, jsonOWMDesc.name);
 
+        document.getElementById("id_spanLocation0").innerHTML = json.list[0].name;
+        document.getElementById("id_spanLocation1").innerHTML = json.list[1].name;
+        document.getElementById("id_spanLocation2").innerHTML = json.list[2].name;
     });
 }
 
 
-//function getTheJSON(urlText) {
-//    var data;
-//
-//    var request = new XMLHttpRequest();
-//
-//    request.timeout = 5000;
-//
-//    request.ontimeout = function () {
-//        console.log("Timeout of " + (request.timeout / 1000).toString() + "sec exceeded");
-//    };
-//
-//    request.onload = function () {
-//        if (request.status >= 200 && request.status < 400) {
-//
-//            try {
-//                data = json.list[locationId].parse(request.responseText);
-//            } catch (e) {
-//                console.log("Incorrect JSON data received. Parse error: " + e.message);
-//            }
-//        } else {
-//            console.log("Server returned an onload error:" + request.status + " : " + request.statusText);
-//        }
-//    };
-//
-//    request.onerror = function () {
-//        console.log("Server returned an error:" + request.status + " : " + request.statusText);
-//    };
-//
-//    request.open('GET', urlText.toString(), true);
-//
-//    request.setRequestHeader('Content-Type', 'application/json');
-//    //request.setRequestHeader('Accept-Encoding', 'gzip, deflate');//for narodmon
-//    request.setRequestHeader('Cache-Control', 'no-cache');
-//
-//    request.send();
-//
-//
-//    return data;
-//
-////            console.log(data.error);
-//
-//
-//}
 
 function showWeatherTitle(header, name) {
     document.getElementById("id_spanLocationName").innerHTML = name;
@@ -215,7 +193,12 @@ function getCoordinates() {
         console.warn('ERROR(' + err.code + '): ' + err.message);
     }
 
-    navigator.geolocation.getCurrentPosition(getWeather, error, options);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getWeather, error, options);
+    } else {
+        showWeatherTitle("Geolocation not supported");
+    }
+
 
 }
 
@@ -226,11 +209,41 @@ $(document).ready(function () {
     //todo get weather from narodmon++change view of location/cities list: add list of parameters/abilities
 
     //showWeatherList("value", "desc");
-    if (navigator.geolocation) {
+
+getCoordinates();
+
+    $("#id_btnMetric").on("click", function () {
+        unitId=0;
         getCoordinates();
-    } else {
-        showWeatherTitle("Geolocation not supported");
-    }
+    });
+
+    $("#id_btnImperial").on("click", function () {
+        unitId=1;
+        getCoordinates();
+    });
 
 
+    $("#id_btnEn").on("click", function () {
+        langId=0;
+        getCoordinates();
+    });
+
+    $("#id_btnRu").on("click", function () {
+        langId=1;
+        getCoordinates();
+    });
+
+
+    $("#id_btnLocation0").on("click", function () {
+        locationId=0;
+        getCoordinates();
+    });
+    $("#id_btnLocation1").on("click", function () {
+        locationId=1;
+        getCoordinates();
+    });
+    $("#id_btnLocation2").on("click", function () {
+        locationId=2;
+        getCoordinates();
+    });
 });

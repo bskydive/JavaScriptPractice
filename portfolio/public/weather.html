@@ -28,7 +28,8 @@
 
 
         <!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
-        <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+        <!--<script type="text/javascript" src="js/jquery-1.11.3.js"></script>-->
+        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/weather.js"></script>
 
 </head>
@@ -71,24 +72,43 @@
 </div>
 
 <div class="container-fluid text-center" id="id_divBottom">
-        <div class="btn-toolbar" role="toolbar">
-                <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default active" id="id_btnMetric">Metric</button>
-                        <button type="button" class="btn btn-default" id="id_btnImperial">Imperial</button>
 
-                </div>
-                <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default active" id="id_btnEn">EN</button>
-                        <button type="button" class="btn btn-default" id="id_btnRu">РФ</button>
-
-                </div>
+        <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active">
+                        <input type="radio" name="options" id="id_btnMetric" autocomplete="off" checked>
+                        Metric
+                </label>
+                <label class="btn btn-default">
+                        <input type="radio" name="options" id="id_btnImperial" autocomplete="off">
+                        Imperial
+                </label>
         </div>
-        <!--button list to choise nearest gps weather point-->
 
-        <button type="button" class="btn btn-default btnControls" id="id_btnLocation">
-                        <i class="glyphicon glyphicon-map-marker"></i><span
-                        id="id_spanLocations"> Nearest location list</span>
+        <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active">
+                        <input type="radio" name="options1" id="id_btnEn" autocomplete="off" checked>
+                        EN
+                </label>
+                <label class="btn btn-default">
+                        <input type="radio" name="options1" id="id_btnRu" autocomplete="off">
+                        РФ
+                </label>
+        </div>
+
+
+        <div class="btn-group" role="group" data-toggle="buttons">
+                <button type="button" class="btn btn-default active" id="id_btnLocation0">
+                        <i class="glyphicon glyphicon-map-marker"></i> <span id="id_spanLocation0">UNKNOWN</span>
                 </button>
+                <button type="button" class="btn btn-default" id="id_btnLocation1">
+                        <i class="glyphicon glyphicon-map-marker"></i> <span id="id_spanLocation1">UNKNOWN</span>
+                </button>
+                <button type="button" class="btn btn-default" id="id_btnLocation2">
+                        <i class="glyphicon glyphicon-map-marker"></i> <span id="id_spanLocation2">UNKNOWN</span>
+                </button>
+
+        </div>
+
 
 </div>
 
