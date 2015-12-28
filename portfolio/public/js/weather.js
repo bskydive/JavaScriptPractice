@@ -220,35 +220,52 @@ $(document).ready(function () {
     $("#id_btnMetric").on("click", function () {
         unitId = 0;
         getCoordinates();
+        $('#id_btnMetric').addClass('active');
+        $('#id_btnImperial').removeClass('active');
     });
 
     $("#id_btnImperial").on("click", function () {
         unitId = 1;
         getCoordinates();
+        $('#id_btnMetric').removeClass('active');
+        $('#id_btnImperial').addClass('active');
     });
 
 
     $("#id_btnEn").on("click", function () {
         langId = 0;
         getCoordinates();
+        $('#id_btnRu').removeClass('active');
+        $('#id_btnEn').addClass('active');
     });
 
     $("#id_btnRu").on("click", function () {
         langId = 1;
         getCoordinates();
+        $('#id_btnEn').removeClass('active');
+        $('#id_btnRu').addClass('active');
     });
 
 
     $("#id_btnLocation0").on("click", function () {
         locationId = 0;
         getCoordinates();
+        $('#id_btnLocation0').addClass('active');
+        $('#id_btnLocation1').removeClass('active');
+        $('#id_btnLocation2').removeClass('active');
     });
     $("#id_btnLocation1").on("click", function () {
         locationId = 1;
         getCoordinates();
+        $('#id_btnLocation0').removeClass('active');
+        $('#id_btnLocation1').addClass('active');
+        $('#id_btnLocation2').removeClass('active');
     });
     $("#id_btnLocation2").on("click", function () {
         locationId = 2;
         getCoordinates();
+        $('#id_btnLocation0').removeClass('active');
+        $('#id_btnLocation1').removeClass('active');
+        $('#id_btnLocation2').addClass('active');
     });
 });
