@@ -1,5 +1,7 @@
 # README #
 
+### What is this? ###
+
 This is my code examples repository
 
 ### What is this repository for? ###
@@ -22,6 +24,16 @@ This is my code examples repository
 ### Contribution guidelines ###
 
 * Currently I'm not ready to maintain contributing processes
+
+### Development workflow ###
+
+* feature-*.*.XX branch tested locally, merged to development
+* development branch tested on dedicated(VPS) server, merged to master
+* master branch tested on dedicated(VPS) server, published in my portfolio page
+* hotfix-*.*.*.XX branch tested on dedicated(VPS) server, merged to master
+* version currently not published, but can be viewed in git repository commits and my Redmine ALM
+{production(master) release}.{development release}.{feature list number}.{hotfix list number}
+
 
 ### Who do I talk to? ###
 
