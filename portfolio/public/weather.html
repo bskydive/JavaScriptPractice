@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
 
 <head>
         <meta charset="UTF-8">
+        <meta lang="en-us">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Weather<sup>&alpha;;</sup></title>
+        <title>Weather<sup>&alpha;;</sup> at: <span>UNKNOWN</span></title>
 
         <link rel="shortcut icon" type="image/png" href="img/favicon_stepanovv.png">
-
 
         <link rel="stylesheet" type="text/css" href="css/font-roboto-mono.css">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+        <link rel="stylesheet" type="text/css" href="css/weather.css">
 
         <!--<link rel="stylesheet" type="text/css" href="//public/css/font-droid-sans-mono.css">-->
         <!--<link rel = "stylesheet" type = "text/css"-->
@@ -24,279 +26,26 @@
         <!--<link href = 'https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext' rel = 'stylesheet'-->
         <!--type = 'text/css'>-->
 
-        <style type="text/css">
-                body {
-                        font-family: 'Roboto Mono', Monospace, serif;
-                }
-
-                /*#id_timeText {*/
-
-                /*padding: 0px;*/
-                /*margin: 0px;*/
-                /*font-size: 6em;*/
-                /*}*/
-
-                /*#id_headerCaption {*/
-                /*padding: 1em;*/
-                /*font-family: Roboto, Monospace, serif;*/
-                /*}*/
-
-                /*.btnControls {*/
-                /*font-family: 'Roboto Mono', Monospace, serif;*/
-                /*font-weight: 700 !important;*/
-                /*}*/
-
-                #id_divMain, #id_divBottom {
-                        border-top: 1px solid gray;
-                        padding: 1em;
-                }
-
-                #id_divlistMainHeader {
-                        /*border-top: 1px solid gray;*/
-                        text-transform: uppercase;
-                        letter-spacing: 0.25em;
-                        font-weight: bold;
-                        font-size: 1em;
-                        margin-bottom: 1.25em;
-                        padding-top: 1.25em;
-                }
-
-                #id_listMain {
-                        text-align: left;
-                        width: 25em;
-                        margin: 0 auto;
-                }
-
-                #id_listMain li {
-                        padding: 0.5em 5em 0.5em 0.5em;
-                        background: #ddd;
-                        margin-bottom: 1px;
-                        position: relative;
-                }
-
-                #id_listMain li span {
-                        position: absolute;
-                        right: 1em;
-                        top: 1em;
-                        font-size: 0.75em;
-                }
-
-        </style>
 
         <!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
-        <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+        <!--<script type="text/javascript" src="js/jquery-1.11.3.js"></script>-->
+        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="js/weather.js"></script>
 
-        <script>
-
-                var jsonOWMDesc = {
-
-                        coord: {
-                                lon: "City geo location, longitude",
-                                lat: "City geo location, latitude"
-                        },
-
-                        weather: {
-                                id: "Weather condition id",
-                                main: "Group of weather parameters (Rain, Snow, Extreme etc_)",
-                                description: "Weather condition within the group",
-                                icon: "Weather icon id"
-                        },
-
-                        base: "Internal parameter",
-
-                        main: {
-                                temp: "Temperature",
-                                pressure: "Atmospheric pressure, hPa", //(on the sea level, if there is no sea_level or grnd_level data), hPa",
-                                humidity: "Humidity, %",
-
-                                temp_min: "Minimum temperature at the moment_ ",
-                                temp_max: "Maximum temperature at the moment_ ",
-                                sea_level: "Atmospheric pressure on the sea level, hPa",
-                                grnd_level: "Atmospheric pressure on the ground level, hPa"
-                        },
-
-                        wind: {
-                                "speed": "Wind speed_ Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour_",
-                                "deg": "Wind direction, degrees (meteorological)"
-                        },
-
-
-                        clouds: {
-                                "all": "Cloudiness, %"
-                        },
-
-                        rain: {
-                                "3h": "Rain volume for the last 3 hours"
-                        },
-
-                        snow: {
-                                "3h": "Snow volume for the last 3 hours"
-                        },
-
-                        dt: "Time of data calculation, unix, UTC",
-
-                        sys: {
-                                type: "Internal parameter",
-                                id: "Internal parameter",
-                                message: "Internal parameter",
-                                country: "Country code (GB, JP etc_)",
-                                sunrise: "Sunrise time, unix, UTC",
-                                sunset: "Sunset time, unix, UTC"
-                        },
-
-                        id: "City ID",
-                        name: "City name",
-                        cod: "Internal parameter"
-                };
-
-
-                function getWeatherIcon(weatherIcon) {
-                        return "http://openweathermap.org/img/w/" + weatherIcon + ".png"
-                }
-
-                function getWeather() {
-                        var json, apiKey = "9810b9f35c8f7b1ee6ae08d2d6f49e06";
-
-                        var coord = getCoordinates();
-
-                        $.getJSON("http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&lat="
-                                +coord.lat.toString+"&lon="+coord.lon.toString()+"&appid=2de143494c0b295cca9337e1e96b00e0"
-                                , function (json) {
-//                                        console.log(json);
-//                Широта
-//                55°32′37″N (55.543512)
-//                Долгота
-//                37°3′54″E (37.064897)
-
-                                        document.getElementById("id_spanLocation").innerHTML = json.name;
-
-                                        showWeather(json.coord.lon + " lon", jsonOWMDesc.coord.lon);
-                                        showWeather(json.coord.lat + " lat", jsonOWMDesc.coord.lat);
-
-                                        //todo show icon
-                                        //getWeatherIcon(json.weather.icon);
-
-                                        showWeather(json.main.temp + "&deg; C", jsonOWMDesc.main.temp);
-                                        showWeather(json.main.pressure + " hPa", jsonOWMDesc.main.pressure);
-                                        showWeather(json.main.humidity + " %", jsonOWMDesc.main.humidity);
-
-                                        showWeather(json.sys.country, jsonOWMDesc.sys.country);
-//          showWeather(json.name, jsonOWMDesc.name);
-
-                                });
-                }
-
-
-                function getTheJSON(urlText) {
-                        var data;
-
-                        var request = new XMLHttpRequest();
-
-                        request.timeout = 5000;
-
-                        request.ontimeout = function () {
-                                console.log("Timeout of " + (request.timeout / 1000).toString() + "sec exceeded");
-                        };
-
-                        request.onload = function () {
-                                if (request.status >= 200 && request.status < 400) {
-
-                                        try {
-                                                data = JSON.parse(request.responseText);
-                                        } catch (e) {
-                                                console.log("Incorrect JSON data received. Parse error: " + e.message);
-                                        }
-                                } else {
-                                        console.log("Server returned an onload error:" + request.status + " : " + request.statusText);
-                                }
-                        };
-
-                        request.onerror = function () {
-                                console.log("Server returned an error:" + request.status + " : " + request.statusText);
-                        };
-
-                        request.open('GET', urlText.toString(), true);
-
-                        request.setRequestHeader('Content-Type', 'application/json');
-                        //request.setRequestHeader('Accept-Encoding', 'gzip, deflate');//for narodmon
-                        request.setRequestHeader('Cache-Control', 'no-cache');
-
-                        request.send();
-
-
-                        return data;
-
-//            console.log(data.error);
-
-
-                }
-
-
-                function showWeather(itemKey, itemValue) {
-
-                        var newLi = document.createElement("li");
-
-                        newLi.innerHTML = itemKey + "<span>" + itemValue + "</span>";
-
-                        document.getElementById('id_listMain').appendChild(newLi);
-
-                }
-
-                function getCoordinates() {
-                        var options = {
-                                enableHighAccuracy: true,
-                                timeout: 5000,
-                                maximumAge: 0
-                        };
-
-                        var coord = {
-                                lat: 0,
-                                lon: 0,
-                                acc: 0
-                        };
-
-                        function success(pos) {
-                                var crd = pos.coords;
-
-                                coord.lat = (Math.round(pos.coords.latitude * 100) / 100 );
-                                coord.lon = (Math.round(pos.coords.longitude * 100) / 100 );
-                                coord.acc = (pos.coords.accuracy);
-
-
-
-                                console.log('Your current position is:');
-                                console.log('Latitude : ' + crd.latitude);
-                                console.log('Longitude: ' + crd.longitude);
-                                console.log('More or less ' + crd.accuracy + ' meters.');
-                        }
-
-                        function error(err) {
-                                console.warn('ERROR(' + err.code + '): ' + err.message);
-                        }
-
-                        navigator.geolocation.getCurrentPosition(success, error, options);
-
-                        return coord;
-                }
-
-                $(document).ready(function () {
-                        //todo get country&units from BOM
-                        //todo get 3 nearest cities/locations from 100km radius
-                        //todo get weather from narodmon++change view of location/cities list: add list of parameters/abilities
-                        showWeather("value", "desc");
-                        getWeather();
-
-                });
-        </script>
 </head>
 
 <body>
 
 <div class="container-fluid text-center" id="id_divHeader">
 
-        <a class="btn btn-link" id="id_headerCaption" href="#"
+        <a class="btn btn-link" id="id_headerCaption" href="http://openweathermap.org/"
            role="button">Weather<sup>&alpha;</sup></a>
         <!--button group to choose weather api-->
+        <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default active" id="id_btnOWM">OpenWeatherMap</button>
+                <button type="button" class="btn btn-default" id="id_btnNM">NarodMon</button>
+
+        </div>
 </div>
 
 
@@ -304,7 +53,7 @@
         <!--list - because on mobile small screens much easier swipe above non-interactive elements to scroll-->
 
         <div class="container-fluid text-center" id="id_divlistMainHeader">
-                Nearest location: <span id="id_spanLocation">UNKNOWN</span>
+                <span id="id_spanLocationHeader">Nearest location: </span><span id="id_spanLocationName">UNKNOWN</span>
         </div>
         <ul class="list-unstyled" id="id_listMain">
                 <!--<li><i class = "glyphicon glyphicon-map-marker"></i>location name</li>-->
@@ -323,13 +72,44 @@
 </div>
 
 <div class="container-fluid text-center" id="id_divBottom">
-        <!--button list to choise nearest gps weather point-->
-        <ul class="list-unstyled" id="id_listBottom">
-                <button type="button" class="btn btn-default btnControls" id="id_btnTimer">
-                        <i class="glyphicon glyphicon-map-marker"></i><span
-                        id="id_spanLocations"> Nearest location list</span>
+
+        <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active">
+                        <input type="radio" name="options" id="id_btnMetric" autocomplete="off" checked>
+                        Metric
+                </label>
+                <label class="btn btn-default">
+                        <input type="radio" name="options" id="id_btnImperial" autocomplete="off">
+                        Imperial
+                </label>
+        </div>
+
+        <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active">
+                        <input type="radio" name="options1" id="id_btnEn" autocomplete="off" checked>
+                        EN
+                </label>
+                <label class="btn btn-default">
+                        <input type="radio" name="options1" id="id_btnRu" autocomplete="off">
+                        РФ
+                </label>
+        </div>
+
+
+        <div class="btn-group" role="group" data-toggle="buttons">
+                <button type="button" class="btn btn-default active" id="id_btnLocation0">
+                        <i class="glyphicon glyphicon-map-marker"></i> <span id="id_spanLocation0">UNKNOWN</span>
                 </button>
-        </ul>
+                <button type="button" class="btn btn-default" id="id_btnLocation1">
+                        <i class="glyphicon glyphicon-map-marker"></i> <span id="id_spanLocation1">UNKNOWN</span>
+                </button>
+                <button type="button" class="btn btn-default" id="id_btnLocation2">
+                        <i class="glyphicon glyphicon-map-marker"></i> <span id="id_spanLocation2">UNKNOWN</span>
+                </button>
+
+        </div>
+
+
 </div>
 
 
