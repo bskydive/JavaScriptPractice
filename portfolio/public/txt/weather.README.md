@@ -1,5 +1,8 @@
-### Version: ###
-3.8.3
+### Versions: ###
+App:3.8.3
+Bootstrap:3.3.6
+Font-awesome:4.5.0
+jQuery:2.1.4
 
 ### Feature list ###
 
