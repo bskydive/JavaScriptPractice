@@ -24,9 +24,13 @@ jQuery:2.1.4
 
 * Show distance from current geo position to nearest weather location points
 * Get weather from narodmon json api
-* Get geo location from ipinfo.io json api
+* Get geo location from ipinfo.io/loc json api
 * Choose geo location api
 * Choose weather api
 * Show weather history graphs: month, week, day
 * Show weather forecast(openweathermap only)
+* Show current lat,lon in app header
+* Translation of the app header
 * Make android client
+* Determine adblock, noScript
+* Determine disabed geolocation
