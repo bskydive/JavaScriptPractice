@@ -1,5 +1,6 @@
 ### Versions: ###
-App(beta):3.8.3
+
+App(beta):3.8.4.1
 Bootstrap:3.3.6
 Font-awesome:4.5.0
 jQuery:2.1.4
@@ -20,7 +21,7 @@ jQuery:2.1.4
 * Bootstrap styles
 
 
-### TODO Feature List ###
+### Wish List: ###
 
 * Show distance from current geo position to nearest weather location points
 * Get weather from narodmon json api
@@ -30,7 +31,9 @@ jQuery:2.1.4
 * Show weather history graphs: month, week, day
 * Show weather forecast(openweathermap only)
 * Show current lat,lon in app header
-* Translation of the app header
+* Translation of the app header and title
 * Make android client
 * Determine adblock, noScript
 * Determine disabed geolocation
+* Disable weather get with city/lang/unit change(???) New refresh button(!!!)
+* Add city name to tab title after weather refresh
