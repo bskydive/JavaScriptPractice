@@ -7,7 +7,7 @@ jQuery:2.1.4
 
 ### Sources ###
 
-[BitBucket](https://bitbucket.org/bskydive/portfoliojs/src/62b71508d319?at=feature-3.8.3)
+[BitBucket](https://bitbucket.org/bskydive/portfoliojs/)
 
 ### Feature list ###
 

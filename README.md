@@ -27,6 +27,8 @@ This is my code examples repository
 
 ### Development workflow ###
 
+Previously I'm use gitflow:
+
 * Issues registered as tasks in my own Redmine server
 * feature-*.*.XX.* branch tested locally, merged to development
 * development branch(*.XX.*.*) tested on dedicated(VPS) server, merged to master
@@ -36,6 +38,8 @@ This is my code examples repository
 {production(master) release}.{development release}.{feature list number}.{hotfix list number}. Example: v3.8.3.0, v4.0.0.1
 * after successfully testing of master commit, I've create corresponding git tag with features and fixes description.
 * commited feature lists registers in Redmine task and time tracker, links to the commit number in git repo.
+
+Currently I'm exclude development branch. Only hotfix-* and feature-* branches in use.
 
 ### Who do I talk to? ###
 
