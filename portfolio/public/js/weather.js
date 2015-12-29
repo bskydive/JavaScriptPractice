@@ -207,6 +207,9 @@ function getCoordinates() {
 
 }
 
+function getCoordinatesNM(){
+    //http://narodmon.ru/api?cmd=sensorsNearby&lat=55.75&lng=37.62&radius=2&types=1,2&uuid=UUID&api_key=API_KEY&lang=en
+}
 
 $(document).ready(function () {
     //todo get country&units from BOM
