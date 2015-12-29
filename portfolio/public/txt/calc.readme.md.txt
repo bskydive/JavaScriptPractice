@@ -1,0 +1,30 @@
+### Versions: ###
+
+App(beta):3.9.1.0
+Bootstrap:3.3.6
+Font-awesome:4.5.0
+jQuery:2.1.4
+
+### Sources ###
+
+[BitBucket](https://bitbucket.org/bskydive/portfoliojs/)
+
+### Feature list ###
+
+* bootstrap mobile-first responsive design
+
+### Wish List: ###
+
+* enter digits from web keyboard
+* enter digits from numpad
+* enter digits in plain text
+* check isSafeInteger of input digits
+* check isSafeInteger of the result
+* 15 digits+sign+dot limit
+* implement /,*,-,+ operations
+* imp;ement ^ operation
+* implement () operation
+* show current input expression before =
+* show history of expressions
+* restore operations from history by click
+* C operation
