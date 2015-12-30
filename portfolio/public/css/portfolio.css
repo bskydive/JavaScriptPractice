@@ -6,6 +6,9 @@ body {
     background: url("../img/hatch.png") repeat fixed;
 }
 
+.placeholder{
+    padding-bottom: 50em;
+}
 /*img {*/
     /*padding: 1em;*/
 /*}*/
