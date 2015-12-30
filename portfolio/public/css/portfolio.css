@@ -3,7 +3,26 @@ body {
 }
 
 .background-main {
-    background: url("http://stepanovv.ru/sites/all/themes/sky/css/images/ts/hatch.png") repeat fixed;
+    background: url("../img/hatch.png") repeat fixed;
+}
+
+/*img {*/
+    /*padding: 1em;*/
+/*}*/
+
+/*.container-main{*/
+    /*background: white;*/
+/*}*/
+
+/*.background-main {*/
+    /*background: url("http://stepanovv.ru/sites/all/themes/sky/css/images/ts/hatch.png") repeat fixed;*/
+/*}*/
+
+/*h1, h2, p {*/
+    /*font-family: Roboto, Monospace,serif;*/
+/*}*/
+.caption{
+    padding-top: 1em;
 }
 
 p {
