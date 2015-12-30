@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title id="id_titleText">Таймер Pomodoro</title>
+
+        <link rel="shortcut icon" type="image/png" href="../img/favicon_stepanovv.png">
+        <!--<link rel = "stylesheet" type = "text/css" href="css/font-droid-sans-mono.css">-->
+        <link rel="stylesheet" type="text/css" href="../css/font-roboto-mono.css">
+        <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+
+        <!--<link rel="stylesheet" type="text/css"-->
+        <!--href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+        <!--<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+
+        <!--<link href = 'https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&subset=latin,cyrillic-ext'-->
+        <!--rel = 'stylesheet' type = 'text/css'>-->
+        <!--<link href = 'https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext' rel = 'stylesheet'-->
+        <!--type = 'text/css'>-->
+
+
+
+        <!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+
+        <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="../js/timer.js"></script>
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid text-center">
+
+        <a class="btn btn-link" id="id_headerCaption" href="http://pomodorotechnique.com/"
+           role="button">Таймер Pomodoro<sup>&beta;</sup></a>
+
+        <!--<div class="btn-group " role="group" aria-label="...">-->
+
+        <!--	<button type="button" class="btn btn-default navbar-btn" id="id_btnTimer">-->
+        <!--		<i class="glyphicon glyphicon-play"></i> 25 : 00-->
+        <!--	</button>-->
+        <!--	<button type="button" class="btn btn-default navbar-btn" id="id_btnSmallPause">-->
+        <!--		<i class="glyphicon glyphicon-pause"></i> 5 : 00-->
+        <!--	</button>-->
+        <!--	<button type="button" class="btn btn-default navbar-btn" id="id_btnLargePause">-->
+        <!--		<i class="glyphicon glyphicon-pause"></i> 15 : 00-->
+        <!--	</button>-->
+        <!--</div>-->
+
+        <div class="btn-group " role="group" aria-label="...">
+
+                <button type="button" class="btn btn-default btnControls" id="id_btnTimerDec">
+                        &minus;
+                </button>
+                <button type="button" class="btn btn-default btnControls" id="id_btnTimer">
+                        <i class="glyphicon glyphicon-briefcase"></i> 25
+                </button>
+                <button type="button" class="btn btn-default btnControls" id="id_btnTimerInc">
+                        &plus;
+                </button>
+        </div>
+
+        <div class="btn-group  btnControls" role="group" aria-label="...">
+
+                <button type="button" class="btn btn-default btnControls" id="id_btnSmallPauseDec">
+                        &minus;
+                </button>
+                <button type="button" class="btn btn-default btnControls" id="id_btnSmallPause">
+                        <i class="glyphicon glyphicon-bell"></i> 05
+                </button>
+                <button type="button" class="btn btn-default btnControls" id="id_btnSmallPauseInc">
+                        &plus;
+                </button>
+        </div>
+
+
+</div>
+
+
+<div class="container-fluid text-center" id="id_timeText">
+        <p>00:00</p>
+</div>
+
+<div class="container-fluid text-center" id="id_divListHistoryHeader">
+        История действий за <span>00ч:00м</span>
+</div>
+
+<div>
+        <ul class="list-unstyled" id="id_listHistory">
+
+        </ul>
+</div>
+
+</body>
+
+</html>

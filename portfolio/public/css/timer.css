@@ -1,0 +1,52 @@
+
+body {
+    font-family: 'Roboto Mono', Monospace, serif;
+}
+
+#id_timeText {
+
+    padding: 0px;
+    margin: 0px;
+    font-size: 6em;
+    border-top: 1px solid gray;
+}
+
+#id_headerCaption {
+    padding: 1em;
+    font-family: Roboto, Monospace, serif;
+}
+
+.btnControls {
+    font-family: 'Roboto Mono', Monospace, serif;
+    font-weight: 700 !important;
+}
+
+#id_divListHistoryHeader {
+    border-top: 1px solid gray;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 1.25em;
+    padding-top: 1.25em;
+}
+
+#id_listHistory {
+    text-align: left;
+    width: 25em;
+    margin: 0 auto;
+}
+
+#id_listHistory li {
+    padding: 0.5em 5em 0.5em 0.5em;
+    background: #ddd;
+    margin-bottom: 1px;
+    position: relative;
+}
+
+#id_listHistory li span {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    font-size: 0.75em;
+}
