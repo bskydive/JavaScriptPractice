@@ -122,6 +122,7 @@ function showTime() {
         timeSpendString += "00";
 
         showHistory("Отсчёт закончен");
+        playSound();
     }
 
     document.getElementById('id_timeText').innerHTML = "<p>" + timeSpendString + "</p>";
@@ -141,11 +142,7 @@ function showHistory(nameVal) {
 
     document.getElementById('id_listHistory').appendChild(newLi);
 
-
-    //document.getElementById('id_timeText').innerHTML = "<p>" + timeSpendString + "</p>";
-
 }
-
 
 $(document).ready(function () {
 
