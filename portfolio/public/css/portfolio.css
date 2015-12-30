@@ -1,0 +1,25 @@
+body {
+    font-family: 'Roboto Mono', Monospace, serif;
+}
+
+.background-main {
+    background: url("http://stepanovv.ru/sites/all/themes/sky/css/images/ts/hatch.png") repeat fixed;
+}
+
+p {
+    font-size: 16px;
+}
+
+.column-double-center {
+    background: white;
+    padding: 1em 3em 1em 2em;
+}
+
+.column-left-center {
+    background: white;
+
+}
+
+.column-right-center {
+    background: white;
+}

@@ -1,0 +1,19 @@
+### Versions: ###
+
+App(beta):3.9.2.0
+Bootstrap:3.3.6
+Font-awesome:4.5.0
+jQuery:2.1.4
+
+### Sources ###
+
+[BitBucket](https://bitbucket.org/bskydive/portfoliojs/)
+
+### Feature list ###
+
+* bootstrap mobile-first responsive design
+*
+
+### Wish List: ###
+
+*
