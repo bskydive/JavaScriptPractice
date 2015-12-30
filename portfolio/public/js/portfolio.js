@@ -5,8 +5,10 @@ $(document).ready(function () {
     $(".column-double-center").addClass("col-md-8");
     $(".column-left-center").addClass("col-md-7");
     $(".column-right-center").addClass("col-md-1");
-    $(".column-thumbnail-center").addClass("col-md-3");
 
+
+    //$(".container-main").addClass("container-fluid col-md-8");
+    $(".column-thumbnail-center").addClass("col-md-3 text-center");
     //$(".column-double-center").addClass("bg-overlay");
 });
 
