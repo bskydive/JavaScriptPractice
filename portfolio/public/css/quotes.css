@@ -1,0 +1,19 @@
+
+.background-main {
+    background: url("../img/background-wood-backgroundlab.jpg") repeat repeat;
+}
+
+body {
+    font-family: Roboto, Monospace, serif;
+}
+
+.column-center {
+    background: url("../img/pattern-lines-ava7-1527-bright.png") repeat fixed;
+    /*padding: 1em 3em 1em 2em;*/
+
+}
+
+#id_divQuoteText {
+    padding-top: 1em;
+}
+
