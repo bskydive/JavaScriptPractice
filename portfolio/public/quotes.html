@@ -32,28 +32,22 @@
 
         <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
         <!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
-        <noscript>
-                <style>
-                        body *{ /*hides all elements inside the body*/
-                                display: none;
-                        }
 
-                        h1{ /* even if this h1 is inside head tags it will be first hidden, so we have to display it again after all body elements are hidden*/
-                                display: block;
-                        }
-
-                </style>
-                <h1>JavaScript is not enabled, please check your browser settings.</h1>
-        </noscript>
 
 </head>
 
 <body class="background-main">
 
 <div class="bg-overlay">
+
         <div class="column-left col-md-1"></div>
 
         <div class="column-center text-center col-md-6">
+                <noscript>
+                        <div class="alert alert-danger" role="alert">
+                                <strong>Warning!</strong> Please, enable JavaScript to see correct markup.
+                        </div>
+                </noscript>
                 <h1>Генератор цитат<span id="id_divHeaderText"></span></h1>
 
                 <a id="id_getQuoteBtn" class="btn btn-default" role="button">
