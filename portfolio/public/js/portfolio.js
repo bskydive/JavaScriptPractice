@@ -10,5 +10,12 @@ $(document).ready(function () {
     //$(".container-main").addClass("container-fluid col-md-8");
     $(".column-thumbnail-center").addClass("col-md-3 text-center");
     //$(".column-double-center").addClass("bg-overlay");
+
+
+        $(document.body).css('padding-top', $('#topnavbar').height() + 100);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#topnavbar').height() + 100);
+        });
+
 });
 
