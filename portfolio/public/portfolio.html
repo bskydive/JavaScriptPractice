@@ -32,38 +32,37 @@
 <body>
 
 <header>
-        <div class="container">
-                <div class="row">
-                        <nav class="c-columnNavTop">
-                                <ul class="c-listInline">
-                                        <li class="active">
-                                                <a href="#contacts">Контакты</a>
-                                        </li>
-                                        <li>
-                                                <a href="#resume">Краткие сведения</a>
-                                        </li>
-                                        <li>
-                                                <a href="#experience">Опыт</a>
-                                        </li>
-                                        <li>
-                                                <a href="#skills">Навыки</a>
-                                        </li>
-                                        <li>
-                                                <a href="#portfolio">Портфолио</a>
-                                        </li>
-                                        <li>
-                                                <a href="#hobbies">Хобби</a>
-                                        </li>
-                                </ul>
-                        </nav>
+        <!--<div class="container">-->
+                <div class="c-columnNavTop">
+                        <ul class="c-listInline">
+                                <li class="active">
+                                        <a href="#contacts">Контакты</a>
+                                </li>
+                                <li>
+                                        <a href="#resume">Краткие сведения</a>
+                                </li>
+                                <li>
+                                        <a href="#experience">Опыт</a>
+                                </li>
+                                <li>
+                                        <a href="#skills">Навыки</a>
+                                </li>
+                                <li>
+                                        <a href="#portfolio">Портфолио</a>
+                                </li>
+                                <li>
+                                        <a href="#hobbies">Хобби</a>
+                                </li>
+                        </ul>
                 </div>
-        </div>
+        <!--</div>-->
 </header>
+<main>
 
+        <div class="container" id="id_containerMain">
 
-<div class="container container-fluid">
-
-        <a name="contacts"></a>
+                <div class="spacer"></div>
+                <a name="contacts" class="c-navLink"></a>
 
 
                 <div class="row row-header">
@@ -81,15 +80,23 @@
 
                 </div>
 
+                <div class="row row-header">
+                        <div class="column-double-center">
+                                <br/>
+
+                                <h2>Контакты:</h2><br/>
+                        </div>
+                </div>
+
                 <div class="row row-text">
 
                         <div class="column-double-center">
 
 
                                 <ul class="c-listBlock">
-                                        <li>
-                                                <h3>Контакты:</h3>
-                                        </li>
+                                        <!--<li>-->
+                                                <!--<h3>Контакты:</h3>-->
+                                        <!--</li>-->
                                         <li>
                                                 <a href="https://www.facebook.com/bskydive" target="_blank"
                                                    class="btn btn-default">
@@ -116,7 +123,8 @@
                                 </ul>
 
 
-                                <img src="http://stepanovv.ru/sites/default/files/styles/medium/public/nvg_VStepanov2_LThumb.jpg">
+                                <img id="id_imgRight"
+                                     src="http://stepanovv.ru/sites/default/files/styles/medium/public/nvg_VStepanov2_LThumb.jpg">
 
                         </div>
 
@@ -364,8 +372,7 @@
                         </div>
                 </div>
         </div>
-</div>
-
+<!--</main>-->
 </body>
 </html>
 
