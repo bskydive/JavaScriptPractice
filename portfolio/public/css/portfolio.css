@@ -13,11 +13,12 @@ body {
 h2 {
     text-align: center;
 }
-/*.column-thumbnail-center {*/
+.column-thumbnail-center {
     /*text-align: center;*/
     /*margin: 3px;*/
     /*padding: 3px;*/
-/*}*/
+    display: block;
+}
 
 .c-columnNavTop {
     z-index: 1024;
