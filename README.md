@@ -31,11 +31,11 @@ This is my code examples repository
 * feature-x.x.XX.x branch tested locally, merged to development
 * development branch(x.XX.x.x) tested on dedicated(VPS) [server](http://test.portfolio.stepanovv.ru), merged to master
 * master branch(XX.x.x.x) tested on dedicated(VPS) [server](http://portfolio.stepanovv.ru)
-* hotfix-x.x.x.XX branch tested on dedicated(VPS) [server](http://portfolio.stepanovv.ru), commited to master
+* hotfix-x.x.x.XX branch tested on dedicated(VPS) [server](http://portfolio.stepanovv.ru), committed to master
 * version currently not published, but can be viewed in git repository commits and my Redmine server:
 {production(master) release}.{development release}.{feature list number}.{hotfix list number}. Example: v3.8.3.0, v4.0.0.1
 * after successfully testing of master commit, I've create corresponding git tag with features and fixes description.
-* commited feature lists registers in Redmine task and time tracker, links to the commit number in git repo.
+* committed feature lists registers in Redmine task and time tracker, links to the commit number in git repo.
 
 ### Who do I talk to? ###
 

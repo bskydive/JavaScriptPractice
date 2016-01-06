@@ -19,6 +19,7 @@ jQuery:2.1.4
 * Show weather conditions
 * Responsive mobile-first design
 * Bootstrap styles
+* determine noScript
 
 
 ### Wish List: ###
@@ -33,7 +34,7 @@ jQuery:2.1.4
 * Show current lat,lon in app header
 * Translation of the app header and title
 * Make android client
-* Determine adblock, noScript
+* Determine adblock
 * Determine disabed geolocation
 * Disable weather get with city/lang/unit change(???) New refresh button(!!!)
 * Add city name to tab title after weather refresh

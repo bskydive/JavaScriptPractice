@@ -22,7 +22,7 @@ jQuery:2.1.4
 * check isSafeInteger of the result
 * 15 digits+sign+dot limit
 * implement /,*,-,+ operations
-* imp;ement ^ operation
+* implement ^ operation
 * implement () operation
 * show current input expression before =
 * show history of expressions

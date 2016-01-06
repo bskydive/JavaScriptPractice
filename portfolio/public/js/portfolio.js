@@ -14,10 +14,10 @@ $(document).ready(function () {
 
 
     function offsetResize() {
-        var navTopHegiht = $('.c-columnNavTop').height();
-        $("#id_containerMain").css('padding-top', navTopHegiht);
-        $(".c-anchorOffset").css('top', -(navTopHegiht - 30));
-        //console.log(-navTopHegiht);
+        var navTopHeight = $('.c-columnNavTop').height();
+        $("#id_containerMain").css('padding-top', navTopHeight);
+        $(".c-anchorOffset").css('top', -(navTopHeight - 30));
+        //console.log(-navTopHeight);
     }
 
     offsetResize();

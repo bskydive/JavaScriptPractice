@@ -43,70 +43,70 @@
 //}
 
 
-var jsonOWMDesc = {
+//var jsonOWMDesc = {
+//
+//        coord: {
+//            lon: "Weather geo location, longitude",
+//            lat: "Weather geo location, latitude"
+//        },
+//
+//        weather: {
+//            id: "Weather condition id",
+//            main: "Group of weather parameters (Rain, Snow, Extreme etc_)",
+//            description: "Weather condition within the group",
+//            icon: "Weather icon id"
+//        },
+//
+//        base: "Internal parameter",
+//
+//        main: {
+//            temp: "Temperature",
+//            pressure: "Atmospheric pressure", //(on the sea level, if there is no sea_level or grnd_level data), hPa",
+//            humidity: "Humidity",
+//
+//            temp_min: "Minimum temperature at the moment_ ",
+//            temp_max: "Maximum temperature at the moment_ ",
+//            sea_level: "Atmospheric pressure on the sea level, hPa",
+//            grnd_level: "Atmospheric pressure on the ground level, hPa"
+//        },
+//
+//        wind: {
+//            "speed": "Wind speed_ Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour_",
+//            "deg": "Wind direction, degrees (meteorological)"
+//        },
+//
+//
+//        clouds: {
+//            "all": "Cloudiness, %"
+//        },
+//
+//        rain: {
+//            "3h": "Rain volume for the last 3 hours"
+//        },
+//
+//        snow: {
+//            "3h": "Snow volume for the last 3 hours"
+//        },
+//
+//        dt: "Time of data calculation, unix, UTC",
+//
+//        sys: {
+//            type: "Internal parameter",
+//            id: "Internal parameter",
+//            message: "Internal parameter",
+//            country: "Country code",
+//            sunrise: "Sunrise time, unix, UTC",
+//            sunset: "Sunset time, unix, UTC"
+//        },
+//
+//        id: "City ID",
+//        name: "City name",
+//        cod: "Internal parameter"
+//    },
 
-        coord: {
-            lon: "Weather geo location, longitude",
-            lat: "Weather geo location, latitude"
-        },
+    //imperialCountries = ['US', 'BS', 'BZ', 'KY', 'PW'],
 
-        weather: {
-            id: "Weather condition id",
-            main: "Group of weather parameters (Rain, Snow, Extreme etc_)",
-            description: "Weather condition within the group",
-            icon: "Weather icon id"
-        },
-
-        base: "Internal parameter",
-
-        main: {
-            temp: "Temperature",
-            pressure: "Atmospheric pressure", //(on the sea level, if there is no sea_level or grnd_level data), hPa",
-            humidity: "Humidity",
-
-            temp_min: "Minimum temperature at the moment_ ",
-            temp_max: "Maximum temperature at the moment_ ",
-            sea_level: "Atmospheric pressure on the sea level, hPa",
-            grnd_level: "Atmospheric pressure on the ground level, hPa"
-        },
-
-        wind: {
-            "speed": "Wind speed_ Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour_",
-            "deg": "Wind direction, degrees (meteorological)"
-        },
-
-
-        clouds: {
-            "all": "Cloudiness, %"
-        },
-
-        rain: {
-            "3h": "Rain volume for the last 3 hours"
-        },
-
-        snow: {
-            "3h": "Snow volume for the last 3 hours"
-        },
-
-        dt: "Time of data calculation, unix, UTC",
-
-        sys: {
-            type: "Internal parameter",
-            id: "Internal parameter",
-            message: "Internal parameter",
-            country: "Country code",
-            sunrise: "Sunrise time, unix, UTC",
-            sunset: "Sunset time, unix, UTC"
-        },
-
-        id: "City ID",
-        name: "City name",
-        cod: "Internal parameter"
-    },
-
-    imperialCountries = ['US', 'BS', 'BZ', 'KY', 'PW'],
-
-    langId = 0,
+    var langId = 0,
     locationId = 0,
     unitId = 0,
     localization = {
@@ -142,7 +142,7 @@ function getWeather(pos) {
         + "&lat=" + (Math.round(crd.latitude * 100) / 100).toString()
         + "&lon=" + (Math.round(crd.longitude * 100) / 100).toString()
         + "&cnt=3"
-        + "&appid=2de143494c0b295cca9337e1e96b00e0";
+        + "&appid=" + apiKey;//2de143494c0b295cca9337e1e96b00e0
     console.log("httpText:" + httpText);
 
     $.getJSON(httpText, function (json) {
@@ -207,21 +207,20 @@ function getCoordinates() {
 
 }
 
-function getCoordinatesNM(){
-    //http://narodmon.ru/api?cmd=sensorsNearby&lat=55.75&lng=37.62&radius=2&types=1,2&uuid=UUID&api_key=API_KEY&lang=en
-}
+//function getCoordinatesNM(){
+//    //http://narodmon.ru/api?cmd=sensorsNearby&lat=55.75&lng=37.62&radius=2&types=1,2&uuid=UUID&api_key=API_KEY&lang=en
+//}
 
 $(document).ready(function () {
     //todo get country&units from BOM
-    //todo get 3 nearest cities/locations from 100km radius
     //todo get weather from narodmon++change view of location/cities list: add list of parameters/abilities
 
     //showWeatherList("value", "desc");
 
     getCoordinates();
 
-    $("#id_btnMetric").on("click", function () {
-        unitId = 0;
+    $('#id_btnMetric').on("click", function () {
+        unitId = 0;//todo fix scope
         getCoordinates();
         $('#id_btnMetric').addClass('active');
         $('#id_btnImperial').removeClass('active');

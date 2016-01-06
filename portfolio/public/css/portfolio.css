@@ -2,9 +2,9 @@ body {
     font-family: 'Roboto Mono', Monospace, serif;
 }
 
-.background-main {
-    background: url("../img/hatch.png") repeat fixed;
-}
+/*.background-main {*/
+    /*background: url("../img/hatch.png") repeat fixed;*/
+/*}*/
 
 .placeholder {
     padding-bottom: 50em;
