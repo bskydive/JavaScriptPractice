@@ -3,7 +3,7 @@ $(document).ready(function () {
     //$(".column-left").addClass("col-md-1");
     //$(".column-right").addClass("col-md-1");
     $(".column-double-center").addClass("col-md-12");
-    $(".c-columnNavTop").addClass("col-md-12");
+    //$(".c-columnNavTop").addClass("col-md-12");
     //$(".column-left-center").addClass("col-md-7");
     //$(".column-right-center").addClass("col-md-3");
 
@@ -13,9 +13,14 @@ $(document).ready(function () {
     //$(".column-double-center").addClass("bg-overlay");
 
 
-        $("#id_containerMain").css('padding-top', $('.c-columnNavTop').height() + 100);
+
+        $("#id_containerMain").css('padding-top', $('.c-columnNavTop').height());
+
         $(window).resize(function(){
-            $("#id_containerMain").css('padding-top', $('.c-columnNavTop').height() + 100);
+    var navTopHegiht=$('.c-columnNavTop').height();
+            $("#id_containerMain").css('padding-top', navTopHegiht);
+
+            console.log(navTopHegiht);
         });
 
 });

@@ -121,6 +121,13 @@ p {
     font-size: 15px;
 }
 
+a.c-anchorOffset {
+    display: block;
+    position: relative;
+    top: -250px;
+    visibility: hidden;
+}
+
 .column-double-center {
     background: white;
     padding: 1em 3em 1em 2em;
