@@ -104,18 +104,18 @@
 //        cod: "Internal parameter"
 //    },
 
-    //imperialCountries = ['US', 'BS', 'BZ', 'KY', 'PW'],
+//imperialCountries = ['US', 'BS', 'BZ', 'KY', 'PW'],
 
-    var langId = 0,
+var langId = 0,
     locationId = 0,
     unitId = 0,
     localization = {
         locationHeader: ["Weather geo location: ", "Точка определения погоды: "],
         locationLonDesc: ["Geo longitude", "Географическая долгота"],
         locationLatDesc: ["Geo latitude", "Географическая широта"],
-        pressureDesc:["Atmospheric pressure","Атмосфероное давление"],
-        temperatureDesc:["Air temperature","Температура воздуха"],
-        humidityDesc:["Air humidity","Влажность воздуха"],
+        pressureDesc: ["Atmospheric pressure", "Атмосфероное давление"],
+        temperatureDesc: ["Air temperature", "Температура воздуха"],
+        humidityDesc: ["Air humidity", "Влажность воздуха"],
         pressUnitCap: [" hPa", " гПа"],
         tempUnitCap: [" C", " K"],
         langJson: ["en", "ru"],

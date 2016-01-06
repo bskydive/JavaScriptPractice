@@ -3,7 +3,7 @@ body {
 }
 
 /*.background-main {*/
-    /*background: url("../img/hatch.png") repeat fixed;*/
+/*background: url("../img/hatch.png") repeat fixed;*/
 /*}*/
 
 .placeholder {
@@ -34,16 +34,15 @@ h2 {
 /*#id_containerMain{*/
 /*}*/
 
-.c-columnNavTop a:hover {
-    background-color: #adadad;
+
+.c-logoText {
+    background-color: transparent;
+    font-size: 15px;
 }
 
-.c-columnNavTop a {
-    padding: 15px;
-    display: block;
-    color: black;
-    text-decoration: none;
-}
+/*.c-logoText a:hover {*/
+    /*background-color: transparent;*/
+/*}*/
 
 .c-listInline {
     display: inline;
@@ -56,6 +55,18 @@ h2 {
     display: inline-block;
     box-sizing: border-box;
 }
+
+.c-listInline a {
+    padding: 15px;
+    display: inline-block;
+    color: black;
+    text-decoration: none;
+}
+
+.c-listInline a:hover {
+    background-color: #adadad;
+}
+
 
 .c-listBlock {
     display: block;
