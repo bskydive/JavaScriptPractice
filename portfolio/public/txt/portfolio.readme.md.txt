@@ -1,9 +1,9 @@
 ### Versions: ###
 
-App(beta):3.9.2.0
-Bootstrap:3.3.6
-Font-awesome:4.5.0
-jQuery:2.1.4
+* App(beta):3.9.4.0
+* Bootstrap:3.3.6
+* Font-awesome:4.5.0
+* jQuery:2.1.4
 
 ### Sources ###
 
@@ -12,8 +12,11 @@ jQuery:2.1.4
 ### Feature list ###
 
 * bootstrap mobile-first responsive design
-*
+* accurate internal url navigating
+* accurate menu showing on resize
+* determine noScript
 
 ### Wish List: ###
 
-*
+* cross-browser support
+* accurate position save on resizing
