@@ -13,15 +13,17 @@ $(document).ready(function () {
     //$(".column-double-center").addClass("bg-overlay");
 
 
+    function offsetResize() {
+        var navTopHegiht = $('.c-columnNavTop').height();
+        $("#id_containerMain").css('padding-top', navTopHegiht);
+        $(".c-anchorOffset").css('top', -(navTopHegiht - 30));
+        //console.log(-navTopHegiht);
+    }
 
-        $("#id_containerMain").css('padding-top', $('.c-columnNavTop').height());
-
-        $(window).resize(function(){
-    var navTopHegiht=$('.c-columnNavTop').height();
-            $("#id_containerMain").css('padding-top', navTopHegiht);
-
-            console.log(navTopHegiht);
-        });
+    offsetResize();
+    $(window).resize(function () {
+        offsetResize();
+    });
 
 });
 
