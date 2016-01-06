@@ -12,8 +12,11 @@ jQuery:2.1.4
 ### Feature list ###
 
 * bootstrap mobile-first responsive design
-*
+* accurate internal url navigating
+* accurate menu showing on resize
+* determine noScript
 
 ### Wish List: ###
 
-*
+* cross-browser support
+* accurate position save on resizing

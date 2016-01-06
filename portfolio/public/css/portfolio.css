@@ -2,34 +2,130 @@ body {
     font-family: 'Roboto Mono', Monospace, serif;
 }
 
-.background-main {
-    background: url("../img/hatch.png") repeat fixed;
-}
+/*.background-main {*/
+    /*background: url("../img/hatch.png") repeat fixed;*/
+/*}*/
 
-.placeholder{
+.placeholder {
     padding-bottom: 50em;
 }
+
+h2 {
+    text-align: center;
+}
+
+/*.column-thumbnail-center {*/
+/*text-align: center;*/
+/*margin: 3px;*/
+/*padding: 3px;*/
+/*display: block;*/
+/*}*/
+
+.c-columnNavTop {
+    z-index: 1024;
+    position: fixed;
+    background-color: #f5f5f5;
+    /*padding: 0px 0px;*/
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}
+
+/*#id_containerMain{*/
+/*}*/
+
+.c-columnNavTop a:hover {
+    background-color: #adadad;
+}
+
+.c-columnNavTop a {
+    padding: 15px;
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+
+.c-listInline {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.c-listInline li {
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.c-listBlock {
+    display: block;
+    /*margin: 0;*/
+    /*padding: 0;*/
+    list-style-type: none;
+}
+
+.c-listBlock li {
+    /*margin: 0;*/
+    padding: 3px;
+}
+
+.column-double-center ul {
+    float: left;
+}
+
+#id_imgRight {
+    float: right;
+}
+
+/* Extra small devices (tablets, 480px and up) */
+@media (max-width: 320px) {
+}
+
+/* Extra small devices (tablets, 480px and up) */
+@media (max-width: 480px) {
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (max-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (max-width: 1200px) {
+}
+
 /*img {*/
-    /*padding: 1em;*/
+/*padding: 1em;*/
 /*}*/
 
 /*.container-main{*/
-    /*background: white;*/
+/*background: white;*/
 /*}*/
 
 /*.background-main {*/
-    /*background: url("http://stepanovv.ru/sites/all/themes/sky/css/images/ts/hatch.png") repeat fixed;*/
+/*background: url("http://stepanovv.ru/sites/all/themes/sky/css/images/ts/hatch.png") repeat fixed;*/
 /*}*/
 
 /*h1, h2, p {*/
-    /*font-family: Roboto, Monospace,serif;*/
+/*font-family: Roboto, Monospace,serif;*/
 /*}*/
-.caption{
+.caption {
     padding-top: 1em;
 }
 
 p {
-    font-size: 16px;
+    font-size: 15px;
+}
+
+a.c-anchorOffset {
+    display: block;
+    position: relative;
+    top: -250px;
+    visibility: hidden;
 }
 
 .column-double-center {
@@ -37,11 +133,11 @@ p {
     padding: 1em 3em 1em 2em;
 }
 
-.column-left-center {
-    background: white;
+/*.column-left-center {*/
+/*background: white;*/
 
-}
+/*}*/
 
-.column-right-center {
-    background: white;
-}
+/*.column-right-center {*/
+/*background: white;*/
+/*}*/

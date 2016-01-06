@@ -1,13 +1,13 @@
 //all variables should be global for code minimization(legacy :] ) purposes. The clock is one.
-var msecStart = 0, secondsMaxValue = 0, msecNow = 0, msecHistoryStart = 0;
+var msecStart = 0, secondsMaxValue = 0, msecHistoryStart = 0;//msecNow = 0
 
 var timerMaxValue = 25, smallPauseMaxValue = 5;
 
 
-function parseTimeToSec(valueText) {
-    //splits 00:00 to seconds
-    return (valueText.split(":")[0].replace(/\s+/g, '').toNumber() * 60) + valueText.split(":")[1].replace(/\s+/g, '').toNumber();
-}
+//function parseTimeToSec(valueText) {
+//    //splits 00:00 to seconds
+//    return (valueText.split(":")[0].replace(/\s+/g, '').toNumber() * 60) + valueText.split(":")[1].replace(/\s+/g, '').toNumber();
+//}
 
 function startTimer() {
 
@@ -122,7 +122,7 @@ function showTime() {
         timeSpendString += "00";
 
         showHistory("Отсчёт закончен");
-        playSound();
+        //playSound();
     }
 
     document.getElementById('id_timeText').innerHTML = "<p>" + timeSpendString + "</p>";
@@ -138,7 +138,7 @@ function showHistory(nameVal) {
     var newLi = document.createElement("li");
 
     newLi.innerHTML = nameVal + "<span class = \"time\">"
-    + nowDate.getHours() + "ч:" + nowDate.getMinutes() + "м</span>";
+        + nowDate.getHours() + "ч:" + nowDate.getMinutes() + "м</span>";
 
     document.getElementById('id_listHistory').appendChild(newLi);
 
