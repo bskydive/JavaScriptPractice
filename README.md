@@ -27,15 +27,42 @@ This is my code examples repository
 
 ### Development workflow ###
 
-* Issues registered as tasks in my own Redmine server
-* feature-x.x.XX.x branch tested locally, merged to development
-* development branch(x.XX.x.x) tested on dedicated(VPS) [server](http://test.portfolio.stepanovv.ru), merged to master
-* master branch(XX.x.x.x) tested on dedicated(VPS) [server](http://portfolio.stepanovv.ru)
-* hotfix-x.x.x.XX branch tested on dedicated(VPS) [server](http://portfolio.stepanovv.ru), committed to master
-* version currently not published, but can be viewed in git repository commits and my Redmine server:
-{production(master) release}.{development release}.{feature list number}.{hotfix list number}. Example: v3.8.3.0, v4.0.0.1
-* after successfully testing of master commit, I've create corresponding git tag with features and fixes description.
-* committed feature lists registers in Redmine task and time tracker, links to the commit number in git repo.
+1. New features placed in wish lists.
+2. Choose new issue from wish list, register it as task in Redmine server.
+3. Checkout master->development->feature-0.0.+1.0 branch.
+4. Develop new feature, commit changes after testing on local PC.
+5. Repeat steps 2-4, corresponding to issue list.
+6. Merge feature-0.0.1.0 to development branch. Push it to remote repository.
+7. Pull development branch from remote VPS server(dev env).
+8. Test it. After bug fixing repeat 3-7 steps, corresponding to issue list.
+9. Merge tested development to master branch. Push it to remote repository.
+10. Pull master branch from remote VPS server(master env). Testing it.
+11. Bugs in master fixed as new master->hotfix-0.0.1.+1 branch. Test, commit, merge to master&dev, push to remote repository.
+12. Create tag 0.+1.1.1, push to remote repository.
+
+Version currently not published, but can be viewed in git repository commits and my Redmine server:
+{apps count}.{production(master) release}.{feature list number}.{hotfix list number}. Example: v3.8.3.0, v4.0.0.1
+
+Committed features registered in Redmine task and time tracker, linked to the commit number in git repo.
+
+### Common to all apps feature list ###
+
+* Readme.markdown for every app
+* Bootstrap, Font-Awesome icons, Responsive design
+* noScript warning
+* Git-flow
+* Prod & Test physically separated from Development environment
+* Identical Prod & Test environment configuration
+* GPLv2 license for all apps
+* Open repository on bitbucket
+* Locally stored libraries/frameworks for loading speed up
+* ALM in Redmine server
+
+### Common to all apps wish list ###
+
+* browserify, webpack, ember, Jenkins
+* Separated backend. Java/NodeJS
+* PostgreSQL/MongoDB data store
 
 ### Who do I talk to? ###
 
