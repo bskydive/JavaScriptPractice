@@ -88,6 +88,13 @@ h2 {
     float: right;
 }
 
+/* Extra small devices (two-line menu) */
+@media only screen and (max-width: 500px) {
+ .c-columnNavTop {
+     display: none;
+ }
+}
+
 /* Extra small devices (tablets, 480px and up) */
 @media (max-width: 320px) {
 }
