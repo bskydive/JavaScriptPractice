@@ -14,49 +14,90 @@
 
         <link rel="stylesheet" type="text/css" href="css/userlist.css">
 
-<script type="text/template" id="id-user-list-template">
-<h4>template text</h4>
-</script>
+        <script type="text/template" id="id-user-list-template">
+                <h4>template text</h4>
+        </script>
 
 </head>
 <body>
 <header>
         <div class="c-columnNavTop">
 
-                <a class="c-logoText" href="txt/userlist.readme.md.txt"><i class="fa fa-file-text"></i> Portfolio<sup>&beta;</sup></a>
+                <a class="c-logoText" href="txt/userlist.readme.md.txt"><i class="fa fa-file-text"></i>
+                        UserList<sup>&beta;</sup></a>
 
                 <ul class="c-listInline">
                         <li class="active">
-                                <a href="#contacts">Контакты</a>
+                                <a href="#!/">User list</a>
                         </li>
                         <li>
-                                <a href="#resume">Краткие сведения</a>
+                                <a href="#!/id-container-userAdd">User add</a>
                         </li>
-                        <li>
-                                <a href="#experience">Опыт</a>
-                        </li>
-                        <li>
-                                <a href="#skills">Навыки</a>
-                        </li>
-                        <li>
-                                <a href="#portfolio">Портфолио</a>
-                        </li>
-                        <li>
-                                <a href="#hobbies">Хобби</a>
-                        </li>
+
                 </ul>
         </div>
 
 </header>
 <main>
 
-        FIO, Age, Phone, Email
 
-        <div class="container-fluid">
+        <noscript>
+                <div class="alert alert-danger" role="alert">
+                        <strong>Warning!</strong> Please, enable JavaScript to see correct
+                        markup.
+                </div>
+        </noscript>
 
-                <div class="page"></div>
+        <a name="a-home" class="c-anchorOffset"></a>
+
+        <div class="container-fluid c-containerMain" id="id-container-userList">
+
+                <div class="row row-header">
+
+                        <div class="column-center">
+
+                                <h2>User list</h2>
+                        </div>
+
+                </div>
+
+                <div class="row row-text">
+
+                        <div class="column-center">
+
+                                <!--FIO, Age, Phone, Email-->
+
+                                <div class="page"></div>
+                        </div>
+                </div>
 
         </div>
+
+        <div class="container-fluid c-containerMain" id="id-container-userAdd">
+
+                <a name="a-userAdd" class="c-anchorOffset"></a>
+
+                <div class="row row-header">
+
+                        <div class="column-center">
+                                <h2>User add</h2>
+                        </div>
+
+                </div>
+
+                <div class="row row-text" id="id-userAdd">
+
+                        <div class="column-center">
+
+                                <!--FIO, Age, Phone, Email-->
+
+                        </div>
+                </div>
+
+
+        </div>
+
+        <div class="placeholder"></div>
 
 </main>
 

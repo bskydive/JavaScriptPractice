@@ -1,4 +1,20 @@
+//$(document).ready(function () {
 (function ($) {
+
+    $(".column-center").addClass("col-md-12");
+    //$("#id-container-userAdd").addClass("hidden");
+
+
+    function offsetResize() {
+        var navTopHeight = $('.c-columnNavTop').height();
+        $(".c-containerMain").css('padding-top', navTopHeight);
+        $(".c-anchorOffset").css('top', -(navTopHeight - 30));
+    }
+
+    offsetResize();
+    $(window).resize(function () {
+        offsetResize();
+    });
 
 
     var UsersCollection = Backbone.Collection.extend({
@@ -13,19 +29,32 @@
             var usersCollection1 = new UsersCollection();
 
             usersCollection1.fetch({
-               success:function(usersCollection1){
-                   "use strict";
-                   var template = _.template($('#id-user-list-template').html(),{usersCollection1 : usersCollection1.models});
-                   that.$el.html(template);
-               }
+                success: function (usersCollection1) {
+                    "use strict";
+                    var template1 = _.template($('#id-user-list-template').html(), {usersCollection1: usersCollection1.models});
+                    that.$el.html(template1);
+                }
             });
 
         }
     });
 
     var Router = Backbone.Router.extend({
+
         routes: {
-            '': 'home'
+            '': 'routeUserList',
+            '!/': 'routeUserList',
+            '!/id-container-userAdd': 'routeUserAdd'
+        },
+
+        routeUserList: function () {
+            $('.c-containerMain').hide();
+            $("#id-container-userList").show();
+        },
+
+        routeUserAdd: function () {
+            $('.c-containerMain').hide();
+            $('#id-container-userAdd').show();
         }
     });
 
@@ -33,13 +62,16 @@
 
     var router1 = new Router();
 
-    router1.on('route:home', function () {
+    router1.on('route:routeUserList', function () {
         "use strict";
         userListView1.render();
     });
 
 
     Backbone.history.start();
+
+
+//});
 
 
 })(jQuery);
