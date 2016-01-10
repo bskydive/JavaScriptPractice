@@ -1,0 +1,27 @@
+### Versions: ###
+
+* App(beta):3.9.5.0
+* Bootstrap:3.3.6
+* Font-awesome:4.5.0
+* jQuery:2.1.4
+* Normalize.css:3.0.2
+* backbone:
+
+### Sources ###
+
+[BitBucket](https://bitbucket.org/bskydive/portfoliojs/)
+
+### Feature list ###
+
+* bootstrap mobile-first responsive design
+* accurate internal url navigating
+* accurate menu showing on resize
+* determine noScript
+
+### Wish List: ###
+
+* resizable font-size depend on screen size
+* collapse menu on xs/sm screens(smaller popup font-size/padding/float-left)
+* cross-browser support
+* accurate position save on resizing
+* comment eraser after merge to master, before deploy
