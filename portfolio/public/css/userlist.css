@@ -71,11 +71,11 @@ h2 {
 }
 
 /* Extra small devices (two-line menu) */
-@media only screen and (max-width: 500px) {
-    .c-columnNavTop {
-        display: none;
-    }
-}
+/*@media only screen and (max-width: 500px) {*/
+    /*.c-columnNavTop {*/
+        /*display: none;*/
+    /*}*/
+/*}*/
 
 /* Extra small devices (tablets, 480px and up) */
 @media (max-width: 320px) {
@@ -106,15 +106,18 @@ p {
     font-size: 15px;
 }
 
-a.c-anchorOffset {
-    display: block;
-    position: relative;
-    top: -250px;
-    visibility: hidden;
-}
+/*a.c-anchorOffset {*/
+    /*display: block;*/
+    /*position: relative;*/
+    /*top: -250px;*/
+    /*visibility: hidden;*/
+/*}*/
 
 .column-center {
     background: white;
     padding: 1em 3em 1em 2em;
 }
 
+.col-md-3 {
+    display: inline-block;
+}

@@ -14,9 +14,13 @@
 
         <link rel="stylesheet" type="text/css" href="css/userlist.css">
 
-        <script type="text/template" id="id-user-list-template">
-                <h4>template text</h4>
-        </script>
+        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
+        <script type="text/javascript" src="js/underscore-min.js"></script>
+        <script type="text/javascript" src="js/backbone-min.js"></script>
+
+        <script type="text/javascript" src="js/userlist.js"></script>
+
 
 </head>
 <body>
@@ -48,7 +52,7 @@
                 </div>
         </noscript>
 
-        <a name="a-home" class="c-anchorOffset"></a>
+        <!--<a name="a-home" class="c-anchorOffset"></a>-->
 
         <div class="container-fluid c-containerMain" id="id-container-userList">
 
@@ -62,14 +66,29 @@
                 </div>
 
                 <div class="row row-text">
+                        <div class="col-md-3"><h4>FIO</h4></div>
+                        <div class="col-md-3">Age</div>
+                        <div class="col-md-3">Phone</div>
+                        <div class="col-md-3">Email</div>
+                </div>
 
-                        <div class="column-center">
+                <script type="text/template" id="#id-user-list-template">
+                        <div class="row row-text">
 
                                 <!--FIO, Age, Phone, Email-->
 
                                 <div class="page"></div>
+
+                                <% _.each(usersCollection1, function (user) { %>
+                                <div class="col-md-3"> <% user.get('firstname') %></div>
+                                <div class="col-md-3"> <% user.get('lastname') %></div>
+                                <div class="col-md-3"> <% user.get('age') %></div>
+                                <div class="col-md-3"> </div>
+
+                                <% }); %>
+
                         </div>
-                </div>
+                </script>
 
         </div>
 
@@ -102,12 +121,7 @@
 </main>
 
 
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 
-<script type="text/javascript" src="js/underscore-min.js"></script>
-<script type="text/javascript" src="js/backbone-min.js"></script>
-
-<script type="text/javascript" src="js/userlist.js"></script>
 
 </body>
 </html>

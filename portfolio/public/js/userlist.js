@@ -1,25 +1,32 @@
-//$(document).ready(function () {
-(function ($) {
+$(document).ready(function () {
+//(function ($) {
 
     $(".column-center").addClass("col-md-12");
+    $(".c-column-userList").addClass("col-md-3");
     //$("#id-container-userAdd").addClass("hidden");
 
 
-    function offsetResize() {
-        var navTopHeight = $('.c-columnNavTop').height();
-        $(".c-containerMain").css('padding-top', navTopHeight);
-        $(".c-anchorOffset").css('top', -(navTopHeight - 30));
-    }
+    //function offsetResize() {
+    //    var navTopHeight = $('.c-columnNavTop').height();
+    //    $(".c-containerMain").css('padding-top', navTopHeight);
+    //    $(".c-anchorOffset").css('top', -(navTopHeight - 30));
+    //}
+    //
+    //offsetResize();
+    //$(window).resize(function () {
+    //    offsetResize();
+    //});
 
-    offsetResize();
-    $(window).resize(function () {
-        offsetResize();
-    });
+    // Generate four random hex digits.
+    function S4() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
 
+    // Generate a pseudo-GUID by concatenating random hexadecimal.
+    function guid() {
+        return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+    };
 
-    var UsersCollection = Backbone.Collection.extend({
-        url: 'http://backbonejs-beginner.herokuapp.com/users'
-    });
 
     var UserListView = Backbone.View.extend({
         el: '.page',
@@ -29,9 +36,8 @@
             var usersCollection1 = new UsersCollection();
 
             usersCollection1.fetch({
-                success: function (usersCollection1) {
-                    "use strict";
-                    var template1 = _.template($('#id-user-list-template').html(), {usersCollection1: usersCollection1.models});
+                success: function (users) {
+                    var template1 = _.template($('#id-user-list-template').html(), {users: users.models});
                     that.$el.html(template1);
                 }
             });
@@ -71,10 +77,10 @@
     Backbone.history.start();
 
 
-//});
+});
 
 
-})(jQuery);
+//})(jQuery);
 
 
 //(function ($) {
