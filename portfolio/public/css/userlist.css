@@ -113,9 +113,10 @@ p {
     /*visibility: hidden;*/
 /*}*/
 
-.column-center {
-    background: white;
-    padding: 1em 3em 1em 2em;
+.c-column-center {
+    /*background: white;*/
+    /*padding: 1em 3em 1em 2em;*/
+    float: center;
 }
 
 /*.col-md-3 {*/

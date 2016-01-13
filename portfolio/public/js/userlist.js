@@ -1,8 +1,10 @@
 $(document).ready(function () {
 //(function ($) {
 
-    $(".column-center").addClass("col-md-12");
+    $(".c-column-center").addClass("col-md-12");
     $(".c-column-userList").addClass("col-md-3");
+    $(".c-label-input-field").addClass("col-md-2");
+    $(".c-input-field").addClass("col-md-6");
     //$("#id-container-userAdd").addClass("hidden");
 
 
