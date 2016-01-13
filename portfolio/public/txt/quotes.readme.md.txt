@@ -1,0 +1,24 @@
+### Versions: ###
+
+* App(beta):4.0.0.0
+* Bootstrap:3.3.6
+* Font-awesome:4.5.0
+* jQuery:2.1.4
+
+### Sources ###
+
+[BitBucket](https://bitbucket.org/bskydive/portfoliojs/)
+
+### Feature list ###
+
+* Show quotes in random order
+* Responsive mobile-first design
+* Bootstrap styles
+* determine noScript
+* Twit out quote
+
+
+### Wish List: ###
+
+* Determine adblock
+* Improve small screens behaviour
