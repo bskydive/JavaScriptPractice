@@ -22,31 +22,132 @@ $(document).ready(function () {
     // Generate four random hex digits.
     function S4() {
         return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
+    }
 
     // Generate a pseudo-GUID by concatenating random hexadecimal.
     function guid() {
         return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
-    };
+    }
 
+    //============================================MODEL======================================================
+
+
+    var AppModel = Backbone.Model.extend({
+        defaults: {
+            username: "",
+            state: "start"
+        }
+    });
+
+    var appModel1 = new AppModel();
+
+    //============================================COLLECTION======================================================
+
+    function checkString(val) {
+        "use strict";
+
+        return (val.firstName.toString() === val.firstName.toString);
+    }
+
+    function checkFirstName(val) {
+        "use strict";
+        return (checkString(val) && val.firstName.length <= 25 && val.firstName.length >= 3);
+    }
+
+    var UserListModel = Backbone.Model.extend({
+        defaults: {
+            firstName: "blankFirstName",
+            lastName: "blankLastName",
+            surName: "blankSurName",
+            birthDate: new Date(1900, 0, 1),
+            eMail: "blankEMail@stepanovv.ru",
+            phoneNumber: "+71112233344",
+            //order: userListView1.nextOrder(),
+            //guidNumber: guid(),
+            validate: function (attrs) {
+                "use strict";
+                if (!attrs.firstName) {
+                    return false;
+                } else {
+                    return checkFirstName(attrs.firstName);
+                }
+            }
+        }
+    });
+
+    var UserListCollection = Backbone.Collection.extend({
+
+        model: UserListModel,
+
+        findUserName: function (username) {
+
+            var findResult = this.find(function (user) {
+                return user.get("firstName") === username;
+            });
+            return findResult !== null;
+
+        }
+
+    });
+
+    var userListCollection1 = new UserListCollection([
+        {
+            firstName: "blankFirstName1",
+            lastName: "blankLastName",
+            surName: "blankSurName",
+            birthDate: new Date(1901, 0, 1),
+            eMail: "blankEMail@stepanovv.ru",
+            phoneNumber: "+71112233344"
+        }, {
+            firstName: "blankFirstName2",
+            lastName: "blankLastName",
+            surName: "blankSurName",
+            birthDate: new Date(1901, 0, 1),
+            eMail: "blankEMail@stepanovv.ru",
+            phoneNumber: "+71112233344"
+        }, {
+            firstName: "blankFirstName3",
+            lastName: "blankLastName",
+            surName: "blankSurName",
+            birthDate: new Date(1901, 0, 1),
+            eMail: "blankEMail@stepanovv.ru",
+            phoneNumber: "+71112233344"
+        }
+
+    ]);
+
+    //================================================VIEW==================================================
 
     var UserListView = Backbone.View.extend({
         el: '.page',
         render: function () {
             var that = this;
 
-            var usersCollection1 = new UsersCollection();
+            var userListCollection1 = new UserListCollection();
 
-            usersCollection1.fetch({
-                success: function (users) {
-                    var template1 = _.template($('#id-user-list-template').html(), {users: users.models});
-                    that.$el.html(template1);
-                }
-            });
+            //userListCollection1.fetch({
+            //    success: function (users) {
+            //        var template1 = _.template($('#id-user-list-template').html(), {users: users.models});
+            //        that.$el.html(template1);
+            //    }
+            //});
 
-        }
+            //this.$el.html(this.template(this.model.toJSON()));
+            var template1 = _.template($('#id-user-list-template').html(), {userListCollection1: userListCollection1.models});
+            that.$el.html(template1);
+
+        },
+
+        nextOrder: function () {
+            if (!this.length) return 1;
+            return this.last().get('order') + 1;
+        },
+
+        comparator: 'order'
     });
 
+
+    //==============================================ROUTER====================================================
     var Router = Backbone.Router.extend({
 
         routes: {
@@ -127,115 +228,3 @@ $(document).ready(function () {
 //})(jQuery);
 //
 
-//$(function () {
-//
-//    var AppState = Backbone.Model.extend({
-//        defaults: {
-//            username: "",
-//            state: "start"
-//        }
-//    });
-//
-//    var appState = new AppState();
-//
-//    var UserNameModel = Backbone.Model.extend({ // Модель пользователя
-//        defaults: {
-//            "Name": ""
-//        }
-//    });
-//
-//    var Family = Backbone.Collection.extend({ // Коллекция пользователей
-//
-//        model: UserNameModel,
-//
-//        checkUser: function (username) { // Проверка пользователя
-//            var findResult = this.find(function (user) { return user.get("Name") == username })
-//            return findResult != null;
-//        }
-//
-//    });
-//
-//    var MyFamily = new Family([ // Моя семья
-//        {Name: "Саша" },
-//        { Name: "Юля" },
-//        { Name: "Елизар" },
-//
-//    ]);
-//
-//
-//
-//    var Controller = Backbone.Router.extend({
-//        routes: {
-//            "": "start", // Пустой hash-тэг
-//            "!/": "start", // Начальная страница
-//            "!/success": "success", // Блок удачи
-//            "!/error": "error" // Блок ошибки
-//        },
-//
-//        start: function () {
-//            appState.set({ state: "start" });
-//        },
-//
-//        success: function () {
-//            appState.set({ state: "success" });
-//        },
-//
-//        error: function () {
-//            appState.set({ state: "error" });
-//        }
-//    });
-//
-//    var controller = new Controller(); // Создаём контроллер
-//
-//
-//    var Block = Backbone.View.extend({
-//        el: $("#block"), // DOM элемент widget'а
-//
-//        templates: { // Шаблоны на разное состояние
-//            "start": _.template($('#start').html()),
-//            "success": _.template($('#success').html()),
-//            "error": _.template($('#error').html())
-//        },
-//
-//        events: {
-//            "click input:button": "check" // Обработчик клика на кнопке "Проверить"
-//        },
-//
-//        initialize: function () { // Подписка на событие модели
-//            this.model.bind('change', this.render, this);
-//        },
-//
-//        check: function () {
-//            var username = this.el.find("input:text").val();
-//            var find = MyFamily.checkUser(username); // Проверка имени пользователя
-//            appState.set({ // Сохранение имени пользователя и состояния
-//                "state": find ? "success" : "error",
-//                "username": username
-//            });
-//        },
-//
-//        render: function () {
-//            var state = this.model.get("state");
-//            $(this.el).html(this.templates[state](this.model.toJSON()));
-//            return this;
-//        }
-//    });
-//
-//    var block = new Block({ model: appState }); // создадим объект
-//
-//    appState.trigger("change"); // Вызовем событие change у модели
-//
-//    appState.bind("change:state", function () { // подписка на смену состояния для контроллера
-//        var state = this.get("state");
-//        if (state == "start")
-//            controller.navigate("!/", false); // false потому, что нам не надо
-//                                              // вызывать обработчик у Router
-//        else
-//            controller.navigate("!/" + state, false);
-//    });
-//
-//    Backbone.history.start();  // Запускаем HTML5 History push
-//
-//
-//});
-//

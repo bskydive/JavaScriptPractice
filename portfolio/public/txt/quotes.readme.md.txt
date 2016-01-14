@@ -22,3 +22,4 @@
 
 * Determine adblock
 * Improve small screens behaviour
+* add url to shrotened twit texts
