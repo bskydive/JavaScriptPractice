@@ -1,3 +1,6 @@
+$(document).ready(function () {
+    "use strict";
+    var $ = window.$;
 var quotes = [
     ["Царь Соломон", "http://www.adme.ru/svoboda-kultura/20-mudryh-myslej-carya-solomona-o-zhizni-886910/",
         "Всему свой час и время всякому делу под небесами: время родиться и время умирать. Время разрушать и время строить. Время разбрасывать камни и время складывать камни. Время молчать и время говорить.",
@@ -297,7 +300,7 @@ var quotes = [
 
 
 function showQuote() {
-    "use strict";
+
     function getRandomNum(min, max) {
         return Math.floor(Math.random() * (max - min)) + min; //исключая max!!!
     }
@@ -325,13 +328,10 @@ function showQuote() {
     }
 
     $("#id_twitOutBtn").attr("href", "https://twitter.com/intent/tweet?text=" + quoteTwitText);
-
-
 }
 
 
-$(document).ready(function () {
-    "use strict";
+
     var quotesall = 0;
 
     for (var i = 0; i < quotes.length - 1; i++) {
@@ -340,9 +340,7 @@ $(document).ready(function () {
         }
     }
 
-    $("#id_divHeaderText").html(
-        " авторов: " + quotes.length.toString()
-        + " цитат: " + quotesall.toString());
+    $("#id_divHeaderText").html(" авторов: " + quotes.length.toString() + " цитат: " + quotesall.toString() + " ");
 
     $("#id_getQuoteBtn").on("click", function () {
         showQuote();

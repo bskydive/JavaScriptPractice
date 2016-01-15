@@ -25,6 +25,10 @@ body {
     font-size: large;
 }
 
+.c-row-header span{
+    padding-right: 15px;
+}
+
 /*.row-header{*/
     /*display: inline !important;*/
 /*}*/

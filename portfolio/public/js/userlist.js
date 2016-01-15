@@ -1,5 +1,7 @@
-$(document).ready(function () {
+window.$(document).ready(function () {
 //(function ($) {
+    "use strict";
+    var $ = window.$, Backbone = window.Backbone, console = window.console, _ = window._;
 
     $(".c-column-center").addClass("col-md-12");
     $(".c-column-userList").addClass("col-md-3");
@@ -44,14 +46,13 @@ $(document).ready(function () {
     //============================================COLLECTION======================================================
 
     function checkString(val) {
-        "use strict";
 
-        return (val.firstName.toString() === val.firstName.toString);
+        return (val.toString() === val.toString);
     }
 
-    function checkFirstName(val) {
-        "use strict";
-        return (checkString(val) && val.firstName.length <= 25 && val.firstName.length >= 3);
+    function checkStringLength(val, min, max) {
+
+        return (checkString(val) && val.length <= max && val.length >= min);
     }
 
     var UserListModel = Backbone.Model.extend({
@@ -63,13 +64,19 @@ $(document).ready(function () {
             eMail: "blankEMail@stepanovv.ru",
             phoneNumber: "+71112233344",
             //order: userListView1.nextOrder(),
-            //guidNumber: guid(),
+            guidNumber: guid(),
             validate: function (attrs) {
-                "use strict";
-                if (!attrs.firstName) {
-                    return false;
-                } else {
-                    return checkFirstName(attrs.firstName);
+
+                if (!checkStringLength(attrs.firstName, 3, 25)) {
+                    return "First name" + this.guidNumber.toString() + " should be 3 to 25 letters long";
+                }
+
+                if (!checkStringLength(attrs.lastName, 3, 25)) {
+                    return "Last name" + this.guidNumber.toString() + " should be 3 to 25 letters long";
+                }
+
+                if (!checkStringLength(attrs.surName, 3, 25)) {
+                    return "Surname " + this.guidNumber.toString() + " should be 3 to 25 letters long";
                 }
             }
         }
@@ -90,40 +97,38 @@ $(document).ready(function () {
 
     });
 
-    var userListCollection1 = new UserListCollection([
-        {
-            firstName: "blankFirstName1",
-            lastName: "blankLastName",
-            surName: "blankSurName",
-            birthDate: new Date(1901, 0, 1),
-            eMail: "blankEMail@stepanovv.ru",
-            phoneNumber: "+71112233344"
-        }, {
-            firstName: "blankFirstName2",
-            lastName: "blankLastName",
-            surName: "blankSurName",
-            birthDate: new Date(1901, 0, 1),
-            eMail: "blankEMail@stepanovv.ru",
-            phoneNumber: "+71112233344"
-        }, {
-            firstName: "blankFirstName3",
-            lastName: "blankLastName",
-            surName: "blankSurName",
-            birthDate: new Date(1901, 0, 1),
-            eMail: "blankEMail@stepanovv.ru",
-            phoneNumber: "+71112233344"
+
+    function fillCollection(varCollection) {
+        for (var i = 0; i <= 3; i++) {
+            varCollection.add(
+                {
+                    firstName: "FirstName" + i.toString(),
+                    lastName: "LastName" + i.toString(),
+                    surName: "SurName" + i.toString(),
+                    birthDate: new Date(1901, 0, i),
+                    eMail: i.toString() + "EMail@stepanovv.ru",
+                    phoneNumber: "+7111223334" + i.toString()
+                }
+            );
         }
 
-    ]);
+        if (varCollection.isValid) {
+            console.log(varCollection.validationError);
+        }
+    }
+
+    var userListCollection1 = new UserListCollection();
+
+    fillCollection(userListCollection1);
 
     //================================================VIEW==================================================
 
     var UserListView = Backbone.View.extend({
-        el: '.page',
+        //el: '.page',
         render: function () {
-            var that = this;
+            var self = this;
 
-            var userListCollection1 = new UserListCollection();
+            //var userListCollection1 = new UserListCollection();
 
             //userListCollection1.fetch({
             //    success: function (users) {
@@ -133,13 +138,16 @@ $(document).ready(function () {
             //});
 
             //this.$el.html(this.template(this.model.toJSON()));
-            var template1 = _.template($('#id-user-list-template').html(), {userListCollection1: userListCollection1.models});
-            that.$el.html(template1);
-
+            this.model.each(function (UserListModel) {
+                var template1 = _.template($('#id-user-list-template').html(), {userListCollection1: userListCollection1.models});
+                self.$el.html(template1);
+            });
         },
 
         nextOrder: function () {
-            if (!this.length) return 1;
+            if (!this.length) {
+                return 1;
+            }
             return this.last().get('order') + 1;
         },
 
@@ -158,7 +166,7 @@ $(document).ready(function () {
 
         routeUserList: function () {
             $('.c-containerMain').hide();
-            $("#id-container-userList").show();
+            $('#id-container-userList').show();
         },
 
         routeUserAdd: function () {
@@ -172,7 +180,7 @@ $(document).ready(function () {
     var router1 = new Router();
 
     router1.on('route:routeUserList', function () {
-        "use strict";
+
         userListView1.render();
     });
 

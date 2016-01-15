@@ -79,14 +79,16 @@
                                                 <script type="text/template" id="#id-user-list-template">
                                                         <% _.each(userListCollection1, function (user) { %>
                                                         <tr>
-                                                                <td><% user.get('firstName') %></td>
-                                                                <td><% user.get('lastName') %></td>
-                                                                <td><% user.get('surName') %></td>
-                                                                <td><% user.get('birthDate') %></td>
-                                                                <td><% user.get('eMail') %></td>
-                                                                <td><% user.get('mobileNumber') %></td>
+                                                                <td><%= user.get('firstName') %></td>
+                                                                <td><%= user.get('lastName') %></td>
+                                                                <td><%= user.get('surName') %></td>
+                                                                <td><%= user.get('birthDate') %></td>
+                                                                <td><%= user.get('eMail') %></td>
+                                                                <td><%= user.get('mobileNumber') %></td>
+                                                                <td><a class="btn" href="#/edit/<%= user.get('guid') %>">Edit</a></td>
                                                         </tr>
                                                         <% }); %>
+
                                                 </script>
                                         </table>
                                 </div>
