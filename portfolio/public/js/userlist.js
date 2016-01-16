@@ -1,7 +1,7 @@
-window.$(document).ready(function () {
-//(function ($) {
+//window.$(document).ready(function () {
+(function ($) {
     "use strict";
-    var $ = window.$, Backbone = window.Backbone, console = window.console, _ = window._;
+    //var $ = window.$, Backbone = window.Backbone, console = window.console, _ = window._;
 
     $(".c-column-center").addClass("col-md-12");
     $(".c-column-userList").addClass("col-md-3");
@@ -64,36 +64,37 @@ window.$(document).ready(function () {
             eMail: "blankEMail@stepanovv.ru",
             phoneNumber: "+71112233344",
             //order: userListView1.nextOrder(),
-            guidNumber: guid(),
-            validate: function (attrs) {
-
-                if (!checkStringLength(attrs.firstName, 3, 25)) {
-                    return "First name" + this.guidNumber.toString() + " should be 3 to 25 letters long";
-                }
-
-                if (!checkStringLength(attrs.lastName, 3, 25)) {
-                    return "Last name" + this.guidNumber.toString() + " should be 3 to 25 letters long";
-                }
-
-                if (!checkStringLength(attrs.surName, 3, 25)) {
-                    return "Surname " + this.guidNumber.toString() + " should be 3 to 25 letters long";
-                }
+            guidNumber: guid()
             }
-        }
+
+        //validate: function (attrs) {
+        //
+        //    if (!checkStringLength(attrs.firstName, 3, 25)) {
+        //        return "First name" + this.guidNumber.toString() + " should be 3 to 25 letters long";
+        //    }
+        //
+        //    if (!checkStringLength(attrs.lastName, 3, 25)) {
+        //        return "Last name" + this.guidNumber.toString() + " should be 3 to 25 letters long";
+        //    }
+        //
+        //    if (!checkStringLength(attrs.surName, 3, 25)) {
+        //        return "Surname " + this.guidNumber.toString() + " should be 3 to 25 letters long";
+        //    }
+        //}
     });
 
     var UserListCollection = Backbone.Collection.extend({
 
-        model: UserListModel,
+        model: UserListModel
 
-        findUserName: function (username) {
-
-            var findResult = this.find(function (user) {
-                return user.get("firstName") === username;
-            });
-            return findResult !== null;
-
-        }
+        //findUserName: function (username) {
+        //
+        //    var findResult = this.find(function (user) {
+        //        return user.get("firstName") === username;
+        //    });
+        //    return findResult !== null;
+        //
+        //}
 
     });
 
@@ -121,12 +122,19 @@ window.$(document).ready(function () {
 
     fillCollection(userListCollection1);
 
+
     //================================================VIEW==================================================
 
     var UserListView = Backbone.View.extend({
         //el: '.page',
+        //model: new UserListModel(),
+
+        initialize: function () {
+            this.render();
+        },
+
         render: function () {
-            var self = this;
+            //var self = this;
 
             //var userListCollection1 = new UserListCollection();
 
@@ -138,10 +146,17 @@ window.$(document).ready(function () {
             //});
 
             //this.$el.html(this.template(this.model.toJSON()));
-            this.model.each(function (UserListModel) {
-                var template1 = _.template($('#id-user-list-template').html(), {userListCollection1: userListCollection1.models});
-                self.$el.html(template1);
-            });
+            //this.model.each(function (eachModel) {
+            //    var template1 = _.template($('#id-user-list-template').html(), {eachModel: eachModel.models});
+            //    var html = template1(this.model.toJSON());
+            //    self.$el.html(html);
+            //
+            //});
+
+            this.template = _.template($("#id-user-list-template").html(), { userListCollection1 : userListCollection1.models});
+            var html = this.template(this.model.toJSON());
+            this.$el.html(html);
+            return this;
         },
 
         nextOrder: function () {
@@ -175,7 +190,7 @@ window.$(document).ready(function () {
         }
     });
 
-    var userListView1 = new UserListView();
+    var userListView1 = new UserListView({model: userListCollection1});
 
     var router1 = new Router();
 
@@ -188,10 +203,10 @@ window.$(document).ready(function () {
     Backbone.history.start();
 
 
-});
+//});
 
 
-//})(jQuery);
+})(jQuery);
 
 
 //(function ($) {
