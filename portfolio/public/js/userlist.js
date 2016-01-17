@@ -21,24 +21,14 @@ window.$(document).ready(function () {
     //    offsetResize();
     //});
 
-    function genUid() {
-
-            return window.Date.now().toString() +"-" + Math.random().toString(36).substring(2, 15) + "-" + Math.random().toString(36).substring(2, 15);
-    }
-
-    //============================================MODEL======================================================
-
-
-    var AppModel = Backbone.Model.extend({
-        defaults: {
-            username: "",
-            state: "start"
-        }
-    });
-
-    var appModel1 = new AppModel();
 
     //============================================COLLECTION======================================================
+
+    function genUid() {
+
+        return window.Date.now().toString() + "-" + Math.random().toString(36).substring(2, 15) + "-" + Math.random().toString(36).substring(2, 15);
+    }
+
 
     function checkString(val) {
 
@@ -60,7 +50,7 @@ window.$(document).ready(function () {
             phoneNumber: "+71112233344",
             //order: userListView1.nextOrder(),
             uidNumber: genUid()
-            },
+        },
 
         validate: function (attrs) {
 
@@ -116,23 +106,33 @@ window.$(document).ready(function () {
 
     //================================================VIEW==================================================
 
+    function toLocalDate(varDate, varLocale) {
+        var options = {
+            //era: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+            //weekday: 'long',
+            //timezone: 'UTC',
+            //hour: 'numeric',
+            //minute: 'numeric',
+            //second: 'numeric'
+        };
+
+        return varDate.toLocaleString(varLocale, options).toString();
+    }
+
     var UserListView = Backbone.View.extend({
         el: "#id-tbody-userList",
+        events: {
+            'click .c-btn-edit': 'userEdit'
+            //'click .c-btn-delete': 'routeUserDelete'
+        },
 
-        toLocalDate: function(varDate, varLocale){
-            var options = {
-                //era: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-                //weekday: 'long',
-                //timezone: 'UTC',
-                //hour: 'numeric',
-                //minute: 'numeric',
-                //second: 'numeric'
-            };
+        userEdit: function () {
+            this.router.navigate('', {trigger: true});
 
-            return varDate.toLocaleString(varLocale, options).toString();
+            return false;
         },
 
         render: function () {
@@ -140,10 +140,10 @@ window.$(document).ready(function () {
             this.$el.html("");
 
             this.model.each(
-                function(ulModel){
+                function (eachModel) {
                     var template = _.template($("#id-user-list-template").html());
-                    ulModel.set( 'birthDateLocal', self.toLocalDate(ulModel.get('birthDate'), "ru"));
-                    var html = template(ulModel.toJSON());
+                    eachModel.set('birthDateLocal', self.toLocalDate(eachModel.get('birthDate'), "ru"));
+                    var html = template(eachModel.toJSON());
                     self.$el.append(html);
 
                 }
@@ -162,42 +162,106 @@ window.$(document).ready(function () {
     });
 
 
+    var UserEditView = Backbone.View().extend({
+        el: "#id-form-userEdit",
+        events: {
+            'submit .edit-user-form': 'saveUser',
+            //'click .delete': 'deleteUser'
+        },
+
+        saveUser: function (ev) {
+            var userDetails = $(ev.currentTarget).serializeObject();
+            var user = new User();
+            user.save(userDetails, {
+                success: function (user) {
+                    router.navigate('', {trigger: true});
+                }
+            });
+            return false;
+        },
+        deleteUser: function (ev) {
+            this.user.destroy({
+                success: function () {
+                    console.log('destroyed');
+                    router.navigate('', {trigger: true});
+                }
+            });
+            return false;
+        },
+
+
+        render: function (options) {
+            var self = this;
+            this.$el.html("");
+
+            if (options.uid) {
+                this.model.each(
+                    function (eachModel) {
+                        if (eachModel.get('uidNumber') === options.uid) {
+
+                            //todo catch absent uid's
+                            var template = _.template($("#id-form-userEdit").html());
+                            eachModel.set('birthDateLocal', self.toLocalDate(eachModel.get('birthDate'), "ru"));
+                            var html = template(eachModel.toJSON());
+                            self.$el.prepend(html);
+                        }
+                    }
+                );
+            }
+            return this;
+        }
+
+    });
 
     //==============================================ROUTER====================================================
     var Router = Backbone.Router.extend({
 
         routes: {
             '': 'routeUserList',
-            '!/': 'routeUserList',
-            '!/id-container-userAdd': 'routeUserAdd'
+            'add': 'routeUserAdd',
+            'edit/:uidLink': 'routeUserEdit',
+            'delete/:uidLink': 'routeUserDelete'
         },
 
         routeUserList: function () {
             $('.c-containerMain').hide();
+
+            userListView1.render();
+
             $('#id-container-userList').show();
         },
 
         routeUserAdd: function () {
             $('.c-containerMain').hide();
             $('#id-container-userAdd').show();
+        },
+
+        routeUserEdit: function (uidLink) {
+            $('.c-containerMain').hide();
+            userEditView1.render({uid: uidLink});
+            $('#id-container-userAdd').show();
+
+        },
+
+        routeUserDelete: function () {
+            //$('.c-containerMain').hide();
+            //$('#id-container-userAdd').show();
+            userListView1.render();
         }
     });
 
 
     //==============================================CALCULATIONS====================================================
 
+    var router1 = new Router();
+
     var userListCollection1 = new UserListCollection();
 
     fillCollection(userListCollection1);
 
-    var userListView1 = new UserListView({model: userListCollection1});
+    var userListView1 = new UserListView({model: userListCollection1, router: router1});
 
-    var router1 = new Router();
-
-    router1.on('route:routeUserList', function () {
-        userListView1.render();
-    });
-
+    var userEditView1 = new UserEditView({model: userListCollection1, router: router1});
 
     Backbone.history.start();
 

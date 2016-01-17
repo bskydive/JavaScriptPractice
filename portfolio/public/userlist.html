@@ -63,8 +63,8 @@
 
                 <div class="row row-text">
                         <div class="c-column-center">
-                                <div class="table-responsive" >
-                                        <table class="table table-hover tabble-condensed table-responsive" >
+                                <div class="table-responsive">
+                                        <table class="table table-hover tabble-condensed table-responsive">
                                                 <thead>
                                                 <tr>
                                                         <th>First name</th>
@@ -72,7 +72,8 @@
                                                         <th>Surname</th>
                                                         <th>Birth date</th>
                                                         <th>Email</th>
-                                                        <th>Mobile number</th>
+                                                        <th>Phone number</th>
+                                                        <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="id-tbody-userList">
@@ -92,7 +93,10 @@
                         <td><%= birthDateLocal %></td>
                         <td><%= eMail %></td>
                         <td><%= phoneNumber %></td>
-                        <td><a class="btn btn-default" href="#/edit/<%= uidNumber %>">Edit</a></td>
+                        <td>
+                                <a class="btn btn-default btn-xs" href="#/edit/<%= uidNumber %>">Edit</a>
+                                <a class="btn btn-default btn-xs" href="#/delete/<%= uidNumber %>">Delete</a>
+                        </td>
                 </tr>
         </script>
 
@@ -109,64 +113,7 @@
 
                 <div class="row row-text" id="id-userAdd">
                         <div class="c-column-center">
-                                <form class="form-horizontal">
-                                        <!--=================FIO=================-->
-                                        <div class="form-group">
-                                                <label for="id-input-firstName"
-                                                       class="c-label-input-field control-label">First
-                                                        name</label>
-                                                <div class="c-input-field">
-                                                        <input type="text" class="form-control" id="id-input-firstName"
-                                                               placeholder="First name">
-                                                </div>
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="id-input-lastName"
-                                                       class="c-label-input-field control-label">Last
-                                                        name</label>
-                                                <div class="c-input-field">
-                                                        <input type="text" class="form-control" id="id-input-lastName"
-                                                               placeholder="Last name">
-                                                </div>
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="id-input-surName"
-                                                       class="c-label-input-field control-label">Surname</label>
-                                                <div class="c-input-field">
-                                                        <input type="text" class="form-control" id="id-input-surName"
-                                                               placeholder="Surname">
-                                                </div>
-                                        </div>
-
-                                        <!--=================birthdate=================-->
-                                        <div class="form-group">
-                                                <label for="id-input-birthDate"
-                                                       class="c-label-input-field control-label">Birth
-                                                        date</label>
-                                                <div class="c-input-field">
-                                                        <input type="date" class="form-control" id="id-input-birthDate"
-                                                               placeholder="Birth date">
-                                                </div>
-                                        </div>
-                                        <!--=================email=================-->
-                                        <div class="form-group">
-                                                <label for="id-input-eMail" class="c-label-input-field control-label">Email</label>
-                                                <div class="c-input-field">
-                                                        <input type="email" class="form-control" id="id-input-eMail"
-                                                               placeholder="Email">
-                                                </div>
-                                        </div>
-
-                                        <!--=================phone=================-->
-                                        <div class="form-group">
-                                                <label for="id-input-phoneNumber"
-                                                       class="c-label-input-field control-label">Mobile
-                                                        number</label>
-                                                <div class="c-input-field">
-                                                        <input type="tel" class="form-control" id="id-input-phoneNumber"
-                                                               placeholder="Mobile number">
-                                                </div>
-                                        </div>
+                                <form class="form-horizontal" id="id-form-userEdit">
 
                                         <div class="form-group">
                                                 <div class="col-sm-offset-2 c-input-field">
@@ -174,12 +121,23 @@
                                                 </div>
                                         </div>
                                 </form>
+                        </div>
+                </div>
+        </div>
 
+        <script type="text/template" id="id-template-userEdit">
+                <div class="form-group">
+                        <label for="id-input-firstName"
+                               class="c-label-input-field control-label">First
+                                name</label>
+                        <div class="c-input-field">
+                                <input type="text" class="form-control" id="id-input-firstName"
+                                       placeholder="First name">
                         </div>
                 </div>
 
 
-        </div>
+        </script>
 
         <div class="placeholder"></div>
 
