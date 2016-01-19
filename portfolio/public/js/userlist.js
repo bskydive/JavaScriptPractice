@@ -1,5 +1,4 @@
 window.$(document).ready(function () {
-
     "use strict";
     var $ = window.$, Backbone = window.Backbone, console = window.console, _ = window._;
 
@@ -7,7 +6,7 @@ window.$(document).ready(function () {
     $(".c-column-userList").addClass("col-md-3");
     $(".c-label-input-field").addClass("col-md-2");
     $(".c-input-field").addClass("col-md-6");
-    //$("#id-container-userAdd").addClass("hidden");
+    //$("#id-container-userEdit").addClass("hidden");
 
 
     //function offsetResize() {
@@ -24,9 +23,9 @@ window.$(document).ready(function () {
 
     //============================================COLLECTION======================================================
 
-    function genUid() {
+    function genuuid() {
 
-        return window.Date.now().toString() + "-" + Math.random().toString(36).substring(2, 15) + "-" + Math.random().toString(36).substring(2, 15);
+        return window.Date.now().toString() + "-" + Math.random().toString(36).substring(2, 15);
     }
 
 
@@ -40,6 +39,47 @@ window.$(document).ready(function () {
         return (checkString(val) && val.length <= max && val.length >= min);
     }
 
+    function validateFirstName(attrs) {
+        
+        if (!checkStringLength(attrs.firstName, 3, 25)) {
+            return "First name " + attrs.uuidNumber.toString() + " should be 3 to 25 letters long";
+        } else {
+            return true;
+        }
+    }
+
+    function validateLastName(attrs) {
+        
+        if (!checkStringLength(attrs.lastName, 3, 25)) {
+            return "Last name " + attrs.uuidNumber.toString(attrs) + " should be 3 to 25 letters long";
+        } else {
+            return true;
+        }
+    }
+
+    function validateSurName(attrs) {
+        if (!checkStringLength(attrs.surName, 3, 25)) {
+            return "Surname " + attrs.uuidNumber.toString() + " should be 3 to 25 letters long";
+        }
+    }
+
+    function validateBirthDate(attrs) {
+        new Date(1900, 0, 1);
+    }
+
+    function validateEMail(attrs) {
+        "blankEMail@stepanovv.ru"
+    }
+
+    function validatePhoneNumber(attrs) {
+        "+71112233344"
+    }
+
+    function validateUuidNumber(attrs) {
+        genuuid(attrs)
+    }
+
+
     var UserListModel = Backbone.Model.extend({
         defaults: {
             firstName: "blankFirstName",
@@ -48,38 +88,24 @@ window.$(document).ready(function () {
             birthDate: new Date(1900, 0, 1),
             eMail: "blankEMail@stepanovv.ru",
             phoneNumber: "+71112233344",
-            //order: userListView1.nextOrder(),
-            uidNumber: genUid()
+            uuidNumber: genuuid(),
+            idAttribute: "uuidNumber"
         },
 
         validate: function (attrs) {
 
-            if (!checkStringLength(attrs.firstName, 3, 25)) {
-                return "First name" + this.guidNumber.toString() + " should be 3 to 25 letters long";
-            }
+            
 
-            if (!checkStringLength(attrs.lastName, 3, 25)) {
-                return "Last name" + this.guidNumber.toString() + " should be 3 to 25 letters long";
-            }
 
-            if (!checkStringLength(attrs.surName, 3, 25)) {
-                return "Surname " + this.guidNumber.toString() + " should be 3 to 25 letters long";
-            }
-        }
+            
+
+
+}
     });
 
     var UserListCollection = Backbone.Collection.extend({
 
-        model: UserListModel,
-
-        findUserName: function (username) {
-
-            var findResult = this.find(function (user) {
-                return user.get("firstName") === username;
-            });
-            return findResult !== null;
-
-        }
+        model: UserListModel
 
     });
 
@@ -106,7 +132,7 @@ window.$(document).ready(function () {
 
     //================================================VIEW==================================================
 
-    function toLocalDate(varDate, varLocale) {
+    function toLocalDate(varDate) {
         var options = {
             //era: 'long',
             year: 'numeric',
@@ -119,30 +145,26 @@ window.$(document).ready(function () {
             //second: 'numeric'
         };
 
+        var varLocale = "ru-RU";
+
         return varDate.toLocaleString(varLocale, options).toString();
     }
 
     var UserListView = Backbone.View.extend({
         el: "#id-tbody-userList",
         events: {
-            'click .c-btn-edit': 'userEdit'
-            //'click .c-btn-delete': 'routeUserDelete'
-        },
-
-        userEdit: function () {
-            this.router.navigate('', {trigger: true});
-
-            return false;
+            'click .c-btn-edit': 'eventUserEdit',
+            'click .c-btn-delete': 'eventUserDelete'
         },
 
         render: function () {
             var self = this;
             this.$el.html("");
 
-            this.model.each(
+            this.collection.each(
                 function (eachModel) {
                     var template = _.template($("#id-user-list-template").html());
-                    eachModel.set('birthDateLocal', self.toLocalDate(eachModel.get('birthDate'), "ru"));
+                    eachModel.set('birthDateLocal', toLocalDate(eachModel.get('birthDate')));
                     var html = template(eachModel.toJSON());
                     self.$el.append(html);
 
@@ -165,52 +187,50 @@ window.$(document).ready(function () {
     var UserEditView = Backbone.View().extend({
         el: "#id-form-userEdit",
         events: {
-            'submit .edit-user-form': 'saveUser',
-            //'click .delete': 'deleteUser'
+            'click #id-btn-cancel': 'eventUserSave',
+            'click #id-btn-save': 'eventUserSave',
+            'click #id-btn-delete': 'eventUserDelete'
         },
 
-        saveUser: function (ev) {
-            var userDetails = $(ev.currentTarget).serializeObject();
-            var user = new User();
-            user.save(userDetails, {
-                success: function (user) {
-                    router.navigate('', {trigger: true});
-                }
-            });
+        eventUserSave: function () {
+
+            this.collection.saveList;
+            //validation
+
+            this.router.navigate('', {trigger: true});
             return false;
         },
-        deleteUser: function (ev) {
-            this.user.destroy({
-                success: function () {
-                    console.log('destroyed');
-                    router.navigate('', {trigger: true});
-                }
-            });
+
+        eventUserDelete: function () {
+            //this.user.destroy({
+            //    success: function () {
+            //        console.log('destroyed');
+            //        router.navigate('', {trigger: true});
+            //    }
+            //});
+            this.router.navigate('', {trigger: true});
             return false;
         },
 
 
         render: function (options) {
-            var self = this;
+
             this.$el.html("");
 
-            if (options.uid) {
-                this.model.each(
-                    function (eachModel) {
-                        if (eachModel.get('uidNumber') === options.uid) {
+            if (options.uuid) {
 
-                            //todo catch absent uid's
-                            var template = _.template($("#id-form-userEdit").html());
-                            eachModel.set('birthDateLocal', self.toLocalDate(eachModel.get('birthDate'), "ru"));
-                            var html = template(eachModel.toJSON());
-                            self.$el.prepend(html);
-                        }
-                    }
-                );
+                var modelByUuid = this.collection.get(options.uuid);
+
+                //todo add error on absent uuid's
+                var template = _.template($("#id-form-userEdit").html());
+                modelByUuid.set('birthDateLocal', toLocalDate(modelByUuid.get('birthDate')));
+                var html = template(modelByUuid.toJSON());
+
+                self.$el.prepend(html);
+
             }
             return this;
         }
-
     });
 
     //==============================================ROUTER====================================================
@@ -219,8 +239,8 @@ window.$(document).ready(function () {
         routes: {
             '': 'routeUserList',
             'add': 'routeUserAdd',
-            'edit/:uidLink': 'routeUserEdit',
-            'delete/:uidLink': 'routeUserDelete'
+            'edit/:uuidLink': 'routeUserEdit',
+            'delete/:uuidLink': 'routeUserDelete'
         },
 
         routeUserList: function () {
@@ -233,21 +253,23 @@ window.$(document).ready(function () {
 
         routeUserAdd: function () {
             $('.c-containerMain').hide();
-            $('#id-container-userAdd').show();
+            userEditView1.render();
+            $('#id-container-userEdit').show();
         },
 
-        routeUserEdit: function (uidLink) {
+        routeUserEdit: function (uuidLink) {
             $('.c-containerMain').hide();
-            userEditView1.render({uid: uidLink});
-            $('#id-container-userAdd').show();
+            userEditView1.render({uuid: uuidLink});
+            $('#id-container-userEdit').show();
 
-        },
-
-        routeUserDelete: function () {
-            //$('.c-containerMain').hide();
-            //$('#id-container-userAdd').show();
-            userListView1.render();
         }
+
+        //routeUserDelete: function () {
+        //    $('.c-containerMain').hide();
+        //
+        //    userEditView1.deleteUser({uuid: uuidLink});
+        //    $('#id-container-userEdit').show();
+        //}
     });
 
 
@@ -259,9 +281,9 @@ window.$(document).ready(function () {
 
     fillCollection(userListCollection1);
 
-    var userListView1 = new UserListView({model: userListCollection1, router: router1});
+    var userListView1 = new UserListView({collection: userListCollection1, router: router1});
 
-    var userEditView1 = new UserEditView({model: userListCollection1, router: router1});
+    var userEditView1 = new UserEditView({collection: userListCollection1, router: router1});
 
     Backbone.history.start();
 
