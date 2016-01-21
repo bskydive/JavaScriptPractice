@@ -95,8 +95,8 @@
                         <td><%= eMail %></td>
                         <td><%= phoneNumber %></td>
                         <td>
-                                <a class="btn btn-default btn-xs" href="#/edit/<%= uidNumber %>">Edit</a>
-                                <a class="btn btn-default btn-xs" href="#/delete/<%= uidNumber %>">Delete</a>
+                                <a class="btn btn-default btn-xs" href="#/edit/<%= uuidNumber %>" id="id-btn-edit">Edit</a>
+                                <a class="btn btn-default btn-xs" href="#/delete/<%= uuidNumber %>" id="id-btn-delete">Delete</a>
                         </td>
                 </tr>
         </script>
@@ -108,7 +108,7 @@
 
                 <div class="row row-header">
                         <div class="c-column-center">
-                                <h2>User add</h2>
+                                <h2>User edit</h2>
                         </div>
                 </div>
 
@@ -118,7 +118,8 @@
 
                                         <div class="form-group">
                                                 <div class="col-sm-offset-2 c-input-field">
-                                                        <button type="submit" class="btn btn-default">Save</button>
+                                                        <button type="submit" class="btn btn-default" id="id-btn-save">Save</button>
+                                                        <button type="reset" class="btn btn-default" id="id-btn-cancel">Cancel</button>
                                                 </div>
                                         </div>
                                 </form>
@@ -128,12 +129,11 @@
 
         <script type="text/template" id="id-template-userEdit">
                 <div class="form-group">
-                        <label for="id-input-firstName"
-                               class="c-label-input-field control-label">First
-                                name</label>
+                        <label for="id-input-<%= editParamName %>"
+                               class="c-label-input-field control-label"><%= editParamLabel %></label>
                         <div class="c-input-field">
-                                <input type="text" class="form-control" id="id-input-firstName"
-                                       placeholder="First name">
+                                <input type="text" class="form-control" id="id-input-<%= editParamName %>"
+                                       placeholder="<%= editParamPlaceholder %>">
                         </div>
                 </div>
 

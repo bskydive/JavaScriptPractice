@@ -40,7 +40,7 @@ window.$(document).ready(function () {
     }
 
     function validateFirstName(attrs) {
-        
+
         if (!checkStringLength(attrs.firstName, 3, 25)) {
             return "First name " + attrs.uuidNumber.toString() + " should be 3 to 25 letters long";
         } else {
@@ -49,7 +49,7 @@ window.$(document).ready(function () {
     }
 
     function validateLastName(attrs) {
-        
+
         if (!checkStringLength(attrs.lastName, 3, 25)) {
             return "Last name " + attrs.uuidNumber.toString(attrs) + " should be 3 to 25 letters long";
         } else {
@@ -60,23 +60,96 @@ window.$(document).ready(function () {
     function validateSurName(attrs) {
         if (!checkStringLength(attrs.surName, 3, 25)) {
             return "Surname " + attrs.uuidNumber.toString() + " should be 3 to 25 letters long";
+        } else {
+            return true;
         }
     }
 
     function validateBirthDate(attrs) {
-        new Date(1900, 0, 1);
+
+        //var dateformat = /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/;
+        //// Match the date format through regular expression
+        //if (inputText.value.match(dateformat)) {
+        //    document.form1.text1.focus();
+        //    //Test which seperator is used '/' or '-'
+        //    var opera1 = inputText.value.split('/');
+        //    var opera2 = inputText.value.split('-');
+        //    var lopera1 = opera1.length;
+        //    var lopera2 = opera2.length;
+        //    var pdate = "";
+        //
+        //    // Extract the string into month, date and year
+        //    if (lopera1 > 1) {
+        //        pdate = inputText.value.split('/');
+        //    }
+        //    else if (lopera2 > 1) {
+        //        pdate = inputText.value.split('-');
+        //    }
+        //
+        //    var mm = parseInt(pdate[0]);
+        //    var dd = parseInt(pdate[1]);
+        //    var yy = parseInt(pdate[2]);
+        //    // Create list of days of a month [assume there is no leap year by default]
+        //    var ListofDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        //    if (mm == 1 || mm > 2) {
+        //        if (dd > ListofDays[mm - 1]) {
+        //            alert('Invalid date format!');
+        //            return false;
+        //        }
+        //    }
+        //    if (mm == 2) {
+        //        var lyear = false;
+        //        if ((!(yy % 4) && yy % 100) || !(yy % 400)) {
+        //            lyear = true;
+        //        }
+        //        if ((lyear === false) && (dd >= 29)) {
+        //            alert('Invalid date format!');
+        //            return false;
+        //        }
+        //        if ((lyear === true) && (dd > 29)) {
+        //            alert('Invalid date format!');
+        //            return false;
+        //        }
+        //    }
+        //}
+        //else {
+        //    alert("Invalid date format!");
+        //    document.form1.text1.focus();
+        //    return false;
+        //}
+
+
+        return true;
+
+
     }
 
     function validateEMail(attrs) {
-        "blankEMail@stepanovv.ru"
+        //"blankEMail@stepanovv.ru"
+
+        return true;
     }
 
     function validatePhoneNumber(attrs) {
-        "+71112233344"
+        //"+71112233344"
+        return true;
     }
 
-    function validateUuidNumber(attrs) {
-        genuuid(attrs)
+
+
+    function validateAllAttrs(attrs) {
+        var result = "";
+
+        //if (!validateFirstName(attrs)) { result = result +  }
+        //
+        //if (result === "") {
+        //    return true;
+        //} else {
+        //    return result;
+        //}
+
+        //todo change return type for all validators to [bool,str]
+
     }
 
 
@@ -94,13 +167,9 @@ window.$(document).ready(function () {
 
         validate: function (attrs) {
 
-            
+            //var
 
-
-            
-
-
-}
+        }
     });
 
     var UserListCollection = Backbone.Collection.extend({
@@ -184,7 +253,7 @@ window.$(document).ready(function () {
     });
 
 
-    var UserEditView = Backbone.View().extend({
+    var UserEditView = Backbone.View.extend({
         el: "#id-form-userEdit",
         events: {
             'click #id-btn-cancel': 'eventUserSave',
@@ -194,7 +263,16 @@ window.$(document).ready(function () {
 
         eventUserSave: function () {
 
-            this.collection.saveList;
+            var attrs = {
+                firstName: $("id-input-firstName").value,
+                lastName: $("id-input-lastName").value,
+                surName: $("id-input-surName").value,
+                birthDate: $("id-input-birthDate").value,
+                eMail: $("id-input-eMail").value,
+                phoneNumber: $("id-input-phoneNumber").value
+            };
+
+            this.collection.saveList(attrs);
             //validation
 
             this.router.navigate('', {trigger: true});
@@ -217,14 +295,21 @@ window.$(document).ready(function () {
 
             this.$el.html("");
 
-            if (options.uuid) {
+            if (options.length > 1) {
 
                 var modelByUuid = this.collection.get(options.uuid);
 
                 //todo add error on absent uuid's
+
                 var template = _.template($("#id-form-userEdit").html());
                 modelByUuid.set('birthDateLocal', toLocalDate(modelByUuid.get('birthDate')));
                 var html = template(modelByUuid.toJSON());
+
+                //нужно создавать имена полей с обходом по модели
+                //имена полей должны совпадать с this.saveuser!
+                //editParamLabel
+                //editParamName
+                //editParamPlaceholder
 
                 self.$el.prepend(html);
 
@@ -253,13 +338,13 @@ window.$(document).ready(function () {
 
         routeUserAdd: function () {
             $('.c-containerMain').hide();
-            userEditView1.render();
+            //userEditView1.render();
             $('#id-container-userEdit').show();
         },
 
         routeUserEdit: function (uuidLink) {
             $('.c-containerMain').hide();
-            userEditView1.render({uuid: uuidLink});
+            //userEditView1.render({uuid: uuidLink});
             $('#id-container-userEdit').show();
 
         }
@@ -283,7 +368,7 @@ window.$(document).ready(function () {
 
     var userListView1 = new UserListView({collection: userListCollection1, router: router1});
 
-    var userEditView1 = new UserEditView({collection: userListCollection1, router: router1});
+    //var userEditView1 = new UserEditView({collection: userListCollection1, router: router1});
 
     Backbone.history.start();
 
