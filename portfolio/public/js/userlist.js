@@ -295,7 +295,7 @@ window.$(document).ready(function () {
 
             this.$el.html("");
 
-            if (options.length > 1) {
+            if (options.uuid !== "new") {
 
                 var modelByUuid = this.collection.get(options.uuid);
 
@@ -313,6 +313,8 @@ window.$(document).ready(function () {
 
                 self.$el.prepend(html);
 
+            } else {
+
             }
             return this;
         }
@@ -323,7 +325,7 @@ window.$(document).ready(function () {
 
         routes: {
             '': 'routeUserList',
-            'add': 'routeUserAdd',
+            'list': 'routeUserList',
             'edit/:uuidLink': 'routeUserEdit',
             'delete/:uuidLink': 'routeUserDelete'
         },
@@ -336,15 +338,15 @@ window.$(document).ready(function () {
             $('#id-container-userList').show();
         },
 
-        routeUserAdd: function () {
-            $('.c-containerMain').hide();
-            //userEditView1.render();
-            $('#id-container-userEdit').show();
-        },
+        //routeUserAdd: function () {
+        //    $('.c-containerMain').hide();
+        //    userEditView1.render();
+        //    $('#id-container-userEdit').show();
+        //},
 
         routeUserEdit: function (uuidLink) {
             $('.c-containerMain').hide();
-            //userEditView1.render({uuid: uuidLink});
+            userEditView1.render({uuid: uuidLink});
             $('#id-container-userEdit').show();
 
         }
@@ -360,17 +362,24 @@ window.$(document).ready(function () {
 
     //==============================================CALCULATIONS====================================================
 
-    var router1 = new Router();
+
 
     var userListCollection1 = new UserListCollection();
 
     fillCollection(userListCollection1);
 
-    var userListView1 = new UserListView({collection: userListCollection1, router: router1});
+    var userListView1 = new UserListView({collection: userListCollection1});
 
-    //var userEditView1 = new UserEditView({collection: userListCollection1, router: router1});
+    var userEditView1 = new UserEditView({collection: userListCollection1});
+
+    var router1 = new Router();
+
+    userEditView1.router = router1;
+    userListView1.router = router1;
 
     Backbone.history.start();
+
+    router1.navigate('list', {trigger: true});
 
 
 });
