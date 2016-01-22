@@ -4,8 +4,9 @@ window.$(document).ready(function () {
 
     $(".c-column-center").addClass("col-md-12");
     $(".c-column-userList").addClass("col-md-3");
-    $(".c-label-input-field").addClass("col-md-2");
-    $(".c-input-field").addClass("col-md-6");
+    //$(".c-label-input-field").addClass("col-md-2");
+    //$(".c-input-field").addClass("col-md-6");
+
     //$("#id-container-userEdit").addClass("hidden");
 
 
@@ -136,7 +137,6 @@ window.$(document).ready(function () {
     }
 
 
-
     function validateAllAttrs(attrs) {
         var result = "";
 
@@ -152,6 +152,38 @@ window.$(document).ready(function () {
 
     }
 
+    var UserListModelLabel = Backbone.Model.extend({
+        defaults: {
+            firstName: "First Name",
+            lastName: "Last Name",
+            surName: "Surname",
+            birthDate: "Birth date",
+            eMail: "e-mail",
+            phoneNumber: "Phone Number"
+        }
+    });
+
+    var UserListModelPlaceholder = Backbone.Model.extend({
+        defaults: {
+            firstName: "blankFirstName",
+            lastName: "blankLastName",
+            surName: "blankSurName",
+            birthDate: "21.01.1901",
+            eMail: "blankEMail@stepanovv.ru",
+            phoneNumber: "+71112233344"
+        }
+    });
+
+    var UserListModelInputType = Backbone.Model.extend({
+        defaults: {
+            firstName: "text",
+            lastName: "text",
+            surName: "text",
+            birthDate: "date",
+            eMail: "email",
+            phoneNumber: "text"
+        }
+    });
 
     var UserListModel = Backbone.Model.extend({
         defaults: {
@@ -161,8 +193,8 @@ window.$(document).ready(function () {
             birthDate: new Date(1900, 0, 1),
             eMail: "blankEMail@stepanovv.ru",
             phoneNumber: "+71112233344",
-            uuidNumber: genuuid(),
-            idAttribute: "uuidNumber"
+            uuidNumber: "1000000000000-xxxxxxxxxxx"
+            //idAttribute: "uuidNumber"
         },
 
         validate: function (attrs) {
@@ -174,7 +206,10 @@ window.$(document).ready(function () {
 
     var UserListCollection = Backbone.Collection.extend({
 
-        model: UserListModel
+        model: UserListModel,
+        modelId: function (attrs) {
+            return attrs.uuidNumber;
+        }
 
     });
 
@@ -189,7 +224,8 @@ window.$(document).ready(function () {
                     birthDate: new Date(1901, 0, i),
                     birthDateLocal: "",
                     eMail: i.toString() + "EMail@stepanovv.ru",
-                    phoneNumber: "+7111223334" + i.toString()
+                    phoneNumber: "+7111223334" + i.toString(),
+                    uuidNumber: genuuid()
                 }
             );
         }
@@ -293,23 +329,34 @@ window.$(document).ready(function () {
 
         render: function (options) {
 
+
             this.$el.html("");
 
             if (options.uuid !== "new") {
 
+                var self = this;
                 var modelByUuid = this.collection.get(options.uuid);
 
-                //todo add error on absent uuid's
+                var modelLabel = new UserListModelLabel();
+                var modelPlaceholder = new UserListModelPlaceholder();
+                var modelInputType = new UserListModelInputType();
 
-                var template = _.template($("#id-form-userEdit").html());
-                modelByUuid.set('birthDateLocal', toLocalDate(modelByUuid.get('birthDate')));
+                //todo add error on absent uuid's
+                //todo validate uuid's
+
+                var template = _.template($("#id-template-userEdit").html());
+                //modelByUuid.set('birthDateLocal', toLocalDate(modelByUuid.get('birthDate')));
+
+                modelByUuid.set({editParamLabel: modelLabel.get('firstName'),
+                editParamName: 'firstName',
+                    editParamPlaceholder: modelPlaceholder.get('firstName'),
+                    inputEditType: modelInputType.get('firstName'),
+                    inputEditValue: modelByUuid.get('firstName')});
+
                 var html = template(modelByUuid.toJSON());
 
                 //нужно создавать имена полей с обходом по модели
                 //имена полей должны совпадать с this.saveuser!
-                //editParamLabel
-                //editParamName
-                //editParamPlaceholder
 
                 self.$el.prepend(html);
 
@@ -361,7 +408,6 @@ window.$(document).ready(function () {
 
 
     //==============================================CALCULATIONS====================================================
-
 
 
     var userListCollection1 = new UserListCollection();
