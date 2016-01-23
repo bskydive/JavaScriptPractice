@@ -4,8 +4,6 @@ window.$(document).ready(function () {
 
     $(".c-column-center").addClass("col-md-12");
     $(".c-column-userList").addClass("col-md-3");
-    //$(".c-label-input-field").addClass("col-md-2");
-    //$(".c-input-field").addClass("col-md-6");
 
     //$("#id-container-userEdit").addClass("hidden");
 
@@ -190,17 +188,13 @@ window.$(document).ready(function () {
             firstName: "blankFirstName",
             lastName: "blankLastName",
             surName: "blankSurName",
-            birthDate: new Date(1900, 0, 1),
+            birthDate: new Date(1901, 0, 2),
             eMail: "blankEMail@stepanovv.ru",
             phoneNumber: "+71112233344",
+            //The order is matter!
+            birthDateLocal: "01.01.1901",
             uuidNumber: "1000000000000-xxxxxxxxxxx"
             //idAttribute: "uuidNumber"
-        },
-
-        validate: function (attrs) {
-
-            //var
-
         }
     });
 
@@ -221,10 +215,10 @@ window.$(document).ready(function () {
                     firstName: "FirstName" + i.toString(),
                     lastName: "LastName" + i.toString(),
                     surName: "SurName" + i.toString(),
-                    birthDate: new Date(1901, 0, i),
-                    birthDateLocal: "",
+                    birthDate: new Date(1901+i, 0, 2),
                     eMail: i.toString() + "EMail@stepanovv.ru",
                     phoneNumber: "+7111223334" + i.toString(),
+                    birthDateLocal: toLocalDate(new Date(1901+i, 0, 2)),
                     uuidNumber: genuuid()
                 }
             );
@@ -269,7 +263,7 @@ window.$(document).ready(function () {
             this.collection.each(
                 function (eachModel) {
                     var template = _.template($("#id-user-list-template").html());
-                    eachModel.set('birthDateLocal', toLocalDate(eachModel.get('birthDate')));
+                    //eachModel.set('birthDateLocal', toLocalDate(eachModel.get('birthDate')));
                     var html = template(eachModel.toJSON());
                     self.$el.append(html);
 
@@ -303,9 +297,10 @@ window.$(document).ready(function () {
                 firstName: $("id-input-firstName").value,
                 lastName: $("id-input-lastName").value,
                 surName: $("id-input-surName").value,
-                birthDate: $("id-input-birthDate").value,
+                birthDate: $("id-input-birthDate").value, //todo parse to new Date()!!!
                 eMail: $("id-input-eMail").value,
-                phoneNumber: $("id-input-phoneNumber").value
+                phoneNumber: $("id-input-phoneNumber").value,
+                birthDateLocal: toLocalDate($("id-input-birthDate").value)//todo parse from new Date()!!!
             };
 
             this.collection.saveList(attrs);
@@ -337,28 +332,52 @@ window.$(document).ready(function () {
                 var self = this;
                 var modelByUuid = this.collection.get(options.uuid);
 
-                var modelLabel = new UserListModelLabel();
-                var modelPlaceholder = new UserListModelPlaceholder();
-                var modelInputType = new UserListModelInputType();
+                var modelLabel = new UserListModelLabel(), modelPlaceholder = new UserListModelPlaceholder(),
+                    modelInputType = new UserListModelInputType();
 
                 //todo add error on absent uuid's
                 //todo validate uuid's
 
                 var template = _.template($("#id-template-userEdit").html());
-                //modelByUuid.set('birthDateLocal', toLocalDate(modelByUuid.get('birthDate')));
 
-                modelByUuid.set({editParamLabel: modelLabel.get('firstName'),
-                editParamName: 'firstName',
-                    editParamPlaceholder: modelPlaceholder.get('firstName'),
-                    inputEditType: modelInputType.get('firstName'),
-                    inputEditValue: modelByUuid.get('firstName')});
+                var modelKeys = _.keys(modelByUuid.toJSON());
 
-                var html = template(modelByUuid.toJSON());
+                for (var i = 0; i < (modelKeys.length-2); i++){//length-1 make uuid not visible
+
+                    var keyName = modelKeys[i];
+
+                    modelByUuid.set({
+                        //todo fix date display with bootstrap input field type
+                            editParamLabel: modelLabel.get(keyName),
+                            editParamName: keyName,
+                            editParamPlaceholder: modelPlaceholder.get(keyName),
+                            inputEditType: modelInputType.get(keyName),
+                            inputEditValue: modelByUuid.get(keyName)
+                    });
+
+                    var html = template(modelByUuid.toJSON());
+                    self.$el.append(html);
+                }
+
+                //modelByUuid.set({
+                //    editParamLabel: modelLabel.get('firstName'),
+                //    editParamName: 'firstName',
+                //    editParamPlaceholder: modelPlaceholder.get('firstName'),
+                //    inputEditType: modelInputType.get('firstName'),
+                //    inputEditValue: modelByUuid.get('firstName')
+                //});
+
+
+
 
                 //нужно создавать имена полей с обходом по модели
                 //имена полей должны совпадать с this.saveuser!
 
-                self.$el.prepend(html);
+                self.$el.append($("#id-template-btn-userEdit").html());
+
+                $(".c-form-group-buttons").addClass("col-sm-offset-2 col-sm-6");
+                $(".c-form-group-input").addClass("col-sm-6");
+                $(".c-form-group-label").addClass("col-sm-2");
 
             } else {
 
