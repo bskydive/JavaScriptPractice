@@ -123,17 +123,21 @@ window.$(document).ready(function () {
 
     }
 
-    function validateEMail(attrs) {
+    function validateEMail(attr) {
         //"blankEMail@stepanovv.ru"
 
         return true;
     }
 
-    function validatePhoneNumber(attrs) {
+    function validatePhoneNumber(attr) {
         //"+71112233344"
         return true;
     }
 
+    function validateUuidNumber(attr) {
+
+        return (!attr.isEmpty && attr.length > 20 && attr.length < 30 && attr === attr.toString());
+    }
 
     function validateAllAttrs(attrs) {
         var result = "";
@@ -215,10 +219,10 @@ window.$(document).ready(function () {
                     firstName: "FirstName" + i.toString(),
                     lastName: "LastName" + i.toString(),
                     surName: "SurName" + i.toString(),
-                    birthDate: new Date(1901+i, 0, 2),
+                    birthDate: new Date(1901 + i, 0, 2),
                     eMail: i.toString() + "EMail@stepanovv.ru",
                     phoneNumber: "+7111223334" + i.toString(),
-                    birthDateLocal: toLocalDate(new Date(1901+i, 0, 2)),
+                    birthDateLocal: toLocalDate(new Date(1901 + i, 0, 2)),
                     uuidNumber: genuuid()
                 }
             );
@@ -251,13 +255,19 @@ window.$(document).ready(function () {
 
     var UserListView = Backbone.View.extend({
         el: "#id-tbody-userList",
-        events: {
-            'click .c-btn-edit': 'eventUserEdit',
-            'click .c-btn-delete': 'eventUserDelete'
+        //events: {
+        //    'click .c-btn-edit': 'eventUserEdit',
+        //    'click .c-btn-delete': 'eventUserDelete'
+        //},
+
+        eventUserDelete: function (uuid) {
+            this.collection.remove(uuid);
+            this.render();
         },
 
         render: function () {
             var self = this;
+            $('#id-containerMain').hide();
             this.$el.html("");
 
             this.collection.each(
@@ -269,6 +279,7 @@ window.$(document).ready(function () {
 
                 }
             );
+            $('#id-container-userList').show();
             return this;
         }
 
@@ -293,7 +304,10 @@ window.$(document).ready(function () {
 
         eventUserSave: function () {
 
-            var attrs = {
+            var newModel = new UserListModel();
+
+            //todo add validation
+            newModel.set({
                 firstName: $("id-input-firstName").value,
                 lastName: $("id-input-lastName").value,
                 surName: $("id-input-surName").value,
@@ -301,87 +315,76 @@ window.$(document).ready(function () {
                 eMail: $("id-input-eMail").value,
                 phoneNumber: $("id-input-phoneNumber").value,
                 birthDateLocal: toLocalDate($("id-input-birthDate").value)//todo parse from new Date()!!!
-            };
+                //The specified value "Sat Jan 02 1904 00:00:00 GMT+0300 (MSK)" does not conform to the required format, "yyyy-MM-dd".
+            });
 
-            this.collection.saveList(attrs);
-            //validation
+            this.collection.add(newModel);
 
-            this.router.navigate('', {trigger: true});
+
+            this.router.navigate('list', {trigger: true});
             return false;
         },
-
-        eventUserDelete: function () {
-            //this.user.destroy({
-            //    success: function () {
-            //        console.log('destroyed');
-            //        router.navigate('', {trigger: true});
-            //    }
-            //});
-            this.router.navigate('', {trigger: true});
-            return false;
-        },
-
 
         render: function (options) {
+            $('.c-containerMain').hide();
 
 
             this.$el.html("");
 
-            if (options.uuid !== "new") {
+            var self = this;
+            var modelByUuid = new UserListModel();
 
-                var self = this;
-                var modelByUuid = this.collection.get(options.uuid);
-
-                var modelLabel = new UserListModelLabel(), modelPlaceholder = new UserListModelPlaceholder(),
-                    modelInputType = new UserListModelInputType();
-
-                //todo add error on absent uuid's
-                //todo validate uuid's
-
-                var template = _.template($("#id-template-userEdit").html());
-
-                var modelKeys = _.keys(modelByUuid.toJSON());
-
-                for (var i = 0; i < (modelKeys.length-2); i++){//length-1 make uuid not visible
-
-                    var keyName = modelKeys[i];
-
-                    modelByUuid.set({
-                        //todo fix date display with bootstrap input field type
-                            editParamLabel: modelLabel.get(keyName),
-                            editParamName: keyName,
-                            editParamPlaceholder: modelPlaceholder.get(keyName),
-                            inputEditType: modelInputType.get(keyName),
-                            inputEditValue: modelByUuid.get(keyName)
-                    });
-
-                    var html = template(modelByUuid.toJSON());
-                    self.$el.append(html);
-                }
-
-                //modelByUuid.set({
-                //    editParamLabel: modelLabel.get('firstName'),
-                //    editParamName: 'firstName',
-                //    editParamPlaceholder: modelPlaceholder.get('firstName'),
-                //    inputEditType: modelInputType.get('firstName'),
-                //    inputEditValue: modelByUuid.get('firstName')
-                //});
-
-
-
-
-                //нужно создавать имена полей с обходом по модели
-                //имена полей должны совпадать с this.saveuser!
-
-                self.$el.append($("#id-template-btn-userEdit").html());
-
-                $(".c-form-group-buttons").addClass("col-sm-offset-2 col-sm-6");
-                $(".c-form-group-input").addClass("col-sm-6");
-                $(".c-form-group-label").addClass("col-sm-2");
-
-            } else {
-
+            //todo add error on absent uuid's
+            //todo validate uuid's
+            if (options.uuid.length > 10 && options.uuid !== "new") {
+                modelByUuid = this.collection.get(options.uuid);
             }
+
+
+            var modelLabel = new UserListModelLabel(), modelPlaceholder = new UserListModelPlaceholder(),
+                modelInputType = new UserListModelInputType();
+
+            var template = _.template($("#id-template-userEdit").html());
+
+            var modelKeys = _.keys(modelByUuid.toJSON());
+
+            for (var i = 0; i < (modelKeys.length - 2); i++) {//length-1 make uuid not visible
+
+                var keyName = modelKeys[i];
+
+                modelByUuid.set({
+                    //todo fix date display with bootstrap input field type
+                    editParamLabel: modelLabel.get(keyName),
+                    editParamName: keyName,
+                    editParamPlaceholder: modelPlaceholder.get(keyName),
+                    inputEditType: modelInputType.get(keyName),
+                    inputEditValue: modelByUuid.get(keyName)
+                });
+
+                var html = template(modelByUuid.toJSON());
+                self.$el.append(html);
+            }
+
+            //modelByUuid.set({
+            //    editParamLabel: modelLabel.get('firstName'),
+            //    editParamName: 'firstName',
+            //    editParamPlaceholder: modelPlaceholder.get('firstName'),
+            //    inputEditType: modelInputType.get('firstName'),
+            //    inputEditValue: modelByUuid.get('firstName')
+            //});
+
+
+            //нужно создавать имена полей с обходом по модели
+            //имена полей должны совпадать с this.saveuser!
+
+            self.$el.append($("#id-template-btn-userEdit").html());
+
+            $(".c-form-group-buttons").addClass("col-sm-offset-2 col-sm-6");
+            $(".c-form-group-input").addClass("col-sm-6");
+            $(".c-form-group-label").addClass("col-sm-2");
+
+            $('#id-container-userEdit').show();
+
             return this;
         }
     });
@@ -411,9 +414,16 @@ window.$(document).ready(function () {
         //},
 
         routeUserEdit: function (uuidLink) {
-            $('.c-containerMain').hide();
+            //$('.c-containerMain').hide();
             userEditView1.render({uuid: uuidLink});
-            $('#id-container-userEdit').show();
+            //$('#id-container-userEdit').show();
+
+        },
+
+        routeUserDelete: function (uuidLink) {
+            //$('.c-containerMain').hide();
+            userListView1.eventUserDelete(uuidLink);
+            //$('#id-container-userList').show();
 
         }
 
