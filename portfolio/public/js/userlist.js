@@ -297,9 +297,8 @@ window.$(document).ready(function () {
     var UserEditView = Backbone.View.extend({
         el: "#id-form-userEdit",
         events: {
-            'click #id-btn-cancel': 'eventUserSave',
-            'click #id-btn-save': 'eventUserSave',
-            'click #id-btn-delete': 'eventUserDelete'
+            'click #id-btn-cancel': 'eventUserCancel',
+            'click #id-btn-save': 'eventUserSave'
         },
 
         eventUserSave: function () {
@@ -320,7 +319,11 @@ window.$(document).ready(function () {
 
             this.collection.add(newModel);
 
+            this.router.navigate('list', {trigger: true});
+            return false;
+        },
 
+        eventUserCancel: function () {
             this.router.navigate('list', {trigger: true});
             return false;
         },
