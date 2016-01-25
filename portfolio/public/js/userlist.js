@@ -22,7 +22,7 @@ window.$(document).ready(function () {
 
     //============================================COLLECTION======================================================
 
-    function genuuid() {
+    function genUuid() {
 
         return window.Date.now().toString() + "-" + Math.random().toString(36).substring(2, 15);
     }
@@ -223,7 +223,7 @@ window.$(document).ready(function () {
                     eMail: i.toString() + "EMail@stepanovv.ru",
                     phoneNumber: "+7111223334" + i.toString(),
                     birthDateLocal: toLocalDate(new Date(1901 + i, 0, 2)),
-                    uuidNumber: genuuid()
+                    uuidNumber: genUuid()
                 }
             );
         }
@@ -307,20 +307,23 @@ window.$(document).ready(function () {
 
             //todo add validation
             newModel.set({
-                firstName: $("id-input-firstName").value,
-                lastName: $("id-input-lastName").value,
-                surName: $("id-input-surName").value,
-                birthDate: $("id-input-birthDate").value, //todo parse to new Date()!!!
-                eMail: $("id-input-eMail").value,
-                phoneNumber: $("id-input-phoneNumber").value,
-                birthDateLocal: toLocalDate($("id-input-birthDate").value)//todo parse from new Date()!!!
+                firstName: $("#id-input-firstName").attr("value"),
+                lastName: $("#id-input-lastName").attr('value'),
+                surName: $("#id-input-surName").attr('value'),
+                birthDate: Date.parse($("#id-input-birthDate").attr('value')), //todo parse to new Date()!!!
+                eMail: $("#id-input-eMail").attr('value'),
+                phoneNumber: $("#id-input-phoneNumber").attr("value"),
+                birthDateLocal: toLocalDate(Date.parse($("#id-input-birthDate").attr('value'))),
+                //todo parse from new Date()!!!
                 //The specified value "Sat Jan 02 1904 00:00:00 GMT+0300 (MSK)" does not conform to the required format, "yyyy-MM-dd".
+                uuidNumber: genUuid()
             });
 
             this.collection.add(newModel);
+            userListView1.collection = this.collection;//todo use global collection or rest server
 
             this.router.navigate('list', {trigger: true});
-            return false;
+            return newModel;
         },
 
         eventUserCancel: function () {
