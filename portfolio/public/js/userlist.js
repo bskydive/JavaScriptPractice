@@ -5,6 +5,7 @@ window.$(document).ready(function () {
     $(".c-column-center").addClass("col-md-12");
     $(".c-column-userList").addClass("col-md-3");
 
+
     //$("#id-container-userEdit").addClass("hidden");
 
 
@@ -40,8 +41,8 @@ window.$(document).ready(function () {
 
     function validateFirstName(attrs) {
 
-        if (!checkStringLength(attrs.firstName, 3, 25)) {
-            return "First name " + attrs.uuidNumber.toString() + " should be 3 to 25 letters long";
+        if (!checkStringLength(attrs.attributes.firstName.value, 3, 25)) {
+            return "First name " + attrs.attributes.uuidNumber.value.toString() + " should be 3 to 25 letters long";
         } else {
             return true;
         }
@@ -49,16 +50,16 @@ window.$(document).ready(function () {
 
     function validateLastName(attrs) {
 
-        if (!checkStringLength(attrs.lastName, 3, 25)) {
-            return "Last name " + attrs.uuidNumber.toString(attrs) + " should be 3 to 25 letters long";
+        if (!checkStringLength(attrs.attributes.lastName.value, 3, 25)) {
+            return "Last name " + attrs.attributes.uuidNumber.value.toString(attrs) + " should be 3 to 25 letters long";
         } else {
             return true;
         }
     }
 
     function validateSurName(attrs) {
-        if (!checkStringLength(attrs.surName, 3, 25)) {
-            return "Surname " + attrs.uuidNumber.toString() + " should be 3 to 25 letters long";
+        if (!checkStringLength(attrs.attributes.surName.value, 3, 25)) {
+            return "Surname " + attrs.attributes.uuidNumber.value.toString() + " should be 3 to 25 letters long";
         } else {
             return true;
         }
@@ -136,7 +137,7 @@ window.$(document).ready(function () {
 
     function validateUuidNumber(attr) {
 
-        return (!attr.isEmpty && attr.length > 20 && attr.length < 30 && attr === attr.toString());
+        return (attr !== undefined && attr.length > 20 && attr.length < 30 && attr === attr.toString());
     }
 
     function validateAllAttrs(attrs) {
@@ -151,89 +152,140 @@ window.$(document).ready(function () {
         //}
 
         //todo change return type for all validators to [bool,str]
+        return true;
 
     }
 
-    var UserListModelLabel = Backbone.Model.extend({
-        defaults: {
-            firstName: "First Name",
-            lastName: "Last Name",
-            surName: "Surname",
-            birthDate: "Birth date",
-            eMail: "e-mail",
-            phoneNumber: "Phone Number"
-        }
-    });
-
-    var UserListModelPlaceholder = Backbone.Model.extend({
-        defaults: {
-            firstName: "blankFirstName",
-            lastName: "blankLastName",
-            surName: "blankSurName",
-            birthDate: "21.01.1901",
-            eMail: "blankEMail@stepanovv.ru",
-            phoneNumber: "+71112233344"
-        }
-    });
-
-    var UserListModelInputType = Backbone.Model.extend({
-        defaults: {
-            firstName: "text",
-            lastName: "text",
-            surName: "text",
-            birthDate: "date",
-            eMail: "email",
-            phoneNumber: "text"
-        }
-    });
 
     var UserListModel = Backbone.Model.extend({
         defaults: {
-            firstName: "blankFirstName",
-            lastName: "blankLastName",
-            surName: "blankSurName",
-            birthDate: new Date(1901, 0, 2),
-            eMail: "blankEMail@stepanovv.ru",
-            phoneNumber: "+71112233344",
+            firstName: {
+                value: "",
+                label: "First name",
+                inputType: "text",
+                placeholder: "William"
+            },
+            lastName: {
+                value: "",
+                label: "Last name",
+                inputType: "text",
+                placeholder: "Shakespeare"
+            },
+            surName: {
+                value: "",
+                label: "Surname",
+                inputType: "text",
+                placeholder: "John's"
+            },
+            birthDate: {
+                value: "",
+                label: "Birth date",
+                inputType: "text",
+                placeholder: "26.04.1564"
+            },
+            eMail: {
+                value: "",
+                label: "e-mail",
+                inputType: "text",
+                placeholder: "Shakespeare@gmail.com"
+            },
+            phoneNumber: {
+                value: "",
+                label: "Mobile phone number",
+                inputType: "text",
+                placeholder: "+44 871 789 3642"
+            },
             //The order is matter!
-            birthDateLocal: "01.01.1901",
+            //birthDateLocal: "01.01.1901",
             uuidNumber: "1000000000000-xxxxxxxxxxx"
             //idAttribute: "uuidNumber"
-        }
+        },
+        idAttribute:"uuidNumber",
+        isValid: validateAllAttrs()
     });
 
     var UserListCollection = Backbone.Collection.extend({
 
         model: UserListModel,
-        modelId: function (attrs) {
-            return attrs.uuidNumber;
+        //modelId: function (attrs) {
+        //    return attrs.uuidNumber;
+        //},
+        //todo implement "add" to avoid error in case of uuid update
+        collectionUpdate: function (model1) {
+            //dummy save without rest service
+
+            if (userListCollection1.get(model1.uuidNumber) !== undefined) {
+                userListCollection1.remove(model1.uuidNumber);
+            }
+            userListCollection1.add(model1);
         }
+        //,
+        //collectionRemove: function (uuid) {
+        //    //dummy save without rest service
+        //
+        //    userListCollection1.remove(uuid);
+        //
+        //}
+
 
     });
 
 
     function fillCollection(varCollection) {
+
         for (var i = 0; i <= 3; i++) {
-            varCollection.add(
-                {
-                    firstName: "FirstName" + i.toString(),
-                    lastName: "LastName" + i.toString(),
-                    surName: "SurName" + i.toString(),
-                    birthDate: new Date(1901 + i, 0, 2),
-                    eMail: i.toString() + "EMail@stepanovv.ru",
-                    phoneNumber: "+7111223334" + i.toString(),
-                    birthDateLocal: toLocalDate(new Date(1901 + i, 0, 2)),
+            //var newModel = new UserListModel();
+
+            //newModel.set(
+            //    'firstName',{value: "FirstName" + i.toString()},
+            //    'lastName',{value: "LastName" + i.toString()},
+            //    'urName',{value: "SurName" + i.toString()},
+            //    'birthDate',{value: "21.01." + (1901 + i).toString()},
+            //    'eMail',{value: i.toString() + "EMail@stepanovv.ru"},
+            //    'phoneNumber',{value: "+7111223334" + i.toString()}
+            //);
+            //birthDateLocal: toLocalDate(new Date(1901 + i, 0, 2)),
+
+
+
+                varCollection.add({
+
+                    firstName: {value: "FirstName" + i.toString()},
+                    lastName: {value: "LastName" + i.toString()},
+                    surName: {value: "SurName" + i.toString()},
+                    birthDate: {value: "21.01." + (1901 + i).toString()},
+                    eMail: {value: i.toString() + "EMail@stepanovv.ru"},
+                    phoneNumber: {value: "+7111223334" + i.toString()},
                     uuidNumber: genUuid()
-                }
-            );
+                });
+
+            //for (var i = 0; i <= 3; i++) {
+            //    varCollection.add(
+            //        {
+            //            firstName: "FirstName" + i.toString(),
+            //            lastName: "LastName" + i.toString(),
+            //            surName: "SurName" + i.toString(),
+            //            birthDate: new Date(1901, 0, i),
+            //            birthDateLocal: "",
+            //            eMail: i.toString() + "EMail@stepanovv.ru",
+            //            phoneNumber: "+7111223334" + i.toString()
+            //        }
+            //    );
+            //}
+            //
+            //if (varCollection.isValid) {
+            //    console.log(varCollection.validationError);
+            //}
+
+
+
+
         }
 
-        if (varCollection.isValid) {
-            console.log(varCollection.validationError);
-        }
+
     }
 
-    //================================================VIEW==================================================
+//================================================VIEW==================================================
 
     function toLocalDate(varDate) {
         var options = {
@@ -261,6 +313,7 @@ window.$(document).ready(function () {
         //},
 
         eventUserDelete: function (uuid) {
+            //this.collection.remove(uuid);
             this.collection.remove(uuid);
             this.render();
         },
@@ -268,6 +321,16 @@ window.$(document).ready(function () {
         render: function () {
             var self = this;
             $('#id-containerMain').hide();
+
+            //$('#id-container-userList').datepicker({
+            //    format: "dd.mm.yyyy",
+            //    weekStart: 1,
+            //    startDate: "01.01.1900",
+            //    endDate: "01.01.2100",
+            //    todayBtn: "linked",
+            //    language: "ru"
+            //});
+
             this.$el.html("");
 
             this.collection.each(
@@ -279,6 +342,7 @@ window.$(document).ready(function () {
 
                 }
             );
+
             $('#id-container-userList').show();
             return this;
         }
@@ -301,29 +365,40 @@ window.$(document).ready(function () {
             'click #id-btn-save': 'eventUserSave'
         },
 
-        eventUserSave: function () {
+        eventUserSave: function (options) {
+            var uuid = options.currentTarget.formAction.split('/edit/')[1];//get uuid numer from url
 
-            var newModel = new UserListModel();
+            if (uuid === 'new') {
+                var newModel = new UserListModel();
 
-            //todo add validation
-            newModel.set({
-                firstName: $("#id-input-firstName").attr("value"),
-                lastName: $("#id-input-lastName").attr('value'),
-                surName: $("#id-input-surName").attr('value'),
-                birthDate: Date.parse($("#id-input-birthDate").attr('value')), //todo parse to new Date()!!!
-                eMail: $("#id-input-eMail").attr('value'),
-                phoneNumber: $("#id-input-phoneNumber").attr("value"),
-                birthDateLocal: toLocalDate(Date.parse($("#id-input-birthDate").attr('value'))),
-                //todo parse from new Date()!!!
-                //The specified value "Sat Jan 02 1904 00:00:00 GMT+0300 (MSK)" does not conform to the required format, "yyyy-MM-dd".
-                uuidNumber: genUuid()
-            });
+                uuid = newModel.uuidNumber;
+            }
 
-            this.collection.add(newModel);
-            userListView1.collection = this.collection;//todo use global collection or rest server
+            if (validateUuidNumber(uuid) && this.collection.get(uuid)) {
 
-            this.router.navigate('list', {trigger: true});
-            return newModel;
+                var modelByUuid = this.collection.get(uuid);
+
+                //todo add validation
+
+                //firstName.value = $("#id-input-firstName").attr("value");
+
+                modelByUuid.attributes.firstName.value = $("#id-input-firstName").attr("value");
+                modelByUuid.attributes.lastName.value = $("#id-input-lastName").attr('value');
+                modelByUuid.attributes.surName.value = $("#id-input-surName").attr('value');
+                modelByUuid.attributes.birthDate.value = $("#id-input-birthDate").attr('value');
+                modelByUuid.attributes.eMail.value = $("#id-input-eMail").attr('value');
+                modelByUuid.attributes.phoneNumber.value = $("#id-input-phoneNumber").attr("value");
+
+
+                this.collection.collectionUpdate(modelByUuid);
+                this.router.navigate('list', {trigger: true});
+                //return newModel;
+
+            } else {
+                console.log("userEditView.eventUserSave invalid uuid number:" + uuid);
+            }
+
+
         },
 
         eventUserCancel: function () {
@@ -332,76 +407,68 @@ window.$(document).ready(function () {
         },
 
         render: function (options) {
-            $('.c-containerMain').hide();
+
+            if (validateUuidNumber(options.uuid) && this.collection.get(options.uuid)) {
+
+                var modelByUuid = this.collection.get(options.uuid);
+
+                $('.c-containerMain').hide();
+
+                this.$el.html("");
+
+                var self = this;
 
 
-            this.$el.html("");
+                var template = _.template($("#id-template-userEdit").html());
 
-            var self = this;
-            var modelByUuid = new UserListModel();
+                var modelValues = _.values(modelByUuid.toJSON());//get values {value,placeholder, etc} for every attribute of single model
+                var modelKeyNames = _.allKeys(modelByUuid.toJSON());
 
-            //todo add error on absent uuid's
-            //todo validate uuid's
-            if (options.uuid.length > 10 && options.uuid !== "new") {
-                modelByUuid = this.collection.get(options.uuid);
+                for (var i = 0; i < (modelValues.length - 2); i++) {//length-1 make uuid not visible
+
+                    var modelValue = modelValues[i];
+
+                    modelValue.set({keyName: modelKeyNames[i]});
+
+                    var html = template(modelValue.toJSON());
+                    self.$el.append(html);
+                    //$('#id-input-birthDate').attr("data-date-format", "dd.MM.YYYY");
+                }
+
+                //modelByUuid.set({
+                //    editParamLabel: modelLabel.get('firstName'),
+                //    editParamName: 'firstName',
+                //    editParamPlaceholder: modelPlaceholder.get('firstName'),
+                //    inputEditType: modelInputType.get('firstName'),
+                //    inputEditValue: modelByUuid.get('firstName')
+                //});
+
+                //нужно создавать имена полей с обходом по модели
+                //имена полей должны совпадать с this.saveuser!
+
+                self.$el.append($("#id-template-btn-userEdit").html());
+
+                $(".c-form-group-buttons").addClass("col-sm-offset-2 col-sm-6");
+                $(".c-form-group-input").addClass("col-sm-6");
+                $(".c-form-group-label").addClass("col-sm-2");
+
+                $('#id-container-userEdit').show();
+
+                return this;
+            } else {
+                console.log("userEditView.render invalid uuid:" + options.uuid);
             }
-
-
-            var modelLabel = new UserListModelLabel(), modelPlaceholder = new UserListModelPlaceholder(),
-                modelInputType = new UserListModelInputType();
-
-            var template = _.template($("#id-template-userEdit").html());
-
-            var modelKeys = _.keys(modelByUuid.toJSON());
-
-            for (var i = 0; i < (modelKeys.length - 2); i++) {//length-1 make uuid not visible
-
-                var keyName = modelKeys[i];
-
-                modelByUuid.set({
-                    //todo fix date display with bootstrap input field type
-                    editParamLabel: modelLabel.get(keyName),
-                    editParamName: keyName,
-                    editParamPlaceholder: modelPlaceholder.get(keyName),
-                    inputEditType: modelInputType.get(keyName),
-                    inputEditValue: modelByUuid.get(keyName)
-                });
-
-                var html = template(modelByUuid.toJSON());
-                self.$el.append(html);
-            }
-
-            //modelByUuid.set({
-            //    editParamLabel: modelLabel.get('firstName'),
-            //    editParamName: 'firstName',
-            //    editParamPlaceholder: modelPlaceholder.get('firstName'),
-            //    inputEditType: modelInputType.get('firstName'),
-            //    inputEditValue: modelByUuid.get('firstName')
-            //});
-
-
-            //нужно создавать имена полей с обходом по модели
-            //имена полей должны совпадать с this.saveuser!
-
-            self.$el.append($("#id-template-btn-userEdit").html());
-
-            $(".c-form-group-buttons").addClass("col-sm-offset-2 col-sm-6");
-            $(".c-form-group-input").addClass("col-sm-6");
-            $(".c-form-group-label").addClass("col-sm-2");
-
-            $('#id-container-userEdit').show();
-
-            return this;
         }
     });
 
-    //==============================================ROUTER====================================================
+//==============================================ROUTER====================================================
     var Router = Backbone.Router.extend({
 
         routes: {
             '': 'routeUserList',
             'list': 'routeUserList',
             'edit/:uuidLink': 'routeUserEdit',
+            'edit/new': 'routeUserNew',
             'delete/:uuidLink': 'routeUserDelete'
         },
 
@@ -413,36 +480,22 @@ window.$(document).ready(function () {
             $('#id-container-userList').show();
         },
 
-        //routeUserAdd: function () {
-        //    $('.c-containerMain').hide();
-        //    userEditView1.render();
-        //    $('#id-container-userEdit').show();
-        //},
-
         routeUserEdit: function (uuidLink) {
-            //$('.c-containerMain').hide();
             userEditView1.render({uuid: uuidLink});
-            //$('#id-container-userEdit').show();
+        },
 
+        routeUserNew: function () {
+            userEditView1.render({uuid: "new"});
         },
 
         routeUserDelete: function (uuidLink) {
-            //$('.c-containerMain').hide();
             userListView1.eventUserDelete(uuidLink);
-            //$('#id-container-userList').show();
-
         }
 
-        //routeUserDelete: function () {
-        //    $('.c-containerMain').hide();
-        //
-        //    userEditView1.deleteUser({uuid: uuidLink});
-        //    $('#id-container-userEdit').show();
-        //}
     });
 
 
-    //==============================================CALCULATIONS====================================================
+//==============================================CALCULATIONS====================================================
 
 
     var userListCollection1 = new UserListCollection();
@@ -463,4 +516,5 @@ window.$(document).ready(function () {
     router1.navigate('list', {trigger: true});
 
 
-});
+})
+;

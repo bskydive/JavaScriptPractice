@@ -89,12 +89,12 @@
 
         <script type="text/template" id="id-user-list-template">
                 <tr>
-                        <td><%= firstName %></td>
-                        <td><%= lastName %></td>
-                        <td><%= surName %></td>
-                        <td><%= birthDateLocal %></td>
-                        <td><%= eMail %></td>
-                        <td><%= phoneNumber %></td>
+                        <td><%= firstName.value %></td>
+                        <td><%= lastName.value %></td>
+                        <td><%= surName.value %></td>
+                        <td><%= birthDate.value %></td>
+                        <td><%= eMail.value %></td>
+                        <td><%= phoneNumber.value %></td>
                         <td>
                                 <a class="btn btn-default btn-xs" href="#/edit/<%= uuidNumber %>"
                                    id="id-btn-edit">Edit</a>
@@ -126,12 +126,10 @@
 
         <script type="text/template" id="id-template-userEdit">
                 <div class="form-group">
-                        <label for="id-input-<%= editParamName %>" class="c-form-group-label control-label">
+                        <label for="id-input-<%= keyName %>" class="c-form-group-label control-label">
                                 <%= editParamLabel %></label>
                         <div class="c-form-group-input">
-                                <input type="<%= inputEditType %>" class="form-control"
-                                       id="id-input-<%= editParamName %>" placeholder="<%= editParamPlaceholder %>"
-                                       value="<%= inputEditValue %>">
+                                <input type="<%= inputType %>" class="form-control" placeholder="<%= placeholder %>" id="id-input-<%= keyName %>" value="<%= value %>">
                         </div>
                 </div>
         </script>
