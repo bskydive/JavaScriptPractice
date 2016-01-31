@@ -468,9 +468,12 @@ window.$(document).ready(function () {
 
         render: function (options) {
 
-            if (validateUuidNumber(options.uuid) && this.collection.get(options.uuid)) {
+            var modelByUuid = new UserListModel();
 
-                var modelByUuid = this.collection.get(options.uuid);
+
+            if ((options.uuid.toString() === "new") || validateUuidNumber(options.uuid) && this.collection.get(options.uuid) !== undefined ) {
+
+                if (options.uuid.toString() !== "new") {modelByUuid = this.collection.get(options.uuid);}
 
                 $('.c-containerMain').hide();
 
