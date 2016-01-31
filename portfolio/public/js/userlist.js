@@ -152,7 +152,7 @@ window.$(document).ready(function () {
         //}
 
         //todo change return type for all validators to [bool,str]
-        return true;
+        return  null;
 
     }
 
@@ -202,7 +202,12 @@ window.$(document).ready(function () {
         },
 
         idAttribute: "uuidNumber",
-        isValid: validateAllAttrs()
+        validate: function (attrs, options) {
+            return validateAllAttrs();
+        },
+        initialize: function () {
+            this.set({uuidNumber: genUuid()});//assignment function in defaults does not work
+        }
     });
 
     var UserListCollection = Backbone.Collection.extend({
@@ -215,10 +220,11 @@ window.$(document).ready(function () {
         collectionUpdate: function (model1) {
             //dummy save without rest service
 
-            if (userListCollection1.get(model1.uuidNumber) !== undefined) {
-                userListCollection1.remove(model1.uuidNumber);
+            if (userListCollection1.get(model1.attributes.uuidNumber) !== undefined) {
+                userListCollection1.get(model1.attributes.uuidNumber).set(model1.toJSON());
+            } else {
+                userListCollection1.add(model1);
             }
-            userListCollection1.add(model1);
         }
         //,
         //collectionRemove: function (uuid) {
@@ -238,6 +244,7 @@ window.$(document).ready(function () {
         for (var i = 0; i <= 3; i++) {
 
             //!!!model.set or new with attrs {...} erase additional child attrs like firstName.placeholder
+            // model attributes assignment without .set applies change to all models in collection
             var newModel = new UserListModel();
             //    {
             //    firstName: {
@@ -261,16 +268,16 @@ window.$(document).ready(function () {
             //    uuidNumber: genUuid()
             //
             //});
-            newModel.set(
-                'firstName',{value: "FirstName" + i.toString()},
-                'lastName',{value: "LastName" + i.toString()},
-                'urName',{value: "SurName" + i.toString()},
-                'birthDate',{value: "21.01." + (1901 + i).toString()},
-                'eMail',{value: i.toString() + "EMail@stepanovv.ru"},
-                'phoneNumber',{value: "+7111223334" + i.toString()}
-            );
-            birthDateLocal: toLocalDate(new Date(1901 + i, 0, 2)),
-
+            //newModel.set(
+            //    'firstName', {value: "FirstName" + i.toString()},
+            //    'lastName', {value: "LastName" + i.toString()},
+            //    'urName', {value: "SurName" + i.toString()},
+            //    'birthDate', {value: "21.01." + (1901 + i).toString()},
+            //    'eMail', {value: i.toString() + "EMail@stepanovv.ru"},
+            //    'phoneNumber', {value: "+7111223334" + i.toString()}
+            //);
+            //birthDateLocal: toLocalDate(new Date(1901 + i, 0, 2)),
+            //
             newModel.set({
                 firstName: {
                     value: "FirstName" + i.toString(),
@@ -310,7 +317,7 @@ window.$(document).ready(function () {
                 },
                 uuidNumber: genUuid()
             });
-
+            //todo fix generation: do not overwrite defaults
             //newModel.attributes.firstName.value="FirstName" + i.toString();
             //newModel.attributes.lastName.value="LastName" + i.toString();
             //newModel.attributes.surName.value="SurName" + i.toString();
@@ -319,7 +326,7 @@ window.$(document).ready(function () {
             //newModel.attributes.phoneNumber.value="+7111223334" + i.toString();
             //newModel.set({uuidNumber: genUuid()});//elsewhere do not change linked id number
 
-            varCollection.add(newModel);
+            varCollection.add(newModel.toJSON());
 
             //for (var i = 0; i <= 3; i++) {
             //    varCollection.add(
@@ -438,26 +445,30 @@ window.$(document).ready(function () {
 
                 var modelByUuid = this.collection.get(uuid);
 
+
                 //todo add validation
 
                 //firstName.value = $("#id-input-firstName").attr("value");
 
-                modelByUuid.attributes.firstName.value = $("#id-input-firstName").attr("value");
-                modelByUuid.attributes.lastName.value = $("#id-input-lastName").attr('value');
-                modelByUuid.attributes.surName.value = $("#id-input-surName").attr('value');
-                modelByUuid.attributes.birthDate.value = $("#id-input-birthDate").attr('value');
-                modelByUuid.attributes.eMail.value = $("#id-input-eMail").attr('value');
-                modelByUuid.attributes.phoneNumber.value = $("#id-input-phoneNumber").attr("value");
+                modelByUuid.attributes.firstName.value = $("#id-input-firstName").val();
+                modelByUuid.attributes.lastName.value = $("#id-input-lastName").val();
+                modelByUuid.attributes.surName.value = $("#id-input-surName").val();
+                modelByUuid.attributes.birthDate.value = $("#id-input-birthDate").val();
+                modelByUuid.attributes.eMail.value = $("#id-input-eMail").val();
+                modelByUuid.attributes.phoneNumber.value = $("#id-input-phoneNumber").val();
 
-
-                this.collection.collectionUpdate(modelByUuid);
-                this.router.navigate('list', {trigger: true});
-                //return newModel;
+                if (modelByUuid.isValid()) {
+                    this.collection.collectionUpdate(modelByUuid);
+                } else {
+                    console.log(modelByUuid.validationError);
+                }
 
             } else {
                 console.log("userEditView.eventUserSave invalid uuid number:" + uuid);
             }
 
+            this.router.navigate('list', {trigger: true});
+            //return newModel;
 
         },
 
@@ -468,12 +479,15 @@ window.$(document).ready(function () {
 
         render: function (options) {
 
+            //todo refactor modelByUuid to this.model, pass model to viewEdit on creation(not render)
+
             var modelByUuid = new UserListModel();
 
+            if ((options.uuid.toString() === "new") || validateUuidNumber(options.uuid) && this.collection.get(options.uuid) !== undefined) {
 
-            if ((options.uuid.toString() === "new") || validateUuidNumber(options.uuid) && this.collection.get(options.uuid) !== undefined ) {
-
-                if (options.uuid.toString() !== "new") {modelByUuid = this.collection.get(options.uuid);}
+                if (options.uuid.toString() !== "new") {
+                    modelByUuid = this.collection.get(options.uuid);
+                }
 
                 $('.c-containerMain').hide();
 
@@ -582,5 +596,4 @@ window.$(document).ready(function () {
     router1.navigate('list', {trigger: true});
 
 
-})
-;
+});
