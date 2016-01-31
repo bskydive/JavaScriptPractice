@@ -200,7 +200,8 @@ window.$(document).ready(function () {
             uuidNumber: "1000000000000-xxxxxxxxxxx"
             //idAttribute: "uuidNumber"
         },
-        idAttribute:"uuidNumber",
+
+        idAttribute: "uuidNumber",
         isValid: validateAllAttrs()
     });
 
@@ -233,31 +234,92 @@ window.$(document).ready(function () {
 
     function fillCollection(varCollection) {
 
+
         for (var i = 0; i <= 3; i++) {
-            //var newModel = new UserListModel();
 
-            //newModel.set(
-            //    'firstName',{value: "FirstName" + i.toString()},
-            //    'lastName',{value: "LastName" + i.toString()},
-            //    'urName',{value: "SurName" + i.toString()},
-            //    'birthDate',{value: "21.01." + (1901 + i).toString()},
-            //    'eMail',{value: i.toString() + "EMail@stepanovv.ru"},
-            //    'phoneNumber',{value: "+7111223334" + i.toString()}
-            //);
-            //birthDateLocal: toLocalDate(new Date(1901 + i, 0, 2)),
+            //!!!model.set or new with attrs {...} erase additional child attrs like firstName.placeholder
+            var newModel = new UserListModel();
+            //    {
+            //    firstName: {
+            //        value: "FirstName" + i.toString()
+            //    },
+            //    lastName: {
+            //        value: "LastName" + i.toString()
+            //    },
+            //    surName: {
+            //        value: "SurName" + i.toString()
+            //    },
+            //    birthDate: {
+            //        value: "21.01." + (1901 + i).toString()
+            //    },
+            //    eMail: {
+            //        value: i.toString() + "EMail@stepanovv.ru"
+            //    },
+            //    phoneNumber: {
+            //        value: "+7111223334" + i.toString()
+            //    },
+            //    uuidNumber: genUuid()
+            //
+            //});
+            newModel.set(
+                'firstName',{value: "FirstName" + i.toString()},
+                'lastName',{value: "LastName" + i.toString()},
+                'urName',{value: "SurName" + i.toString()},
+                'birthDate',{value: "21.01." + (1901 + i).toString()},
+                'eMail',{value: i.toString() + "EMail@stepanovv.ru"},
+                'phoneNumber',{value: "+7111223334" + i.toString()}
+            );
+            birthDateLocal: toLocalDate(new Date(1901 + i, 0, 2)),
 
+            newModel.set({
+                firstName: {
+                    value: "FirstName" + i.toString(),
+                    label: "First name",
+                    inputType: "text",
+                    placeholder: "William"
+                },
+                lastName: {
+                    value: "LastName" + i.toString(),
+                    label: "Last name",
+                    inputType: "text",
+                    placeholder: "Shakespeare"
+                },
+                surName: {
+                    value: "SurName" + i.toString(),
+                    label: "Surname",
+                    inputType: "text",
+                    placeholder: "John's"
+                },
+                birthDate: {
+                    value: "21.01." + (1901 + i).toString(),
+                    label: "Birth date",
+                    inputType: "text",
+                    placeholder: "26.04.1564"
+                },
+                eMail: {
+                    value: i.toString() + "EMail@stepanovv.ru",
+                    label: "e-mail",
+                    inputType: "text",
+                    placeholder: "Shakespeare@gmail.com"
+                },
+                phoneNumber: {
+                    value: "+7111223334" + i.toString(),
+                    label: "Mobile phone number",
+                    inputType: "text",
+                    placeholder: "+44 871 789 3642"
+                },
+                uuidNumber: genUuid()
+            });
 
+            //newModel.attributes.firstName.value="FirstName" + i.toString();
+            //newModel.attributes.lastName.value="LastName" + i.toString();
+            //newModel.attributes.surName.value="SurName" + i.toString();
+            //newModel.attributes.birthDate.value="21.01." + (1901 + i).toString();
+            //newModel.attributes.eMail.value=i.toString() + "EMail@stepanovv.ru";
+            //newModel.attributes.phoneNumber.value="+7111223334" + i.toString();
+            //newModel.set({uuidNumber: genUuid()});//elsewhere do not change linked id number
 
-                varCollection.add({
-
-                    firstName: {value: "FirstName" + i.toString()},
-                    lastName: {value: "LastName" + i.toString()},
-                    surName: {value: "SurName" + i.toString()},
-                    birthDate: {value: "21.01." + (1901 + i).toString()},
-                    eMail: {value: i.toString() + "EMail@stepanovv.ru"},
-                    phoneNumber: {value: "+7111223334" + i.toString()},
-                    uuidNumber: genUuid()
-                });
+            varCollection.add(newModel);
 
             //for (var i = 0; i <= 3; i++) {
             //    varCollection.add(
@@ -276,8 +338,6 @@ window.$(document).ready(function () {
             //if (varCollection.isValid) {
             //    console.log(varCollection.validationError);
             //}
-
-
 
 
         }
@@ -424,13 +484,16 @@ window.$(document).ready(function () {
                 var modelValues = _.values(modelByUuid.toJSON());//get values {value,placeholder, etc} for every attribute of single model
                 var modelKeyNames = _.allKeys(modelByUuid.toJSON());
 
-                for (var i = 0; i < (modelValues.length - 2); i++) {//length-1 make uuid not visible
+                //parse and flatten object keys to properties list for every parent key like: firstName
+                for (var i = 0; i <= (modelValues.length - 2); i++) {//length-1 make uuid not visible
 
-                    var modelValue = modelValues[i];
-
-                    modelValue.set({keyName: modelKeyNames[i]});
-
-                    var html = template(modelValue.toJSON());
+                    var html = template({
+                        keyName: modelKeyNames[i], //add to model name of the parent key like: firstName, for <input for=> attribute
+                        value: modelValues[i].value,
+                        label: modelValues[i].label,
+                        inputType: modelValues[i].inputType,
+                        placeholder: modelValues[i].placeholder
+                    });
                     self.$el.append(html);
                     //$('#id-input-birthDate').attr("data-date-format", "dd.MM.YYYY");
                 }
