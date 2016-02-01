@@ -17,16 +17,14 @@
 * determine noScript
 * backbone library & underscore templates design
 * locally stored values
-* view userlist
+* view, edit, add, delete users
 
 ### Wish List: ###
 
 * bootstrap mobile-first responsive design
-* accurate internal url navigating
 * accurate menu showing on resize
 * cross-browser support
-* remote stored values
-* edit user
-* delete user
-* add user
+* remotely stored values
+* validation
+
 

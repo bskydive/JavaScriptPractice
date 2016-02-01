@@ -435,18 +435,16 @@ window.$(document).ready(function () {
         eventUserSave: function (options) {
             var uuid = options.currentTarget.formAction.split('/edit/')[1];//get uuid numer from url
 
-            if (uuid === 'new') {
-                var newModel = new UserListModel();
 
-                uuid = newModel.uuidNumber;
-            }
+            if ((uuid === 'new') || (validateUuidNumber(uuid) && this.collection.get(uuid))) {
 
-            if (validateUuidNumber(uuid) && this.collection.get(uuid)) {
+                var modelByUuid = new UserListModel();
 
-                var modelByUuid = this.collection.get(uuid);
+                if (uuid !== 'new') {
+                    modelByUuid = this.collection.get(uuid);
+                }
 
-
-                //todo add validation
+                //todo add validation and highlighting errors
 
                 //firstName.value = $("#id-input-firstName").attr("value");
 
@@ -469,7 +467,6 @@ window.$(document).ready(function () {
 
             this.router.navigate('list', {trigger: true});
             //return newModel;
-
         },
 
         eventUserCancel: function () {
