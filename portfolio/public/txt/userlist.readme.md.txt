@@ -18,6 +18,7 @@
 * backbone library & underscore templates design
 * locally stored values
 * view, edit, add, delete users
+* generated edit form from model
 
 ### Wish List: ###
 
@@ -25,6 +26,6 @@
 * accurate menu showing on resize
 * cross-browser support
 * remotely stored values
-* validation
+* data validation
 
 
