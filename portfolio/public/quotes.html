@@ -22,10 +22,12 @@
         <link rel="stylesheet" type="text/css" href="css/font-roboto.css">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/normalize.css">
 
         <link rel="stylesheet" type="text/css" href="css/quotes.css">
 
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
 
         <script type="text/javascript" src="js/quotes.js"></script>
 
@@ -36,31 +38,50 @@
 
 </head>
 
-<body class="background-main">
+<body class="c-background-main">
 
 <div class="bg-overlay">
 
-        <div class="column-left col-md-1"></div>
 
-        <div class="column-center text-center col-md-6">
-                <noscript>
-                        <div class="alert alert-danger" role="alert">
-                                <strong>Warning!</strong> Please, enable JavaScript to see correct markup.
+        <div class="container-fluid c-container-main">
+
+                <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="c-column-center col-md-6 c-row-header">
+                                <noscript>
+                                        <div class="alert alert-danger" role="alert">
+                                                <strong>Warning!</strong> Please, enable JavaScript to see correct
+                                                markup.
+                                        </div>
+                                </noscript>
+
+                                <a class="btn btn-link" id="id_headerCaption" href="txt/quotes.readme.md.txt" target="_blank"
+                                   role="button">Генератор цитат<sup>&beta;</sup></a><span id="id_divHeaderText"></span>
+
+
+                                <a id="id_getQuoteBtn" class="btn btn-default" role="button">
+                                        <i class="fa fa-graduation-cap fa-fw"></i> Ещё цитату</a>
+
+                                <a id="id_twitOutBtn" class="btn btn-default" role="button"
+                                   href="http://twitter.com/home/?status=" target="_blank">
+                                        <i class="fa fa-twitter fa-fw"></i> Поделиться</a>
+
+
                         </div>
-                </noscript>
-                <h1>Генератор цитат<span id="id_divHeaderText"></span></h1>
+                        <div class="col-md-1"></div>
+                </div>
 
-                <a id="id_getQuoteBtn" class="btn btn-default" role="button">
-                        <i class="fa fa-graduation-cap fa-fw"></i> Ещё цитату</a>
+                <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="c-column-center col-md-6 c-row-text">
+                                <p id="id-p-quoteText">Генератор устал. Отдохните и вы.</p>
 
-                <a id="id_twitOutBtn" class="btn btn-default" role="button"
-                   href="http://twitter.com/home/?status=" target="_blank">
-                        <i class="fa fa-twitter fa-fw"></i> Поделиться</a>
-
-                <div id="id_divQuoteText">Генератор устал. Отдохните и вы.</div>
+                                <a id="id-a-quoteAuthor" href="#"></a>
+                        </div>
+                        <div class="col-md-1"></div>
+                </div>
 
         </div>
-        <div class="column-right col-md-1"></div>
 </div>
 
 </body>

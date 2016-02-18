@@ -1,5 +1,5 @@
 
-.background-main {
+.c-background-main {
     background: url("../img/background-wood-backgroundlab.jpg") repeat repeat;
 }
 
@@ -7,13 +7,34 @@ body {
     font-family: Roboto, Monospace, serif;
 }
 
-.column-center {
-    background: url("../img/pattern-lines-ava7-1527-bright.png") repeat fixed;
-    /*padding: 1em 3em 1em 2em;*/
+.c-container-main {
 
+
+
+}
+
+.c-column-center{
+    background: url("../img/pattern-lines-ava7-1527-bright.png") repeat fixed;
+    padding: 1em 3em 1em 2em;
+    /*margin: -15px 0 -15px 0;*/
+    text-align: center;
 }
 
 #id_divQuoteText {
     padding-top: 1em;
+    font-size: large;
 }
+
+.c-row-header span{
+    padding-right: 15px;
+}
+
+/*.row-header{*/
+    /*display: inline !important;*/
+/*}*/
+
+/*.row {*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+/*}*/
 

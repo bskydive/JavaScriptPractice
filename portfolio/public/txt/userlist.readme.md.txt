@@ -1,0 +1,32 @@
+### Versions: ###
+
+* App(beta):4.0.0.0
+* Bootstrap:3.3.6
+* Font-awesome:4.5.0
+* jQuery:2.1.4
+* Normalize:3.0.2
+* backbone:1.2.3
+* underscore:1.8.3
+
+### Sources ###
+
+[BitBucket](https://bitbucket.org/bskydive/portfoliojs/)
+
+### Feature list ###
+
+* determine noScript
+* backbone library & underscore templates design
+* locally stored values
+* view, edit, add, delete users
+* generated edit form from model
+
+### Wish List: ###
+
+* bootstrap mobile-first responsive design
+* accurate menu showing on resize
+* cross-browser support
+* remotely stored values
+* data validation
+* http://jsonapi.org/
+
+
