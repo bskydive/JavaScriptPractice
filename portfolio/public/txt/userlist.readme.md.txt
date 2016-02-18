@@ -27,5 +27,6 @@
 * cross-browser support
 * remotely stored values
 * data validation
+* http://jsonapi.org/
 
 
