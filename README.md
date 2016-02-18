@@ -2,7 +2,7 @@
 
 ### What is this? ###
 
-This is my code examples repository
+This is my code examples repository. Currently it's a beta.
 
 ### What is this repository for? ###
 
@@ -61,6 +61,8 @@ Committed features registered in Redmine task and time tracker, linked to the co
 ### Common to all apps wish list ###
 
 * browserify, webpack, ember, Jenkins
+* unit test automation
+* git-flow/deploy automation
 * Separated backend. Java/NodeJS
 * PostgreSQL/MongoDB data store
 

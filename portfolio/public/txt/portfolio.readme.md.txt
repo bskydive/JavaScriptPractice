@@ -15,11 +15,12 @@
 * accurate internal url navigating
 * accurate menu showing on resize
 * determine noScript
+* collapse menu on xs/sm screens(smaller popup font-size/padding/float-left)
 
 ### Wish List: ###
 
+* scrollspy http://itchief.ru/lessons/bootstrap-3/bootstrap-3-scrollspy http://getbootstrap.com/javascript/#scrollspy
 * resizable font-size depend on screen size
-* collapse menu on xs/sm screens(smaller popup font-size/padding/float-left)
 * cross-browser support
 * accurate position save on resizing
 * comment eraser after merge to master, before deploy
