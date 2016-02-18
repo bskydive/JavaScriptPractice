@@ -433,7 +433,7 @@ window.$(document).ready(function () {
         },
 
         eventUserSave: function (options) {
-            var uuid = options.currentTarget.formAction.split('/edit/')[1];//get uuid numer from url
+            var uuid = options.currentTarget.baseURI.split('/edit/')[1];//get uuid numer from url
 
 
             if ((uuid === 'new') || (validateUuidNumber(uuid) && this.collection.get(uuid))) {
