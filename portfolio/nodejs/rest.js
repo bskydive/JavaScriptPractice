@@ -2,7 +2,7 @@ var http = require('http');
 
 var restServer = new http.Server();
 
-restServer.listen(1337, 'localhost');
+restServer.listen(1337, process.argv[2]);
 
 var myEvent = 0;
 
