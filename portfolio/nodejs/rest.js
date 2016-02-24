@@ -1,23 +1,42 @@
 var http = require('http');
+var myEvent = "";
+var url = require('url');
 
-var restServer = new http.Server();
 
-restServer.listen(1337, process.argv[2]);
 
-var myEvent = 0;
+var crudULServer = new http.Server(function (req,res) {
 
+    //console.log(req.method, req.url);
+    var urlParsed = url.parse(req.url,true);
+
+    myEvent+= req.method + urlParsed;
+console.log(urlParsed,req.headers);
+
+    if (urlParsed.pathname === '/api'&& urlParsed.query.message){
+        res.statusCode=404;
+        res.setHeader('Cache-control', 'no-cache');
+        myEvent+=urlParsed.query.message+'\n';
+    }else{
+        res.statusCode=404;
+        myEvent+='not found';
+    }
+
+    //res.end();
+});
+
+crudULServer.listen(1337, process.argv[2]);
+
+var myEmit = crudULServer.emit;
 //http.server --> net.server --> EventEmitter
-
-var myEmit = restServer.emit;
-
-restServer.emit = function (event) {
-  myEvent+=event.toString()+'\n';
-    myEmit.apply(restServer,arguments);
+crudULServer.emit = function (event) {
+    myEvent += event.toString() + '\n';
+    myEmit.apply(crudULServer, arguments);
 };
 
-restServer.on('request',function(req,res){
+crudULServer.on('request', function (req, res) {
     "use strict";
-    res.end('hellowee'+ myEvent);
+
+    res.end('hellowee' + myEvent);
 });
 
 //var options = {

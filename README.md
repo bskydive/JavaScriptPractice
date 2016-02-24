@@ -29,19 +29,19 @@ This is my code examples repository. Currently it's a beta.
 
 1. New features placed in wish lists.
 2. Choose new issue from wish list, register it as task in Redmine server.
-3. Checkout master->development->feature-0.0.+1.0 branch.
+3. Checkout master->development->feature-0.+1.0 branch. In case of adding new app use +1.0.0 version
 4. Develop new feature, commit changes after testing on local PC.
 5. Repeat steps 2-4, corresponding to issue list.
-6. Merge feature-0.0.1.0 to development branch. Push it to remote repository.
+6. Merge feature-0.1.0 to development branch. Push it to remote repository.
 7. Pull development branch from remote VPS server(dev env).
 8. Test it. After bug fixing repeat 3-7 steps, corresponding to issue list.
 9. Merge tested development to master branch. Push it to remote repository.
 10. Pull master branch from remote VPS server(master env). Testing it.
-11. Bugs in master fixed as new master->hotfix-0.0.1.+1 branch. Test, commit, merge to master&dev, push to remote repository.
-12. Create tag 0.+1.1.1, push to remote repository.
+11. Bugs in master fixed as new master->hotfix-0.1.+1 branch. Test, commit, merge to master&dev, push to remote repository.
+12. Create tag 1.1.1, push to remote repository.
 
 Version currently not published, but can be viewed in git repository commits and my Redmine server:
-{apps count}.{production(master) release}.{feature list number}.{hotfix list number}. Example: v3.8.3.0, v4.0.0.1
+{apps count}.{feature list number}.{hotfix list number}. Example: v3.3.8, v4.0.1
 
 Committed features registered in Redmine task and time tracker, linked to the commit number in git repo.
 
@@ -57,13 +57,13 @@ Committed features registered in Redmine task and time tracker, linked to the co
 * Open repository on bitbucket
 * Locally stored libraries/frameworks for loading speed up
 * ALM in Redmine server
+* NodeJS backend
 
 ### Common to all apps wish list ###
 
-* browserify, webpack, ember, Jenkins
+* deploy automation
 * unit test automation
 * git-flow/deploy automation
-* Separated backend. Java/NodeJS
 * PostgreSQL/MongoDB data store
 
 ### Who do I talk to? ###
