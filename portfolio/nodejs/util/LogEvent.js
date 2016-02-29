@@ -1,17 +1,12 @@
 function LogEvent() {
-    "use strict";
     //todo write to file
-
-    //this.info = function (eventString){ console.log(eventString); };
-
-
 }
 
-LogEvent.prototype.logInfo = function (eventString) {
-    console.log(eventString);
+LogEvent.prototype.logInfo = function (/* ... */) {
+    console.log(arguments);
 };
-LogEvent.prototype.logError = function (eventString) {
-    console.error(eventString);
+LogEvent.prototype.logError = function (/* ... */) {
+    console.error(arguments);
 };
 
 module.exports = LogEvent;
