@@ -17,16 +17,19 @@ function getUrlParamByName(reqObj, paramName) {
 
     var urlParsed = url.parse(reqObj.url, true);
 
-    logEvent.logInfo(urlParsed.pathname, reqObj.headers, reqObj.method);
+    logEvent.logInfo(urlParsed.pathname, reqObj.url, reqObj.headers, reqObj.method);
 
     if (urlParsed.pathname !== apiDictionary.apiPrefix + '/userlist') {
         throw new ApiParseError(urlParsed.pathname);
     }
 
-     if ( !urlParsed.query[paramName]) {
+    if ( !urlParsed.query[paramName]) {
         //res.setHeader('Cache-control', 'no-cache');
         throw new ApiParseError(urlParsed.query[paramName]);
         }
+
+    return [200,paramName+'=='+urlParsed.query[paramName]];
+
 }
 
 var crudULServer = new http.Server(function (req, res) {
@@ -35,11 +38,11 @@ var crudULServer = new http.Server(function (req, res) {
 
     try {
         result = getUrlParamByName(req, 'uid');
-        outString += result[1];
+        outString += result[1]+'\n';
         res.statusCode = result[0];
 
         result = getUrlParamByName(req, 'name');
-        outString += result[1];
+        outString += result[1]+'n';
         res.statusCode = result[0];
     } catch (e){
         if (e instanceof ApiParseError ){
