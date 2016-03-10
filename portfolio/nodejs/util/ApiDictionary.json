@@ -1,0 +1,16 @@
+{
+  "apiParams": [
+    "firstName",
+    "lastName",
+    "surName",
+    "birthDate",
+    "eMail",
+    "phoneNumber",
+    "uuidNumber"
+  ],
+  "apiCategories": [
+    "userlist",
+    "weather"
+  ],
+  "apiPrefix": "/api"
+}
