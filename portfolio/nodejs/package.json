@@ -1,4 +1,10 @@
 {
   "name": "application-name",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "mongo": "^0.1.0",
+    "pg": "^4.5.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.19.3"
+  }
 }
