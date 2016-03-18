@@ -34,14 +34,13 @@ h2 {
 /*#id_containerMain{*/
 /*}*/
 
-
 .c-logoText {
     background-color: transparent;
     font-size: 15px;
 }
 
 /*.c-logoText a:hover {*/
-    /*background-color: transparent;*/
+/*background-color: transparent;*/
 /*}*/
 
 .c-listInline {
@@ -67,7 +66,6 @@ h2 {
     background-color: #adadad;
 }
 
-
 .c-listBlock {
     display: block;
     /*margin: 0;*/
@@ -90,9 +88,9 @@ h2 {
 
 /* Extra small devices (two-line menu) */
 @media only screen and (max-width: 500px) {
- .c-columnNavTop {
-     display: none;
- }
+    .c-columnNavTop {
+        display: none;
+    }
 }
 
 /* Extra small devices (tablets, 480px and up) */
@@ -149,6 +147,10 @@ a.c-anchorOffset {
 .column-double-center {
     background: white;
     padding: 1em 3em 1em 2em;
+}
+
+ul {
+    display: inline;
 }
 
 /*.column-left-center {*/
