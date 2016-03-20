@@ -16,6 +16,7 @@
 * accurate menu showing on resize
 * determine noScript
 * collapse menu on xs/sm screens(smaller popup font-size/padding/float-left)
+* safe clipboard copy for e-mail
 
 ### Wish List: ###
 
