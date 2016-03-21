@@ -6,10 +6,24 @@ $(document).ready(function () {
 
 
     function offsetResize() {
+
         var navTopHeight = $('.c-columnNavTop').height();//todo fix small bug:in small screen sizes navHeight changes after scroll at 3px
-        $("#id_containerMain").css('padding-top', navTopHeight);
-        $(".c-anchorOffset").css('top', -(navTopHeight - 30));
-        //console.log(-navTopHeight);
+        var windowWidth = $(window).width();
+        //var curXPos = $(document).body.scrollTop();//todo save scroll pos after resize
+
+        if ( windowWidth >= 500) {
+
+            $("#id_containerMain").css('padding-top', navTopHeight+50);
+            $(".c-anchorOffset").css('top', -(navTopHeight - 30));
+            //window.scrollTo(curXPos+50,0);
+        } else {
+            $("#id_containerMain").css('padding-top', 80);
+            $(".c-anchorOffset").css('top', -20);
+        }
+
+        //console.log(navTopHeight);
+        console.log(curXPos);
+
     }
 
     offsetResize();

@@ -3,7 +3,8 @@ body {
 }
 
 .background-main {
-background: url("../img/night.jpg");
+background: url("../img/background_tizer_samsung_1920_400_dark_blur.jpg");
+    height: 400px;
 
 }
 
@@ -16,7 +17,7 @@ background: url("../img/night.jpg");
 }
 
 #id_containerMain h1{
-    color: white;
+    color: #f5f5f5;
 }
 
 h1, h2 {
@@ -26,6 +27,24 @@ h1, h2 {
 .c-background-white{
     background: white;
 }
+
+.c-thumbnail-label{
+    background: white;
+    width: 150px;
+    height: 113px;
+}
+
+/*.column-double-thumbnail-center {*/
+    /*!*background: url("../img/textured_paper.png") repeat fixed;;*!*/
+    /*background-color: #555555;*/
+    /*color: white;*/
+    /*margin: 10px;*/
+    /*padding: 5px;*/
+    /*width: 320px;*/
+    /*height: 226px;*/
+    /*display: inline-table;*/
+/*}*/
+
 .column-thumbnail-center {
     /*background: url("../img/textured_paper.png") repeat fixed;;*/
     background-color: #555555;
@@ -36,25 +55,17 @@ h1, h2 {
     height: 226px;
     display: inline-table;
 
+
 /*text-align: center;*/
 /*margin: 3px;*/
 /*padding: 3px;*/
 /*display: block;*/
 }
 
-.column-list {
-    background-color: #555555;
-    color: white;
-    margin: 10px;
-    padding: 5px;
-    /*width: 100%;*/
-    /*height: 100%;*/
-    display: inline-table;
-}
-
 .c-columnNavTop {
     z-index: 1024;
     position: fixed;
+    color: white;
     background-color: #777777;
     /*padding: 0px 0px;*/
     width: 100%;
@@ -62,28 +73,18 @@ h1, h2 {
     font-size: 20px;
 }
 
-/*#id_containerMain{*/
-/*}*/
-
-.c-logoText {
-    background-color: transparent;
-    /*font-size: 15px;*/
-}
-
-/*.c-logoText a:hover {*/
-/*background-color: transparent;*/
-/*}*/
-
 .c-listInline {
     display: inline;
     margin: 0;
     padding: 0;
-    list-style-type: none;
+
+    text-align: center;
 }
 
 .c-listInline li {
     display: inline-block;
     box-sizing: border-box;
+    list-style-type: none;
 }
 
 .c-listInline a {
@@ -97,16 +98,31 @@ h1, h2 {
     background-color: #adadad;
 }
 
-.c-listBlock {
-    display: block;
-    /*margin: 0;*/
-    /*padding: 0;*/
-    list-style-type: none;
+.column-list {
+
+}
+
+
+.c-listBlock ul {
+    background-color: #555555;
+    color: white;
+    /*margin: 10px;*/
+    padding: 5px;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*display: inline-table;*/
+
+    float: none; !important;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .c-listBlock li {
-    /*margin: 0;*/
+    marginpx: 10px;
     padding: 3px;
+    list-style-type: none;
+    vertical-align: middle;
 }
 
 #id_imgRight {
@@ -118,7 +134,10 @@ h1, h2 {
     .c-columnNavTop {
         display: none;
     }
+
 }
+
+
 
 /* Extra small devices (tablets, 480px and up) */
 @media (max-width: 320px) {
@@ -172,12 +191,12 @@ a.c-anchorOffset {
 }
 
 .column-double-center {
-
+    /*min-width: 325px;*/
     padding: 1em 3em 1em 2em;
 }
 
 .column-double-center ul {
-    float: left;
+    /*float: left;*/
 }
 
 ul {
