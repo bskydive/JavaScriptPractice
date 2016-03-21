@@ -12,6 +12,11 @@ background: url("../img/background_tizer_samsung_1920_400_dark_blur.jpg");
     padding-bottom: 70em;
 }
 
+.row-text{
+    border-bottom-color: #0f0f0f;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
 .spacer {
     padding-bottom: 5em;
 }
