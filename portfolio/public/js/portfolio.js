@@ -12,7 +12,7 @@ $(document).ready(function () {
 
         if ( windowWidth >= 500) {
 
-            $("#id_containerMain").css('padding-top', navTopHeight+30);
+            $("#id_containerMain").css('padding-top', navTopHeight+50);
             $(".c-anchorOffset").css('top', -(navTopHeight - 30));
         } else {
             $("#id_containerMain").css('padding-top', 80);
