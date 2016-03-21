@@ -3,7 +3,8 @@ body {
 }
 
 .background-main {
-background: url("../img/night.jpg");
+background: url("../img/background_tizer_samsung_1920_600.jpg");
+    height: 400px;
 
 }
 
@@ -16,7 +17,7 @@ background: url("../img/night.jpg");
 }
 
 #id_containerMain h1{
-    color: white;
+    color: black;
 }
 
 h1, h2 {
@@ -118,7 +119,10 @@ h1, h2 {
     .c-columnNavTop {
         display: none;
     }
+
 }
+
+
 
 /* Extra small devices (tablets, 480px and up) */
 @media (max-width: 320px) {
@@ -172,7 +176,7 @@ a.c-anchorOffset {
 }
 
 .column-double-center {
-
+    /*min-width: 325px;*/
     padding: 1em 3em 1em 2em;
 }
 
