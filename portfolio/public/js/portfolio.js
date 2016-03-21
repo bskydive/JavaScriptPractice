@@ -19,7 +19,7 @@ $(document).ready(function () {
             $(".c-anchorOffset").css('top', -20);
         }
 
-        console.log(navTopHeight);
+        //console.log(navTopHeight);
     }
 
     offsetResize();

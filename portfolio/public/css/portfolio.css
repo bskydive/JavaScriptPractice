@@ -27,6 +27,24 @@ h1, h2 {
 .c-background-white{
     background: white;
 }
+
+.c-thumbnail-label{
+    background: white;
+    width: 150px;
+    height: 113px;
+}
+
+/*.column-double-thumbnail-center {*/
+    /*!*background: url("../img/textured_paper.png") repeat fixed;;*!*/
+    /*background-color: #555555;*/
+    /*color: white;*/
+    /*margin: 10px;*/
+    /*padding: 5px;*/
+    /*width: 320px;*/
+    /*height: 226px;*/
+    /*display: inline-table;*/
+/*}*/
+
 .column-thumbnail-center {
     /*background: url("../img/textured_paper.png") repeat fixed;;*/
     background-color: #555555;
