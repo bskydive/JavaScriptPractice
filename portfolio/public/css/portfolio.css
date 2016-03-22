@@ -12,11 +12,17 @@ background: url("../img/background_tizer_samsung_1920_400_dark_blur.jpg");
     padding-bottom: 70em;
 }
 
-.row-text{
+.c-row-text{
     border-bottom-color: #0f0f0f;
     border-bottom-width: 2px;
     border-bottom-style: solid;
+    padding-bottom: 1em;
 }
+
+.c-row-header{
+    padding-top:2em;
+}
+
 .spacer {
     padding-bottom: 5em;
 }
@@ -31,24 +37,21 @@ h1, h2 {
 
 .c-background-white{
     background: white;
+    color: black;
+}
+
+.c-background-black{
+    background-color: #555555;
+    color: white;
 }
 
 .c-thumbnail-label{
-    background: white;
-    width: 150px;
-    height: 113px;
+    /*background: white;*/
+    /*width: 150px;*/
+    /*height: 113px;*/
+    padding-top: 1em;
 }
 
-/*.column-double-thumbnail-center {*/
-    /*!*background: url("../img/textured_paper.png") repeat fixed;;*!*/
-    /*background-color: #555555;*/
-    /*color: white;*/
-    /*margin: 10px;*/
-    /*padding: 5px;*/
-    /*width: 320px;*/
-    /*height: 226px;*/
-    /*display: inline-table;*/
-/*}*/
 
 .column-thumbnail-center {
     /*background: url("../img/textured_paper.png") repeat fixed;;*/
@@ -59,12 +62,6 @@ h1, h2 {
     width: 160px;
     height: 226px;
     display: inline-table;
-
-
-/*text-align: center;*/
-/*margin: 3px;*/
-/*padding: 3px;*/
-/*display: block;*/
 }
 
 .c-columnNavTop {
@@ -109,26 +106,32 @@ h1, h2 {
 
 
 .c-listBlock ul {
-    background-color: #555555;
-    color: white;
+
     /*margin: 10px;*/
-    padding: 5px;
+    /*padding: 5px;*/
     /*width: 100%;*/
     /*height: 100%;*/
     /*display: inline-table;*/
 
-    float: none; !important;
+    /*float: none; !important;*/
     display: table;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 0px;
 }
 
 .c-listBlock li {
-    marginpx: 10px;
-    padding: 3px;
+    margin-top: 5px;
+    padding: 10px;
     list-style-type: none;
     vertical-align: middle;
+    background-color: #555555;
+    color: white;
 }
+
+/*.c-listBlock div{*/
+    /*display: inline-grid;*/
+/*}*/
 
 #id_imgRight {
     float: right;
@@ -165,25 +168,6 @@ h1, h2 {
 @media (max-width: 1200px) {
 }
 
-/*img {*/
-/*padding: 1em;*/
-/*}*/
-
-/*.container-main{*/
-/*background: white;*/
-/*}*/
-
-/*.background-main {*/
-/*background: url("http://stepanovv.ru/sites/all/themes/sky/css/images/ts/hatch.png") repeat fixed;*/
-/*}*/
-
-/*h1, h2, p {*/
-/*font-family: Roboto, Monospace,serif;*/
-/*}*/
-.caption {
-    padding-top: 1em;
-}
-
 p {
     font-size: 15px;
 }
@@ -197,7 +181,8 @@ a.c-anchorOffset {
 
 .column-double-center {
     /*min-width: 325px;*/
-    padding: 1em 3em 1em 2em;
+    /*padding: 1em 3em 1em 2em;*/
+
 }
 
 .column-double-center ul {
@@ -208,25 +193,38 @@ ul {
     display: inline;
 }
 
-.column-center {
-    background: white;
-    padding: 1em 3em 1em 2em;
-}
-
-.column-center span {
-    margin: 5px 0px 5px 0px;
-    display: inline-block;
-}
-
-.column-center ul {
-    float: left;
-}
-
-/*.column-left-center {*/
-/*background: white;*/
-
+/*.column-center {*/
+    /*background: white;*/
+    /*padding: 1em 3em 1em 2em;*/
 /*}*/
 
-/*.column-right-center {*/
-/*background: white;*/
+/*.column-center span {*/
+    /*margin: 5px 0px 5px 0px;*/
+    /*display: inline-block;*/
+/*}*/
+
+/*.column-center ul {*/
+    /*float: left;*/
+/*}*/
+
+
+/*.top.active {*/
+    /*right: 30px;*/
+/*}*/
+/*.top {*/
+    /*position: fixed;*/
+    /*bottom: 25px;*/
+    /*background-color: #E0E0E0;*/
+    /*border-radius: 10em;*/
+    /*color: #999;*/
+    /*font-size: 26px;*/
+    /*width: 50px;*/
+    /*height: 50px;*/
+    /*line-height: 50px;*/
+    /*text-align: center;*/
+    /*cursor: pointer;*/
+    /*-webkit-transition: all .25s ease;*/
+    /*transition: all .25s ease;*/
+    /*right: -100px;*/
+    /*z-index: 12;*/
 /*}*/
