@@ -15,13 +15,13 @@ $(document).ready(function () {
         //var curXPos = $(document).body.scrollTop();
         //todo save scroll pos after resize
 
-        if ( windowWidth >= 500) {
+        if ( windowWidth >= 315) {
 
-            $("#id_containerMain").css('padding-top', navTopHeight+65);
+            $("#id_containerMain").css('padding-top', navTopHeight);
             $(".c-anchorOffset").css('top', -(navTopHeight));
             //window.scrollTo(curXPos+50,0);
         } else {
-            $("#id_containerMain").css('padding-top', 65);
+            $("#id_containerMain").css('padding-top', 0);
             $(".c-anchorOffset").css('top', -20);
         }
 
