@@ -64,7 +64,7 @@ h1, h2 {
     display: inline-table;
 }
 
-.c-columnNavTop {
+.c-row-NavTop {
     z-index: 1024;
     position: fixed;
     color: white;
@@ -73,6 +73,14 @@ h1, h2 {
     width: 100%;
     text-align: center;
     font-size: 20px;
+}
+
+.c-row-tags{
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    color: darkgray;
+    background-color: lightgrey;
 }
 
 .c-listInline {
@@ -133,9 +141,9 @@ h1, h2 {
     /*display: inline-grid;*/
 /*}*/
 
-#id_imgRight {
-    float: right;
-}
+/*#id_imgRight {*/
+    /*float: right;*/
+/*}*/
 
 /* Extra small devices (two-line menu) */
 @media only screen and (max-width: 500px) {
@@ -207,10 +215,13 @@ ul {
     /*float: left;*/
 /*}*/
 
+/*rounded up btn*/
 
 /*.top.active {*/
     /*right: 30px;*/
 /*}*/
+
+
 /*.top {*/
     /*position: fixed;*/
     /*bottom: 25px;*/
