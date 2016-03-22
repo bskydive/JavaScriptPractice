@@ -126,10 +126,11 @@ h1, h2 {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0px;
+    padding-left: 5px;
 }
 
 .c-listBlock li {
-    margin-top: 5px;
+    margin-top: 10px;
     padding: 10px;
     list-style-type: none;
     vertical-align: middle;
