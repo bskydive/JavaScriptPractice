@@ -146,11 +146,16 @@ h1, h2 {
 /*}*/
 
 /* Extra small devices (two-line menu) */
-@media only screen and (max-width: 500px) {
-    .c-columnNavTop {
+@media only screen and (max-width: 315px) {
+    .c-row-NavTop {
         display: none;
     }
 
+}
+
+.c-container-margin{
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 
