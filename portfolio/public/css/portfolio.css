@@ -112,6 +112,14 @@ h1, h2 {
 
 }
 
+.c-btn-inline {
+    text-align: center;
+}
+
+.c-btn-inline a, button{
+    margin-top:5px;
+}
+
 
 .c-listBlock ul {
 
